@@ -4,7 +4,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="75dp"
     android:paddingBottom="2dp"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
@@ -12,14 +12,18 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:gravity="bottom"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:touchscreenBlocksFocus="false">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="@string/pop_tags"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
         android:gravity="center"
         android:textAppearance="@style/NavTitle" />
+
 
 
 </LinearLayout>

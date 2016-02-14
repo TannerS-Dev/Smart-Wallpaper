@@ -1,15 +1,23 @@
 package com.tanners.smartwallpaper.clarifaidata;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
 import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+import com.tanners.smartwallpaper.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,12 +31,14 @@ public class ClarifaiData extends ClarifaiClient
     private final int OK_CODE = 1;
     private Context context;
     private Tags tags;
+    private Activity act;
 
-    public ClarifaiData(Context context)
+    public ClarifaiData(Context context, Activity act)
     {
         super(APP_ID, APP_SECRET);
         this.context = context;
         this.tags = null;
+        this.act = act;
     }
 
     public String getAppID()
@@ -48,40 +58,22 @@ public class ClarifaiData extends ClarifaiClient
 
     public boolean addTags(RecognitionResult result)
     {
-        Log.i("error", "start" );
-
-
         if (result != null)
         {
-            Log.i("error", "not null" );
-
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK)
             {
-
-                Log.i("error", "stat ok" );
                 this.tags = new Tags();
 
-               // int counter = 0;
-
                 for (Tag t : result.getTags())
-                {
-                    Log.i("error", t.getName() );
-
-
                     tags.addTag(t.getName());
-
-                  //  counter++;
-                }
             }
             else
             {
-                Log.i("error", "badcode");
                 return false;
             }
         }
         else
         {
-            Log.i("error", "isnull");
             return false;
         }
         return true;
@@ -89,20 +81,21 @@ public class ClarifaiData extends ClarifaiClient
 
     public Tags getTags()
     {
-        Log.i("error" , "return2");
         return this.tags;
     }
 
     public RecognitionResult recognizeBitmap(Uri uri)
     {
-        Log.i("error", "reconizebackground");
         try
         {
             Bitmap image = null;
 
             try
             {
-                image = Picasso.with(this.context).load(uri).resize(320, 320).onlyScaleDown().get();
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = layoutInflater.inflate(R.layout.content_main, null, false);
+                ImageView image_view = (ImageView) view.findViewById(R.id.image_view);
+                image = Picasso.with(this.context).load(uri).get();
             }
             catch (IOException e)
             {
@@ -110,12 +103,7 @@ public class ClarifaiData extends ClarifaiClient
             }
             // Compress the image as a JPEG.
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            //byte[] image_bytes = ;
-
-
-            Log.i("error", "recon results" );
-
+            image.compress(Bitmap.CompressFormat.JPEG, 90, out);
             return recognize(new RecognitionRequest(out.toByteArray())).get(0);
         }
         catch (ClarifaiException e)

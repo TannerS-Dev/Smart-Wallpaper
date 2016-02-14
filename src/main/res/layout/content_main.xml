@@ -14,38 +14,25 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                android:id="@+id/image_view"
-                android:background="#653fff"
-                android:layout_weight="0.5"
-                android:padding="1dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:id="@+id/image_view"
+        android:background="#653fff"
+        android:layout_weight="0.5"
+        android:padding="1dp" />
 
-            <ListView
-                android:id="@+id/clarifaitagview"
-                android:layout_width="match_parent"
-                android:layout_weight="0.35"
-                android:layout_height="0dp"
-                android:padding="5dp"
-                android:background="#68343f"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textAlignment="center" />
-
-
-
-
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            />
+    <ListView
+        android:id="@+id/clarifaitagview"
+        android:layout_width="match_parent"
+        android:layout_weight="0.35"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:background="#68343f"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center" />
 
         <Button
             android:id="@+id/select_button"
