@@ -1,16 +1,5 @@
 package com.tanners.smartwallpaper.flickrdata;
 
-import android.util.Log;
-
-import org.apache.commons.io.IOUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class FlickrData
 {
@@ -24,7 +13,4 @@ public class FlickrData
     {
         url_connection = new URLConnection();
     }
-
-
-
 }

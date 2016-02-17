@@ -29,7 +29,7 @@ public class URLConnection
             url = new URL(url_str);
             Log.i("tags", "URL: " + url.toString());
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             int response = connection.getResponseCode();
 
             Log.i("tags","RESPONESE: " + Integer.toString(response));
@@ -82,45 +82,18 @@ public class URLConnection
                 connection.disconnect();
             }
         }
-
-
         return output;
     }
 
-    /*
-    public ByteArrayOutputStream readData()
+
+    public InputStream getInputStream()
     {
-        ByteArrayOutputStream output = null;
-
-        try
-        {
-            output = new ByteArrayOutputStream();
-            InputStream input_stream = new BufferedInputStream(connection.getInputStream());
-            int buffer_size = 1024;
-            int temp_buffer = 0;
-            byte[] buffer = new byte[buffer_size];
-
-            while((temp_buffer = input_stream.read(buffer)) > 0)
-                output.write(buffer, 0 ,temp_buffer);
-
-
-        }
-        catch (IOException e)
-        {
+        try {
+            return connection.getInputStream();
+        } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        finally
-        {
-
-
-        }
-
-
-
-
-        return ;
     }
-*/
-
 
 }

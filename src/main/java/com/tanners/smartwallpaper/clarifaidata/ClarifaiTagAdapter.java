@@ -16,7 +16,7 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
 {
     private Context context;
     private List<String> taglist;
-    public final static String EXTRA_MESSAGE = "com.tanners.smartwallpaper.clarifaidata.ClarifaiTagAdapter";
+    public final static String EXTRA_MESSAGE = "TAG";
 
     public ClarifaiTagAdapter(Context context, int resource, List<String> objects)
     {
@@ -67,39 +67,8 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
             // just use the viewHolder
             view_holder = (ClarifaiViewHolder) convertView.getTag();
         }
-
-        //final String tag = this.taglist.get(position);
-       // view_holder.btn.setText(tag);
-
-/*
-
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View view = layoutInflater.inflate(R.layout.clarifai_tags, parent, false);
-
-        final String tag = this.taglist.get(position);
-
-        //*******************************************************************************************************DO THIS
-        // http://developer.android.com/training/improving-layouts/smooth-scrolling.html
-
-        Button btn = (Button) view.findViewById(R.id.clarifai_tag_button);
-        btn.setText(tag);
-
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                final Intent intent = new Intent(context, ResultsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(EXTRA_MESSAGE, tag);
-                context.startActivity(intent);
-            }
-        });
-*/
         //return view;
         return convertView;
-
     }
 
     // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html

@@ -42,8 +42,6 @@ public class FlickrDataTags extends FlickrData
                 tag = tag_arry.getJSONObject(i);
                 tags.add(tag.getString("_content"));
             }
-
-
         }
         catch (JSONException e)
         {

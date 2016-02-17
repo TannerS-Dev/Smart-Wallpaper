@@ -16,7 +16,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
 {
     private Context context;
     private List<String> taglist;
-    public final static String EXTRA_MESSAGE = "com.tanners.smartwallpaper.flickrdata.FlickrTagAdapter";
+    public final static String EXTRA_MESSAGE = "TAG";
 
     public FlickrTagAdapter(Context context, int resource, List<String> objects)
     {
@@ -65,36 +65,6 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
             view_holder = (FlickrViewHolder) convertView.getTag();
         }
 
-       // final String tag = this.taglist.get(position);
-       // view_holder.btn.setText(tag);
-
-/*
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View view = layoutInflater.inflate(R.layout.flickr_menu_tags, parent, false);
-
-        final String tag = this.taglist.get(position);
-
-        Button btn = (Button) view.findViewById(R.id.flickr_tag_button);
-
-        btn.setText(tag);
-
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                final Intent intent = new Intent(context, ResultsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(EXTRA_MESSAGE, tag);
-                context.startActivity(intent);//startActivityForResult(media_intent, cdata.getOKCode());
-            }
-        });
-
-        return view;
-
-*/
-        //return view;
         return convertView;
 
     }
