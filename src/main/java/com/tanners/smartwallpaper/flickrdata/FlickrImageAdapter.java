@@ -3,6 +3,8 @@ package com.tanners.smartwallpaper.flickrdata;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,6 +44,7 @@ public class FlickrImageAdapter extends BaseAdapter
     Context context;
     List<FlickrPhotoItem> photos;
     PopupWindow popUp;
+    ImageButton image_button;
 //    final LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     public FlickrImageAdapter(Context context, int resource, List<FlickrPhotoItem> photos)
@@ -73,30 +76,28 @@ public class FlickrImageAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        ImageButtonHolder view_holder;
+       // ImageButtonHolder view_holder;
         boolean click = true;
-        //int position = 0;
 
-        if (convertView == null)
-        {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            convertView = layoutInflater.inflate(R.layout.grid_item, parent, false);
-            view_holder = new ImageButtonHolder();
-            view_holder.Image_button = (ImageButton) convertView.findViewById(R.id.grid_image);
+        View view = layoutInflater.inflate(R.layout.grid_item, parent, false);
 
+           // view_holder = new ImageButtonHolder();
+        image_button = (ImageButton) view.findViewById(R.id.grid_image);
+
+        // iused to get screen size to set picture size
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int screenWidth = metrics.widthPixels;
-            view_holder.Image_button.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
+         image_button.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
 
             final LayoutInflater newlayoutInflater = layoutInflater;
             final int finalPosition = position;
 
-            view_holder.Image_button.setOnClickListener(new View.OnClickListener()
-            {
+
+            image_button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     //LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View popup_view;
                     popup_view = newlayoutInflater.inflate(R.layout.picture_view, null);
@@ -107,42 +108,38 @@ public class FlickrImageAdapter extends BaseAdapter
 
                     Picasso.with(context).load(photos.get(finalPosition).getUrl_z()).into(image_view);
 
-                   // final PopupWindow popup_window = new PopupWindow(popup_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    final PopupWindow popup_window = new PopupWindow(popup_view, 1200, 1200);
+                    // final PopupWindow popup_window = new PopupWindow(popup_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                    int screen_width = metrics.widthPixels;
+                    int screen_hight = metrics.heightPixels;
 
+
+                    final PopupWindow popup_window = new PopupWindow(popup_view, (int)(screen_width *.9) , (int)(screen_hight * .7));
+
+                    // make it so when you click anywhere the window closes
+
+                    popup_window.setOutsideTouchable(true);
+                    popup_window.setTouchable(true);
+                    //popup_window.showAsDropDown(v);
+                    popup_window.setBackgroundDrawable(new ColorDrawable());
+
+                    //popup_window.setFocusable(true);
+                   // popup_window.update();
+
+                    //---
                     popup_window.showAtLocation(v, Gravity.CENTER, 0, 0);
 
-                    set_background_btn.setOnClickListener(new Button.OnClickListener() {
-                        @Override
-                        public void onClick(View v2) {
-                            popup_window.dismiss();
-                        }
-                    });
                 }
             });
 
 
-            convertView.setTag(view_holder);
-        }
-        else
-        {
-            view_holder = (ImageButtonHolder) convertView.getTag();
-        }
-
 
         final String tag = this.photos.get(position).getUrl_z();
-        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(view_holder.Image_button);
+        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(image_button);
 
-        return convertView;
+        return view;
     }
 
 
-    // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html
-    // http://developer.android.com/training/improving-layouts/smooth-scrolling.html
-
-    static public class ImageButtonHolder
-    {
-        ImageButton Image_button;
-    }
 }
 
