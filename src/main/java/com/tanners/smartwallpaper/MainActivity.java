@@ -1,31 +1,3 @@
-
-
-
-
-
-// things to do
-// http://developer.android.com/training/improving-layouts/smooth-scrolling.html
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 package com.tanners.smartwallpaper;
 
 // android imports
@@ -67,7 +39,6 @@ import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.clarifaidata.ClarifaiTagAdapter;
 import com.tanners.smartwallpaper.flickrdata.FlickrDataTags;
 import com.tanners.smartwallpaper.flickrdata.FlickrTagAdapter;
-//import com.tanners.smartwallpaper.data.ClarifaiErrors;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -77,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ClarifaiData cdata = null;
     private ImageView imageview;
-    //private ListView listview;
-   // private ClarifaiTagAdapter cadapter;
-    //private ClarifaiTagAdapter cadapter;
     private FlickrDataTags flickr_tags = null;
 
     @Override
@@ -87,13 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         generateNavBar();
-
         cdata = new ClarifaiData(this, MainActivity.this);
         imageview = (ImageView) findViewById(R.id.image_view);
         flickr_tags = new FlickrDataTags();
-
        // gen_tags = new GenerateTags();
         new GenerateTags().execute(flickr_tags);
     }
@@ -207,50 +172,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             Log.i("tags", Integer.toString(flickr_tags.length));
             flickr_tags[0] = new FlickrDataTags();
-           // flickr_tags[0].getTagsHotList();
             return flickr_tags[0].getTagsHotList();
-            //*********************************************************************************fix not being able to call gettags method twice
         }
 
         @Override
         protected void onPostExecute(List<String> result)
         {
             super.onPostExecute(result);
-
-            //works but no no!
-            // setContentView(R.layout.nav_bar_menu);
-
-           // LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-           // View view = layoutInflater.inflate(R.layout.nav_bar_menu, null, false);
-
-          //  View view = LayoutInflater.from(getApplication()).inflate(R.layout.nav_bar_menu, null);
-
-            //ListView listview = (ListView) view.findViewById(R.id.flickrtagview);
-
             ListView listview = (ListView) findViewById(R.id.flickrtagview);
-
-
-            //setContentView(listview);
-
             List<String> tags = result;
-
-         //  / /for(String x : tags)
-                   // Log.i("tags", x);
-
-
-            //int x = view.inflate(getApplicationContext(), , null);
-
-            //LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-           // int id = R.layout.nav_bar_menu;
-           // Log.i("tags","ID : " + Integer.toString(id));
-//
+            //*******************************************************************************************************************************************8
             FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_header_main, tags);
-
-
-
-           // FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(),               , tags);
-
             listview.setAdapter(adapter);
         }
     }
@@ -280,7 +212,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             List<String> tags = cdata.getTags().getTagList();
            // LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags, tags);
-
             listview.setAdapter(adapter);
         }
     }
