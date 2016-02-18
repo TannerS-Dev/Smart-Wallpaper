@@ -40,12 +40,11 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
         final ClarifaiViewHolder view_holder;
 
 
-
-
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(convertView == null)
         {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-           // LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            // LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.clarifai_tags, parent, false);
             view_holder = new ClarifaiViewHolder();
             //final String tag = this.taglist.get(position);
@@ -75,7 +74,7 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
             view_holder = (ClarifaiViewHolder) convertView.getTag();
         }
         //return view;
-       // String tag = this.taglist.get(position);
+        // String tag = this.taglist.get(position);
         final String tag = this.taglist.get(position);
 
 
@@ -103,7 +102,7 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
     // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html
     // http://developer.android.com/training/improving-layouts/smooth-scrolling.html
 
-    static private class ClarifaiViewHolder
+    static class ClarifaiViewHolder
     {
         Button btn;
     }
