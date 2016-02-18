@@ -37,16 +37,50 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)
     {
-        ClarifaiViewHolder view_holder;
+        final ClarifaiViewHolder view_holder;
 
+
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(convertView == null)
         {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+           // LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.clarifai_tags, parent, false);
             view_holder = new ClarifaiViewHolder();
-            view_holder.btn =  (Button) convertView.findViewById(R.id.clarifai_tag_button);
+            //final String tag = this.taglist.get(position);
+
+            view_holder.btn = (Button) convertView.findViewById(R.id.clarifai_tag_button);
             // here are below else statement?
-            final String tag = this.taglist.get(position);
+
+            //view_holder.btn.setText(tag);
+
+            /*
+            view_holder.btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Intent intent = new Intent(context, ResultsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(EXTRA_MESSAGE, tag);
+                    context.startActivity(intent);
+                }
+            });
+*/
+            convertView.setTag(view_holder);
+        }
+        else
+        {
+            // we've just avoided calling findViewById() on resource everytime
+            // just use the viewHolder
+            view_holder = (ClarifaiViewHolder) convertView.getTag();
+        }
+        //return view;
+       // String tag = this.taglist.get(position);
+        final String tag = this.taglist.get(position);
+
+
+        if(this.taglist != null)
+        {
+
             view_holder.btn.setText(tag);
 
             view_holder.btn.setOnClickListener(new View.OnClickListener() {
@@ -58,16 +92,10 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
                     context.startActivity(intent);
                 }
             });
+        }
 
-            convertView.setTag(view_holder);
-        }
-        else
-        {
-            // we've just avoided calling findViewById() on resource everytime
-            // just use the viewHolder
-            view_holder = (ClarifaiViewHolder) convertView.getTag();
-        }
-        //return view;
+
+
         return convertView;
     }
 

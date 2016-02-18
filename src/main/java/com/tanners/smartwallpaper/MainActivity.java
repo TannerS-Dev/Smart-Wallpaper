@@ -210,6 +210,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             ListView listview = (ListView) findViewById(R.id.clarifaitagview);
             List<String> tags = cdata.getTags().getTagList();
+
+            for(String s : tags)
+                    Log.i("tags", s);
+
            // LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags, tags);
             listview.setAdapter(adapter);

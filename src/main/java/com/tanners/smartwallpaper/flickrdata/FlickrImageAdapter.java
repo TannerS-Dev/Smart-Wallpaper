@@ -45,6 +45,7 @@ public class FlickrImageAdapter extends BaseAdapter
     List<FlickrPhotoItem> photos;
     PopupWindow popUp;
     ImageButton image_button;
+    FlickrDataUserInfo user_data;
 //    final LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     public FlickrImageAdapter(Context context, int resource, List<FlickrPhotoItem> photos)
@@ -53,6 +54,7 @@ public class FlickrImageAdapter extends BaseAdapter
         this.context = context;
         this.photos = photos;
         popUp = new PopupWindow(this.context);
+        user_data = new FlickrDataUserInfo();
     }
 
     @Override
@@ -106,6 +108,22 @@ public class FlickrImageAdapter extends BaseAdapter
                     Button set_background_btn = (Button) popup_view.findViewById(R.id.background_btn);
                     TextView text_view = (TextView) popup_view.findViewById(R.id.background_text);
 
+                    String photo_info = null;
+
+                    /*
+                    user_data.genrateUserInfo(photos.get(finalPosition).getOwner());
+
+                    photo_info += "Name: " + user_data.getFullName() + "/n";
+                    photo_info += "Username: " + user_data.getUsername() + "/n";
+                    photo_info += "ID: " + photos.get(finalPosition).getId() + "/n";
+                    photo_info += "Title: " + photos.get(finalPosition).getTitle() + "/n";
+                    photo_info += "Owner: " + photos.get(finalPosition).getOwner() + "/n";
+                    photo_info += "Height: " + photos.get(finalPosition).getHeight_z() + "/n";
+                    photo_info += "Width: " + photos.get(finalPosition).getWidth_z() + "/n";
+
+                   // text_view.setText(photo_info);
+                   // photos.get(finalPosition)
+*/
                     Picasso.with(context).load(photos.get(finalPosition).getUrl_z()).into(image_view);
 
                     // final PopupWindow popup_window = new PopupWindow(popup_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
