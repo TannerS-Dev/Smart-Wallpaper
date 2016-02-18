@@ -72,7 +72,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
     // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html
     // http://developer.android.com/training/improving-layouts/smooth-scrolling.html
 
-    static class FlickrViewHolder
+    static private class FlickrViewHolder
     {
         Button btn;
     }

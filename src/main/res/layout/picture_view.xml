@@ -38,7 +38,7 @@
         android:layout_weight="0.2"
         android:text="this is a sample of this files information"
         android:textColor="#000000"
-        ></TextView>
+        />
 
     <Button
         android:id="@+id/background_btn"
