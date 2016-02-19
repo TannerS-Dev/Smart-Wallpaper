@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class FlickrPhotoContainer
 {
     private FlickrPhotos photos;
-    private String stat;
-
 
     public FlickrPhotos getPhotos()
     {
@@ -16,13 +14,5 @@ public class FlickrPhotoContainer
     public void setPhotos(FlickrPhotos photos)
     {
         this.photos = photos;
-    }
-
-    public String getStat() {
-        return stat;
-    }
-
-    public void setStat(String stat) {
-        this.stat = stat;
     }
 }

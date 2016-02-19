@@ -54,7 +54,6 @@ public class Tags
 
     public List<String> getTagList()
     {
-        Log.i("error", "return");
         return this.tags;
     }
 }

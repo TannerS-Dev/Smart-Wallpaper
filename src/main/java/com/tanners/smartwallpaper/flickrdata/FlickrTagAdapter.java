@@ -16,7 +16,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
 {
     private Context context;
     private List<String> taglist;
-    public final static String EXTRA_MESSAGE = "TAG";
+    public final String EXTRA_MESSAGE = "TAG";
 
     public FlickrTagAdapter(Context context, int resource, List<String> objects)
     {
@@ -34,29 +34,26 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)
     {
+        // create custom view holder class to hold views
         FlickrViewHolder view_holder;
-
-
+      // TODO find out what this shit means
         if(convertView == null)
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.flickr_menu_tags, parent, false);
             view_holder = new FlickrViewHolder();
             view_holder.btn =  (Button) convertView.findViewById(R.id.flickr_tag_button);
-            // here are below else statement?
             convertView.setTag(view_holder);
         }
         else
         {
-            // we've just avoided calling findViewById() on resource everytime
-            // just use the viewHolder
+            // no need to call findViewById() on resource again
+            // just use the custom view holder
             view_holder = (FlickrViewHolder) convertView.getTag();
         }
 
         final String tag = this.taglist.get(position);
-
         view_holder.btn.setText(tag);
-
         view_holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,9 +64,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
             }
         });
 
-
         return convertView;
-
     }
 
     // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html
@@ -79,6 +74,5 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
     {
         Button btn;
     }
-
 }
 

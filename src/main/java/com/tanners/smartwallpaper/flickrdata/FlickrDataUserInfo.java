@@ -19,53 +19,24 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tanner Summers on 2/17/2016.
- */
 public class FlickrDataUserInfo extends FlickrData
 {
-    private final String GET_PHOTOS_METHOD = "flickr.people.getInfo";
-    private final String GET_PHOTOS_PARA = "&privacy_filter=public&content_type=1&media=photos";
-    private final String GET_USER_ID ="&user_id=";
-    private final String TAG ="&tags=";
     private String real_name;
     private String username;
-    //private
 
     public FlickrDataUserInfo()
     {
         super();
-        real_name = "unknown" ;
-        username = real_name;
+        real_name = username = "unknown" ;
     }
 
-    public void genrateUserInfo(String user_id)
+    public void generateUserInfo(String user_id)
     {
 
-
-        if(url_connection == null)
-            Log.i("info", "null shit");
-
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        String complete_user_id = GET_USER_ID + user_id;
+        String complete_user_id = GET_INFO_ID + user_id;
         Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
 
-
-    //  .//  url_connection
-
-
-
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
+        //ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
         //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
 
         //String json_info = output.toString();

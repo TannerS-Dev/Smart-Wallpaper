@@ -8,6 +8,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InvalidObjectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,36 +17,64 @@ public class URLConnection
 {
     private static int TIMEOUT_CONNECTION_MS = 7000;
     private static int TIMEOUT_READ_MS = 15000;
-   // private URL url;
-    private HttpURLConnection connection;
+    private URL url;
+    private boolean isGood;
 
-
-    public ByteArrayOutputStream readData(String url_str)
+    public URLConnection(String url_str)
     {
-        URL url = null;
+        HttpURLConnection connection = null;
 
         try
         {
             url = new URL(url_str);
-            Log.i("tags", "URL: " + url.toString());
-
             connection = (HttpURLConnection) url.openConnection();
 
-
-
-
-            int response = connection.getResponseCode();
-            Log.i("info","RESPONESE: " + Integer.toString(response));
-
-
-
-
-
-            if (response == HttpURLConnection.HTTP_OK)
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
             {
                 connection.setConnectTimeout(TIMEOUT_CONNECTION_MS);
                 connection.setReadTimeout(TIMEOUT_READ_MS);
+                isGood = true;
             }
+            else
+                throw new IOException();
+            // TODO make exception
+        }
+        catch (MalformedURLException e)
+        {
+            isGood = false;
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            isGood = false;
+            e.printStackTrace();
+        }
+        finally
+        {
+            if(connection != null)
+            {
+                connection.disconnect();
+            }
+        }
+    }
+
+    public ByteArrayOutputStream readData()
+    {
+        InputStream input_stream = null;
+        ByteArrayOutputStream output = null;
+
+        try
+        {
+            if (isGood())
+            {
+                output = new ByteArrayOutputStream();
+                input_stream = url.openStream();
+                byte[] buffer = IOUtils.toByteArray(input_stream);
+                output.write(buffer, 0, buffer.length);
+            }
+            else
+                throw new IOException();
+            // TODO make exception
         }
         catch(MalformedURLException e)
         {
@@ -56,20 +85,6 @@ public class URLConnection
             e.printStackTrace();
         }
 
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        InputStream input_stream = null;
-
-        try
-        {
-            input_stream = url.openStream();
-            //output = new ByteArrayOutputStream();
-            byte[] buffer = IOUtils.toByteArray(input_stream);
-            output.write(buffer, 0, buffer.length);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
         finally
         {
             if(input_stream != null)
@@ -83,24 +98,49 @@ public class URLConnection
                     e.printStackTrace();
                 }
             }
-
-            if(connection != null)
-            {
-                connection.disconnect();
-            }
         }
         return output;
     }
 
+    public HttpURLConnection getHttpURLConnection()
+    {
+        if(isGood())
+        {
+            HttpURLConnection http_con = null;
 
+            try
+            {
+                http_con = (HttpURLConnection) url.openConnection();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return http_con;
+        }
+        else
+            return null;
+    }
+/*
     public InputStream getInputStream()
     {
+
+
         try {
             return connection.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }*/
+
+    public boolean isGood()
+    {
+        return isGood;
     }
 
+    public void setIsGood(boolean isGood)
+    {
+        this.isGood = isGood;
+    }
 }

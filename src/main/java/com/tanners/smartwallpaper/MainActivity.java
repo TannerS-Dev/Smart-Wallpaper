@@ -56,10 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         generateNavBar();
-        cdata = new ClarifaiData(this, MainActivity.this);
+        cdata = new ClarifaiData(MainActivity.this);
         imageview = (ImageView) findViewById(R.id.image_view);
         flickr_tags = new FlickrDataTags();
-       // gen_tags = new GenerateTags();
         new GenerateTags().execute(flickr_tags);
     }
 
@@ -74,9 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (image != null)
             {
-                //Picasso.with(getApplicationContext()).load(image);
-                //Picasso.with(this).load(intent.getData()).resize(imageview.getWidth(), imageview.getHeight()).centerCrop().into(imageview);
-                // Picasso.with(this).load(image).resize(imageview.getWidth(), imageview.getHeight()).fit().into(imageview);
                 Picasso.with(this).load(image).centerInside().fit().into(imageview);
                 selectButton.setText("Please wait");
                 selectButton.setEnabled(false);
@@ -86,27 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else
                 bottomToast(cdata.getLoadError());
         }
-
-
-
-
-
-
-
-
-
-        /// temp
-
-      //  ImageView image_view = (ImageView) findViewById(R.id.image_view);
-
-       // Log.i("image", Integer.toString(image_view.getWidth()));
-       // Log.i("image", Integer.toString(image_view.getHeight()));
-
-
-
-
-
-
     }
 
     private void generateNavBar()
@@ -164,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-
     private class GenerateTags extends AsyncTask<FlickrDataTags, Void, List<String>>
     {
         @Override
@@ -181,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onPostExecute(result);
             ListView listview = (ListView) findViewById(R.id.flickrtagview);
             List<String> tags = result;
-            //*******************************************************************************************************************************************8
             FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_header_main, tags);
             listview.setAdapter(adapter);
         }
@@ -210,19 +183,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             ListView listview = (ListView) findViewById(R.id.clarifaitagview);
             List<String> tags = cdata.getTags().getTagList();
-           // LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags, tags);
-            listview.setAdapter(adapter);
+
+            //no tags!
+            if(tags == null || (tags.size() == 0))
+            {
+                // TODO make constant
+                noTagsToast("No Tags For This Image");
+            }
+            else
+            {
+                ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags, tags);
+                listview.setAdapter(adapter);
+            }
+        }
+
+        private void noTagsToast(String str)
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
+            toast.show();
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

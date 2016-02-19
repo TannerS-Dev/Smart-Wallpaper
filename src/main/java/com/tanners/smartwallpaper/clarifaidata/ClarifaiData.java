@@ -31,24 +31,12 @@ public class ClarifaiData extends ClarifaiClient
     private final int OK_CODE = 1;
     private Context context;
     private Tags tags;
-    private Activity act;
 
-    public ClarifaiData(Context context, Activity act)
+    public ClarifaiData(Context context)
     {
         super(APP_ID, APP_SECRET);
         this.context = context;
         this.tags = null;
-        this.act = act;
-    }
-
-    public String getAppID()
-    {
-        return APP_ID;
-    }
-
-    public String getAppSecret()
-    {
-        return APP_SECRET;
     }
 
     public int getOKCode()
