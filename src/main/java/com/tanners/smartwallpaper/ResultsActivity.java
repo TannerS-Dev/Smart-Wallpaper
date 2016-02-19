@@ -77,6 +77,8 @@ public class ResultsActivity extends AppCompatActivity
 
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
 
+            //TODO null check here, when no tags this isnull
+
            FlickrImageAdapter adapter = new FlickrImageAdapter(ResultsActivity.this, R.layout.content_results, flickr_objects);
 
            grid.setAdapter(adapter);

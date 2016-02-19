@@ -26,7 +26,7 @@ public class FlickrDataUserInfo extends FlickrData
 {
     private final String GET_PHOTOS_METHOD = "flickr.people.getInfo";
     private final String GET_PHOTOS_PARA = "&privacy_filter=public&content_type=1&media=photos";
-    private final String GET_USER_ID =" &user_id=";
+    private final String GET_USER_ID ="&user_id=";
     private final String TAG ="&tags=";
     private String real_name;
     private String username;
@@ -41,29 +41,62 @@ public class FlickrDataUserInfo extends FlickrData
 
     public void genrateUserInfo(String user_id)
     {
+
+
+        if(url_connection == null)
+            Log.i("info", "null shit");
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String complete_user_id = GET_USER_ID + user_id;
-        URL url = null;
-        ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
         Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
-        String json_info = output.toString();
+
+
+    //  .//  url_connection
+
+
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
+        //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
+
+        //String json_info = output.toString();
 
         String name = null;
+
+
+/*
 
         try
         {
             JSONObject root = new JSONObject(json_info).getJSONObject("person");
-            JSONObject name_object = root.getJSONObject("realname");
-            name_object = name_object.getJSONObject("_content");
-            this.real_name = name_object.toString();
+           // JSONObject name_object = root.getJSONObject("realname");
+            //name_object = name_object.getJSONObject("_content");
+            //this.real_name = name_object.toString();
 
-            name_object = root.getJSONObject("username");
-            name_object = name_object.getJSONObject("_content");
-            this.username = name_object.toString();
+           // name_object = root.getJSONObject("username");
+           // name_object = name_object.getJSONObject("_content");
+            //this.username = name_object.toString();
         }
         catch (JSONException e)
         {
             e.printStackTrace();
         }
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
     }
 
     public String getUsername() {

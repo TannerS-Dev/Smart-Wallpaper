@@ -108,11 +108,15 @@ public class FlickrImageAdapter extends BaseAdapter
                 Button set_background_btn = (Button) popup_view.findViewById(R.id.background_btn);
                 TextView text_view = (TextView) popup_view.findViewById(R.id.background_text);
 
+
                 String photo_info = null;
 
-                    /*
+
                     user_data.genrateUserInfo(photos.get(finalPosition).getOwner());
 
+
+
+/*
                     photo_info += "Name: " + user_data.getFullName() + "/n";
                     photo_info += "Username: " + user_data.getUsername() + "/n";
                     photo_info += "ID: " + photos.get(finalPosition).getId() + "/n";
@@ -125,6 +129,10 @@ public class FlickrImageAdapter extends BaseAdapter
                    // photos.get(finalPosition)
 */
                 Picasso.with(context).load(photos.get(finalPosition).getUrl_z()).into(image_view);
+
+
+
+
 
                 // final PopupWindow popup_window = new PopupWindow(popup_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 DisplayMetrics metrics = context.getResources().getDisplayMetrics();

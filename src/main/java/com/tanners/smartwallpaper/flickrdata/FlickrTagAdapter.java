@@ -36,6 +36,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
     {
         FlickrViewHolder view_holder;
 
+
         if(convertView == null)
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,19 +44,6 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
             view_holder = new FlickrViewHolder();
             view_holder.btn =  (Button) convertView.findViewById(R.id.flickr_tag_button);
             // here are below else statement?
-            final String tag = this.taglist.get(position);
-            view_holder.btn.setText(tag);
-
-            view_holder.btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final Intent intent = new Intent(context, ResultsActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(EXTRA_MESSAGE, tag);
-                    context.startActivity(intent);
-                }
-            });
-
             convertView.setTag(view_holder);
         }
         else
@@ -64,6 +52,21 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
             // just use the viewHolder
             view_holder = (FlickrViewHolder) convertView.getTag();
         }
+
+        final String tag = this.taglist.get(position);
+
+        view_holder.btn.setText(tag);
+
+        view_holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(context, ResultsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(EXTRA_MESSAGE, tag);
+                context.startActivity(intent);
+            }
+        });
+
 
         return convertView;
 

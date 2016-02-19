@@ -30,9 +30,16 @@ public class URLConnection
             Log.i("tags", "URL: " + url.toString());
 
             connection = (HttpURLConnection) url.openConnection();
-            int response = connection.getResponseCode();
 
-            Log.i("tags","RESPONESE: " + Integer.toString(response));
+
+
+
+            int response = connection.getResponseCode();
+            Log.i("info","RESPONESE: " + Integer.toString(response));
+
+
+
+
 
             if (response == HttpURLConnection.HTTP_OK)
             {
