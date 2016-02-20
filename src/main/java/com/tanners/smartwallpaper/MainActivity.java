@@ -1,6 +1,5 @@
 package com.tanners.smartwallpaper;
 
-// android imports
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ClarifaiData cdata = null;
     private ImageView imageview;
     private FlickrDataTags flickr_tags = null;
+    private final String NO_TAGS = "No tags aviable for this image";
+    private final String NO_IMAGES = "No images aviable for this tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -102,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 final Intent media_intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 // START API OVER NET
-                Log.i("error", "start act");
                 startActivityForResult(media_intent, cdata.getOKCode());
             }
 
@@ -111,10 +111,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void bottomToast(String str)
     {
-        // getApplicationContext() | Return the context of the single, global Application object of the current process.
         Context context = getApplicationContext();
         Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-        // public void setGravity (int gravity, int xOffset, int yOffset)
         toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
         toast.show();
     }
@@ -144,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected List<String> doInBackground(FlickrDataTags... flickr_tags)
         {
-            Log.i("tags", Integer.toString(flickr_tags.length));
             flickr_tags[0] = new FlickrDataTags();
             return flickr_tags[0].getTagsHotList();
         }
@@ -153,10 +150,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onPostExecute(List<String> result)
         {
             super.onPostExecute(result);
-            ListView listview = (ListView) findViewById(R.id.flickrtagview);
-            List<String> tags = result;
-            FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_header_main, tags);
-            listview.setAdapter(adapter);
+
+            if(result == null || (result.size() == 0))
+                noImagesToast(NO_IMAGES);
+            else
+            {
+                ListView listview = (ListView) findViewById(R.id.flickrtagview);
+                List<String> tags = result;
+                FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_header_main, tags);
+                listview.setAdapter(adapter);
+            }
+        }
+
+        private void noImagesToast(String str)
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
+            toast.show();
         }
     }
 
@@ -186,10 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //no tags!
             if(tags == null || (tags.size() == 0))
-            {
-                // TODO make constant
-                noTagsToast("No Tags For This Image");
-            }
+                noTagsToast(NO_TAGS);
             else
             {
                 ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags, tags);

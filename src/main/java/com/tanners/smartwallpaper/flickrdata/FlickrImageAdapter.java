@@ -1,10 +1,17 @@
 package com.tanners.smartwallpaper.flickrdata;
 
+import android.app.WallpaperManager;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,16 +28,22 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.clarifai.api.RecognitionResult;
 import com.squareup.picasso.Picasso;
+import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
 
 import com.tanners.smartwallpaper.ResultsActivity;
+import com.tanners.smartwallpaper.clarifaidata.ClarifaiTagAdapter;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
+import java.io.IOException;
 import java.util.List;
 
 //// TODO: 2/16/2016
@@ -71,13 +84,17 @@ public class FlickrImageAdapter extends BaseAdapter
         return 0;
     }
 
+    // TODO optimization on this method
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         boolean click = true;
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.grid_item, parent, false);
         image_button = (ImageButton) view.findViewById(R.id.grid_image);
+
+
+
 
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int screenWidth = metrics.widthPixels;
@@ -104,6 +121,23 @@ public class FlickrImageAdapter extends BaseAdapter
                 user_data.generateUserInfo(photos.get(finalPosition).getOwner());
                 // call proper classes / methods to collect info for photo
                 // and append it to the string
+
+
+
+
+                set_background_btn.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        new setWallpaper().execute(finalPosition);
+
+
+                    }
+                });
+
+
+                /*
                 photo_info += "Name: " + user_data.getFullName() + "\n";
                 photo_info += "Username: " + user_data.getUsername() + "\n";
                 photo_info += "ID: " + photos.get(finalPosition).getId() + "\n";
@@ -113,7 +147,8 @@ public class FlickrImageAdapter extends BaseAdapter
                 photo_info += "Width: " + photos.get(finalPosition).getWidth_z() + "\n";
                 // set the textview in the popup window to show the info
                 text_view.setText(photo_info);
-                Log.i("info", photo_info);
+                */
+                //Log.i("info", photo_info);
                 // put image into popup window
                 Picasso.with(context).load(photos.get(finalPosition).getUrl_z()).into(image_view);
                 // get width and height of screen
@@ -146,5 +181,63 @@ public class FlickrImageAdapter extends BaseAdapter
         // return current view
         return view;
     }
+
+
+
+
+
+
+    private class setWallpaper extends AsyncTask<Integer, Void, Bitmap>
+    {
+        @Override
+        protected Bitmap doInBackground(Integer... position)
+        {
+            // get the Image to as Bitmap
+            Bitmap bitmap = null;
+            try {
+                bitmap = Picasso.with(context).load(photos.get(position[0]).getUrl_z()).get();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap)
+        {
+            super.onPostExecute(bitmap);
+
+
+            final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            int screenWidth = metrics.widthPixels;
+
+            // get the height and width of screen
+            int height = metrics.heightPixels;
+            int width = metrics.widthPixels;
+
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+
+            try {
+                wallpaperManager.setBitmap(bitmap);
+
+                wallpaperManager.suggestDesiredDimensions(width, height);
+                //Toast.makeText(this, "Wallpaper Set", Toast.LENGTH_SHORT).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
+
+
+
+
+
+
+
+
+
 

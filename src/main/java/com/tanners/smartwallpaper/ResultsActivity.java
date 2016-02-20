@@ -65,19 +65,18 @@ public class ResultsActivity extends AppCompatActivity
             super.onPostExecute(result);
             GridView grid = (GridView) findViewById(R.id.grid_view);
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
-            //TODO null check here, when no tags this isnull
 
-            if(flickr_objects == null || (flickr_objects.size() == 0))
-            {
+            //if(flickr_objects == null || (flickr_objects.size() == 0))
+            //{
                 //TODO cnstant
-                NoImagesToast("No Images For This Tag");
-                finish();
-            }
-            else
-            {
+              //  NoImagesToast("No Images For This Tag");
+                //finish();
+            //}
+            //else
+            //{
                 FlickrImageAdapter adapter = new FlickrImageAdapter(ResultsActivity.this, R.layout.content_results, flickr_objects);
                 grid.setAdapter(adapter);
-            }
+            //}
         }
 
         private void NoImagesToast(String str)

@@ -30,13 +30,14 @@ public class FlickrDataUserInfo extends FlickrData
         real_name = username = "unknown" ;
     }
 
+    // TODO left off
     public void generateUserInfo(String user_id)
     {
-
         String complete_user_id = GET_INFO_ID + user_id;
         Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
 
-        //ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
+        /*
+        ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
         //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
 
         //String json_info = output.toString();
@@ -44,30 +45,22 @@ public class FlickrDataUserInfo extends FlickrData
         String name = null;
 
 
-/*
-
         try
         {
             JSONObject root = new JSONObject(json_info).getJSONObject("person");
-           // JSONObject name_object = root.getJSONObject("realname");
-            //name_object = name_object.getJSONObject("_content");
-            //this.real_name = name_object.toString();
+            JSONObject name_object = root.getJSONObject("realname");
+            name_object = name_object.getJSONObject("_content");
+            this.real_name = name_object.toString();
 
-           // name_object = root.getJSONObject("username");
-           // name_object = name_object.getJSONObject("_content");
-            //this.username = name_object.toString();
+            name_object = root.getJSONObject("username");
+            name_object = name_object.getJSONObject("_content");
+            this.username = name_object.toString();
         }
+
         catch (JSONException e)
         {
             e.printStackTrace();
-        }
-
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }*/
-
     }
 
     public String getUsername() {

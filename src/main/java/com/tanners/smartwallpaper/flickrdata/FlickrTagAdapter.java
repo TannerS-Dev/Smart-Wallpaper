@@ -36,7 +36,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
     {
         // create custom view holder class to hold views
         FlickrViewHolder view_holder;
-      // TODO find out what this shit means
+
         if(convertView == null)
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
