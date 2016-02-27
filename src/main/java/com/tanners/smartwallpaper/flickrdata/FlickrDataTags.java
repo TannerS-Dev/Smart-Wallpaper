@@ -12,8 +12,8 @@ import java.util.List;
 
 public class FlickrDataTags extends FlickrData
 {
-    private final String GET_HOT_LIST_TAGS = "flickr.tags.getHotList";
-    private final String GET_HOT_LIST_TAGS_PARA = "&period=week&count=15";
+    //private final String GET_HOT_LIST_TAGS = "flickr.tags.getHotList";
+    //private final String GET_HOT_LIST_TAGS_PARA = "&period=week&count=15";
 
     public FlickrDataTags()
     {

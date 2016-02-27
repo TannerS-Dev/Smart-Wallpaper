@@ -7,6 +7,9 @@ public class FlickrData
     protected final String METHOD = "?method=";
     protected final String FORMAT = "&format=json&nojsoncallback=1";
 
+    protected final String GET_HOT_LIST_TAGS = "flickr.tags.getHotList";
+    protected final String GET_HOT_LIST_TAGS_PARA = "&period=week&count=15";
+
 
     protected final String GET_PHOTOS_METHOD = "flickr.photos.search";
     protected final String GET_PHOTOS_PARA = "&privacy_filter=public&content_type=1&media=photos";
