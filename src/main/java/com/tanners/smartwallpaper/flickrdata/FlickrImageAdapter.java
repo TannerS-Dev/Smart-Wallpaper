@@ -3,17 +3,10 @@ package com.tanners.smartwallpaper.flickrdata;
 import android.app.WallpaperManager;
 import android.content.Context;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,25 +15,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.clarifai.api.RecognitionResult;
 import com.squareup.picasso.Picasso;
-import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
 
-import com.tanners.smartwallpaper.ResultsActivity;
-import com.tanners.smartwallpaper.clarifaidata.ClarifaiTagAdapter;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
 import java.io.IOException;
@@ -90,7 +74,7 @@ public class FlickrImageAdapter extends BaseAdapter
     {
         boolean click = true;
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.grid_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, parent, false);
         image_button = (ImageButton) view.findViewById(R.id.grid_image);
 
 
@@ -109,7 +93,7 @@ public class FlickrImageAdapter extends BaseAdapter
             public void onClick(View v)
             {
                 // create view to hold content for popup window
-                final View popup_view = newlayoutInflater.inflate(R.layout.picture_view, null);
+                final View popup_view = newlayoutInflater.inflate(R.layout.flickr_popup_picture_layout, null);
                 // grab elements for the view that will be in the popup window
                 ImageView image_view = (ImageView) popup_view.findViewById(R.id.background_image);
                 Button set_background_btn = (Button) popup_view.findViewById(R.id.background_btn);

@@ -6,9 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.view.Gravity;
@@ -27,7 +25,6 @@ import android.widget.Button;
 import com.clarifai.api.RecognitionResult;
 
 // java imports
-import java.util.ArrayList;
 import java.util.List;
 
 // TannerS
@@ -88,7 +85,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void generateNavBar()
     {
         // AUTO GENERATED
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
+
+        if(toolbar == null)
+            Log.i("text", "fuck");
+
+
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -98,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         selectButton = (Button) findViewById(R.id.select_button);
 
+        // TODO clarifai button, disabled to prevent null pointer until clarifia window is added
+        /*
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         });
+        */
     }
 
     private void bottomToast(String str)
@@ -157,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             {
                 ListView listview = (ListView) findViewById(R.id.flickrtagview);
                 List<String> tags = result;
-                FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_header_main, tags);
+                FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_bar_header, tags);
                 listview.setAdapter(adapter);
             }
         }
@@ -199,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 noTagsToast(NO_TAGS);
             else
             {
-                ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags, tags);
+                ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(MainActivity.this, R.layout.clarifai_tags_layout, tags);
                 listview.setAdapter(adapter);
             }
         }

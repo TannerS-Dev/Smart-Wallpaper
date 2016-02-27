@@ -5,14 +5,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotos;
 import com.tanners.smartwallpaper.flickrdata.FlickrImageAdapter;
-import com.tanners.smartwallpaper.flickrdata.FlickrTagAdapter;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
@@ -31,8 +29,9 @@ public class ResultsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         setSupportActionBar(toolbar);
+        // TODO insteado f creaitng new nav, call one form main but change title
         tag = getIntent().getStringExtra(EXTRA_MESSAGE);
         grid_view = (GridView) findViewById(R.id.grid_view);
 
@@ -74,7 +73,7 @@ public class ResultsActivity extends AppCompatActivity
             //}
             //else
             //{
-                FlickrImageAdapter adapter = new FlickrImageAdapter(ResultsActivity.this, R.layout.content_results, flickr_objects);
+                FlickrImageAdapter adapter = new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects);
                 grid.setAdapter(adapter);
             //}
         }

@@ -40,7 +40,7 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
 
         if(convertView == null)
         {
-            convertView = layoutInflater.inflate(R.layout.clarifai_tags, parent, false);
+            convertView = layoutInflater.inflate(R.layout.clarifai_tags_layout, parent, false);
             view_holder = new ClarifaiViewHolder();
             view_holder.btn = (Button) convertView.findViewById(R.id.clarifai_tag_button);
             convertView.setTag(view_holder);

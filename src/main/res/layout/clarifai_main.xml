@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:gravity="center|bottom"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main_toolbar">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:id="@+id/image_view"
+        android:background="#653fff"
+        android:layout_weight="0.5"
+        android:padding="1dp" />
+
+    <ListView
+        android:id="@+id/clarifaitagview"
+        android:layout_width="match_parent"
+        android:layout_weight="0.35"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:background="#68343f"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/select_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sel_image"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:background="#3d88ec" />
+
+
+
+    </LinearLayout>
+
+

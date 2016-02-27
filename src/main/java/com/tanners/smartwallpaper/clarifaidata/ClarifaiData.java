@@ -1,13 +1,10 @@
 package com.tanners.smartwallpaper.clarifaidata;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.clarifai.api.ClarifaiClient;
@@ -16,7 +13,6 @@ import com.clarifai.api.RecognitionResult;
 import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 import com.tanners.smartwallpaper.R;
 
 import java.io.ByteArrayOutputStream;
@@ -81,7 +77,7 @@ public class ClarifaiData extends ClarifaiClient
             try
             {
                 LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view = layoutInflater.inflate(R.layout.content_main, null, false);
+                View view = layoutInflater.inflate(R.layout.clarifai_main, null, false);
                 ImageView image_view = (ImageView) view.findViewById(R.id.image_view);
                 image = Picasso.with(this.context).load(uri).get();
             }

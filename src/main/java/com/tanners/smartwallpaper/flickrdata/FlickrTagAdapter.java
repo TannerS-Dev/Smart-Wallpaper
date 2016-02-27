@@ -40,7 +40,7 @@ public class FlickrTagAdapter extends ArrayAdapter<String>
         if(convertView == null)
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.flickr_menu_tags, parent, false);
+            convertView = layoutInflater.inflate(R.layout.flickr_menu_tags_layout, parent, false);
             view_holder = new FlickrViewHolder();
             view_holder.btn =  (Button) convertView.findViewById(R.id.flickr_tag_button);
             convertView.setTag(view_holder);
