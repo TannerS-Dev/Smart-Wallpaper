@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ClarifaiData cdata = null;
     private ImageView imageview;
     private FlickrDataTags flickr_tags = null;
-    private final String NO_TAGS = "No tags aviable for this image";
     private final String NO_IMAGES = "No images aviable for this tag";
 
     @Override
@@ -54,12 +53,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         generateNavBar();
+
+
+
         cdata = new ClarifaiData(MainActivity.this);
         imageview = (ImageView) findViewById(R.id.image_view);
         flickr_tags = new FlickrDataTags();
+
         new GenerateTags().execute(flickr_tags);
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (image != null)
             {
-                Picasso.with(this).load(image).centerInside().fit().into(imageview);
+                Picasso.with(tfvhis).load(image).centerInside().fit().into(imageview);
                 selectButton.setText("Please wait");
                 selectButton.setEnabled(false);
 
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bottomToast(cdata.getLoadError());
         }
     }
-
+*/
     private void generateNavBar()
     {
         // AUTO GENERATED
@@ -98,10 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        selectButton = (Button) findViewById(R.id.select_button);
-
-        // TODO clarifai button, disabled to prevent null pointer until clarifia window is added
         /*
+        //selectButton = (Button) findViewById(R.id.select_button);
+
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,15 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         });
         */
+
     }
 
-    private void bottomToast(String str)
-    {
-        Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
-        toast.show();
-    }
 
     @Override
     public void onBackPressed()
@@ -175,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /*
     private class GetTags extends AsyncTask<Uri, Void, RecognitionResult>
     {
         @Override
@@ -216,4 +214,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toast.show();
         }
     }
+    */
 }

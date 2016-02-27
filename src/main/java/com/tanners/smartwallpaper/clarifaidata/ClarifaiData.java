@@ -77,7 +77,7 @@ public class ClarifaiData extends ClarifaiClient
             try
             {
                 LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view = layoutInflater.inflate(R.layout.clarifai_main, null, false);
+                View view = layoutInflater.inflate(R.layout.clarifai_fragment_main, null, false);
                 ImageView image_view = (ImageView) view.findViewById(R.id.image_view);
                 image = Picasso.with(this.context).load(uri).get();
             }
