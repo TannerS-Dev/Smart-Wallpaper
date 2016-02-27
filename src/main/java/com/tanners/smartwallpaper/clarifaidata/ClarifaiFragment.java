@@ -31,10 +31,10 @@ public class ClarifaiFragment extends Fragment
 {
     private ClarifaiData cdata = null;
     private Context context;
-    private View view;
     private ImageView image_view;
     private Button selectButton;
     private final String NO_TAGS = "No tags aviable for this image";
+    private View view;
 
     // way to attache current activity (context) to the class
     @Override
@@ -49,8 +49,8 @@ public class ClarifaiFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        // TODO goo practice?
-        view = inflater.inflate(R.layout.clarifai_fragment_main, container, false);
+
+       // view = inflater.inflate(R.layout.clarifai_fragment_main, container, false);
         return view;
     }
 
@@ -59,6 +59,11 @@ public class ClarifaiFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         cdata = new ClarifaiData(context);
+
+
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = layoutInflater.inflate(R.layout.clarifai_fragment_main, null, false);
+
         image_view = (ImageView) view.findViewById(R.id.image_view);
         selectButton = (Button) view.findViewById(R.id.select_button);
 
