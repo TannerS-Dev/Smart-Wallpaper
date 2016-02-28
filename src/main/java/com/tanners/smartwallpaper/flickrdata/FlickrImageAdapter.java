@@ -28,6 +28,7 @@ import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 //// TODO: 2/16/2016
@@ -48,6 +49,7 @@ public class FlickrImageAdapter extends BaseAdapter
         this.photos = photos;
         popUp = new PopupWindow(this.context);
         user_data = new FlickrDataUserInfo();
+        Collections.shuffle(this.photos);
     }
 
     @Override
@@ -77,9 +79,6 @@ public class FlickrImageAdapter extends BaseAdapter
         View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, parent, false);
         image_button = (ImageButton) view.findViewById(R.id.grid_image);
 
-
-
-
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int screenWidth = metrics.widthPixels;
         image_button.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
@@ -105,18 +104,12 @@ public class FlickrImageAdapter extends BaseAdapter
                 user_data.generateUserInfo(photos.get(finalPosition).getOwner());
                 // call proper classes / methods to collect info for photo
                 // and append it to the string
-
-
-
-
                 set_background_btn.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
                     {
                         new setWallpaper().execute(finalPosition);
-
-
                     }
                 });
 
@@ -165,11 +158,6 @@ public class FlickrImageAdapter extends BaseAdapter
         // return current view
         return view;
     }
-
-
-
-
-
 
     private class setWallpaper extends AsyncTask<Integer, Void, Bitmap>
     {

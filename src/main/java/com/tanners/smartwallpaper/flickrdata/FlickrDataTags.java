@@ -1,6 +1,6 @@
 package com.tanners.smartwallpaper.flickrdata;
 
-import android.util.Log;
+import com.tanners.smartwallpaper.urlutil.URLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +22,8 @@ public class FlickrDataTags extends FlickrData
 
     public List<String> getTagsHotList()
     {
-        URLConnection connection = new URLConnection(BASEURL + METHOD + GET_HOT_LIST_TAGS + APP_KEY + GET_HOT_LIST_TAGS_PARA + FORMAT);
+        // TODO fix hard coding
+        URLConnection connection = new URLConnection(url_builder.getTrendingTags());
         ByteArrayOutputStream output = connection.readData();
         String json_tags = output.toString();
         List<String> tags = new ArrayList<String>();
@@ -31,9 +32,7 @@ public class FlickrDataTags extends FlickrData
         {
             JSONObject root = new JSONObject(json_tags).getJSONObject("hottags");
             JSONArray tag_arry = root.getJSONArray("tag");
-            //TODO shorter way to do this?
 
-            JSONObject tag;
 
             for (int i = 0; i < tag_arry.length(); i++)
                 tags.add(tag_arry.getJSONObject(i).getString("_content"));

@@ -20,6 +20,8 @@ import java.io.IOException;
 
 public class ClarifaiData extends ClarifaiClient
 {
+    // TODO firebase
+    // needed variables
     private final static String APP_ID = "Xijy3WCA1l4UwEb_zLDx10Kixh068oitW7PcHMv8";
     private final static String APP_SECRET = "U-e8tQDPSQxKl2MTvoQW1W1MbOE59oepZr8j92Gf";
     private final String ERROR_REC_IMAGE = "Unable to recognize image";
@@ -42,6 +44,7 @@ public class ClarifaiData extends ClarifaiClient
 
     public boolean addTags(RecognitionResult result)
     {
+        // check if results were returned
         if (result != null)
         {
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK)

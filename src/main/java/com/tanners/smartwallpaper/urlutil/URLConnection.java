@@ -1,4 +1,4 @@
-package com.tanners.smartwallpaper.flickrdata;
+package com.tanners.smartwallpaper.urlutil;
 
 import android.util.Log;
 

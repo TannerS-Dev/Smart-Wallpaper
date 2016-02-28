@@ -48,16 +48,15 @@ import com.tanners.smartwallpaper.flickrdata.FlickrTagAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    private static final String CLASS = MainActivity.class.getSimpleName();
     private Toolbar toolbar;
     private NavigationView navigationView;
     private FlickrDataTags flickr_tags = null;
     private final String NO_IMAGES = "No images aviable for this tag";
 
-
-    private Toolbar tabs_tool_bar;
+    // TODO fix this
+    //private Toolbar tabs_tool_bar;
     private TabLayout tab_layout;
-    private ViewPager view_pager;
+   // private ViewPager view_pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,60 +65,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         generateNavBar();
         flickr_tags = new FlickrDataTags();
+        // run background task to generate flickr tags for navegation bar
         new GenerateTags().execute(flickr_tags);
-
-
+        // find main tool bar and set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         toolbar.setTitle("test");
-
+        // set up fragment tabs
         setUpTabs();
     }
 
     private void setUpTabs()
     {
-        // Support library version of getActionBar(). : Retrieve a reference to this activity's ActionBar.
-
-        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         /*
         VIew:pager Layout manager that allows the user to flip left and right through pages of data.
         You supply an implementation of a PagerAdapter to generate the pages that the view shows.
          */
+        // load view pager that allows you to flip through tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
         setUpFragments(viewPager);
-        // find tablayout
+        // find tab layout
         tab_layout = (TabLayout) findViewById(R.id.tabs);
-        // The one-stop shop for setting up this TabLayout with a ViewPager.
+        // The one-stop shop for setting up this TabLayout with a ViewPager. set layout with tabs
         tab_layout.setupWithViewPager(viewPager);
-
     }
 
     private void setUpFragments(ViewPager viewPager)
     {
         // Return the FragmentManager for interacting with fragments associated with this activity.
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
-        // add fragment objects to list
-
-
-        //FlickrRecentPhotosFragment tab1 = new FlickrRecentPhotosFragment();
-        // args.putInt("tab1", 1);
-        //tab1.setArguments(args);
-        // FlickrPhotoSearchFragment tab2 = new FlickrPhotoSearchFragment();
-        // args.putInt("tab2", 2);
-        // tab2.setArguments(args);
-        // return tab2;
-        //ClarifaiFragment tab3 = new ClarifaiFragment();
-        //args.putInt("tab3", 3);
-        // tab3.setArguments(args);
-        // return tab3;
-
-
-
+        // add fragment objects to list with a title
         adapter.addTab(new FlickrRecentPhotosFragment(), "TAB1");
         adapter.addTab(new FlickrPhotoSearchFragment(), "TAB2");
         adapter.addTab(new ClarifaiFragment(), "TAB3");
-        // set view pager with adapter class of tab objects
+        // set adapter with layout
         viewPager.setAdapter(adapter);
     }
 
@@ -139,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed()
     {
+        // AUTO GENERATED
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if (drawer.isDrawerOpen(GravityCompat.START))
@@ -150,18 +129,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
     {
+        // AUTO GENERATED
         return false;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // AUTO GENERATED
         // Inflate the menu; this adds items to the action bar if it is present.
        // getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // AUTO GENERATED
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -180,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected List<String> doInBackground(FlickrDataTags... flickr_tags)
         {
+            // call object to get list of trending tags
             flickr_tags[0] = new FlickrDataTags();
             return flickr_tags[0].getTagsHotList();
         }
@@ -189,19 +174,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             super.onPostExecute(result);
 
+            // check if there were possible results or not
             if(result == null || (result.size() == 0))
+                // display toast
                 noImagesToast(NO_IMAGES);
             else
             {
+                // load listview
                 ListView listview = (ListView) findViewById(R.id.flickrtagview);
-                List<String> tags = result;
-                FlickrTagAdapter adapter = new FlickrTagAdapter(getApplicationContext(), R.layout.nav_bar_header, tags);
-                listview.setAdapter(adapter);
+                // set adapter
+                listview.setAdapter(new FlickrTagAdapter(getApplicationContext(), R.layout.nav_bar_header, result));
             }
         }
 
         private void noImagesToast(String str)
         {
+            // set and load toast
             Toast toast = Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
             toast.show();
@@ -210,11 +198,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     class FragmentAdapter extends FragmentPagerAdapter
     {
+        // list of fragments and titles
         List<Fragment> frags;
         List<String> titles;
 
         public FragmentAdapter(FragmentManager manager)
         {
+            // init
             super(manager);
             frags = new ArrayList<Fragment>();
             titles = new ArrayList<String>();
@@ -223,40 +213,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public int getCount()
         {
+            // return size
             return frags.size();
         }
 
         @Override
         public Fragment getItem(int position)
         {
-            // Bundle args = new Bundle();
-            // Our object is just an integer :-P
-            Bundle args = new Bundle();
-
            return frags.get(position);
-
-
-
-           /* // a way to switch rto  a different fragment based on position and  pass a bundle of paramtaers to it's oncreate function
-            switch(position) {
-                case 0:
-                    //FlickrRecentPhotosFragment tab1 = new FlickrRecentPhotosFragment();
-                   // args.putInt("tab1", 1);
-                    //tab1.setArguments(args);
-                    return tab1;
-                case 1:
-                   // FlickrPhotoSearchFragment tab2 = new FlickrPhotoSearchFragment();
-                   // args.putInt("tab2", 2);
-                   // tab2.setArguments(args);
-                   // return tab2;
-                case 2:
-                    //ClarifaiFragment tab3 = new ClarifaiFragment();
-                    //args.putInt("tab3", 3);
-                   // tab3.setArguments(args);
-                   // return tab3;
-            }
-            */
-           // return null;
         }
 
         public void addTab(Fragment frag, String title)
@@ -265,12 +229,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             titles.add(title);
         }
 
-
         // idk yet
         @Override
         public CharSequence getPageTitle(int position)
         {
-            return "OBJECT " + (position + 1);
+            // tab titles
+            return titles.get(position);
         }
 
     }

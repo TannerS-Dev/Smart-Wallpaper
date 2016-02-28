@@ -30,12 +30,10 @@ public class FlickrDataUserInfo extends FlickrData
         real_name = username = "unknown" ;
     }
 
-    // TODO left off
-    public void generateUserInfo(String user_id)
-    {
-        String complete_user_id = GET_INFO_ID + user_id;
-        Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
 
+    public void generateUserInfo(String temp)
+    {
+// TODO call flickrurlbuilder and finish, fix temp parameter
         /*
         ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
         //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);

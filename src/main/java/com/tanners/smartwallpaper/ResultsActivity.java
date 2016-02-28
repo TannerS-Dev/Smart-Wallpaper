@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -16,74 +18,78 @@ import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
 import java.util.List;
 
+import javax.xml.transform.Result;
+
 public class ResultsActivity extends AppCompatActivity
 {
-    public final static String EXTRA_MESSAGE = "TAG";
+    // key to access the intent extra (this key will return the tag)
+    private final String EXTRA_MESSAGE = "TAG";
     private String tag;
     private GridView grid_view;
-    private final int PHOTOS_PER_PAGE = 55;
-    private int CURRENT_PAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // load UI elements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
+        // set toolbar as action bar (has back button)
         setSupportActionBar(toolbar);
+
         // TODO insteado f creaitng new nav, call one form main but change title
         tag = getIntent().getStringExtra(EXTRA_MESSAGE);
         grid_view = (GridView) findViewById(R.id.grid_view);
 
-        // TODO take care of number of pages
-        // TODO dynamically grosw as scrolling
-        new CollectPhotos( PHOTOS_PER_PAGE,CURRENT_PAGE).execute(tag);
+        // generate images based on tag
+        new CollectTaggedPhotos().execute(tag);
     }
 
-    private class CollectPhotos extends AsyncTask<String, Void, FlickrPhotoContainer>
+    public class CollectTaggedPhotos extends AsyncTask<String, Void, FlickrPhotoContainer>
     {
-        private FlickrDataPhotos photos = new FlickrDataPhotos();
-        private int per_page;
-        private int current_page;
+        private FlickrDataPhotos photos;
 
-        public CollectPhotos(int per_page, int current_page)
+        public CollectTaggedPhotos()
         {
-            this.per_page = per_page;
-            this.current_page = current_page;
+            // set context
+            photos = new FlickrDataPhotos();
         }
 
         @Override
         protected FlickrPhotoContainer doInBackground(String... str)
         {
-            return photos.populateFlickrPhotos(str[0], current_page, per_page);
+            // run background task to get photo oobjects based on tag
+            return photos.populateFlickrPhotos(str[0]);
         }
 
         @Override
         protected void onPostExecute(FlickrPhotoContainer result)
         {
             super.onPostExecute(result);
-            GridView grid = (GridView) findViewById(R.id.grid_view);
+            // inflate fragment layout
+            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, null, false);
+            GridView grid = (GridView) view.findViewById(R.id.grid_view);
+            // get list of photo objects
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
-
-            //if(flickr_objects == null || (flickr_objects.size() == 0))
-            //{
-                //TODO cnstant
-              //  NoImagesToast("No Images For This Tag");
-                //finish();
-            //}
-            //else
-            //{
-                FlickrImageAdapter adapter = new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects);
-                grid.setAdapter(adapter);
-            //}
+            // check if any results were returned
+            // TODO check this  and other collect class to see if i need both of these
+            if(flickr_objects == null || (flickr_objects.size() == 0))
+            {
+                //TODO cnstant & make activity end?
+                NoImagesToast("No Images For This Tag");
+            }
+            else
+            {
+                // set adapter passing in photo objects
+                grid.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects));
+            }
         }
 
         private void NoImagesToast(String str)
         {
-            // getApplicationContext() | Return the context of the single, global Application object of the current process.
-            Context context = getApplicationContext();
-            Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-            // public void setGravity (int gravity, int xOffset, int yOffset)
+            // set up toast
+            Toast toast = Toast.makeText(ResultsActivity.this, str, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
             toast.show();
         }
