@@ -66,7 +66,21 @@ public class ResultsActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(FlickrPhotoContainer result)
         {
+
+
+
+
+
+
+
             super.onPostExecute(result);
+
+
+
+
+
+
+
             grid_view = (GridView) findViewById(R.id.grid_view);
             // inflate fragment layout
            // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -77,6 +91,9 @@ public class ResultsActivity extends AppCompatActivity
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
             // check if any results were returned
             // TODO check this  and other collect class to see if i need both of these
+
+
+
             if(flickr_objects == null || (flickr_objects.size() == 0))
             {
                 //TODO cnstant & make activity end?

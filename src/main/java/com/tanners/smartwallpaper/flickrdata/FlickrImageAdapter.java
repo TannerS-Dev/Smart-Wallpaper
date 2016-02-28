@@ -87,7 +87,7 @@ public class FlickrImageAdapter extends BaseAdapter
         image_button = (ImageButton) view.findViewById(R.id.image_button);
         card = (CardView) view.findViewById(R.id.grid_image);
 
-Card m;
+
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int screenWidth = metrics.widthPixels;
         card.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
@@ -96,7 +96,7 @@ Card m;
         final LayoutInflater newlayoutInflater = layoutInflater;
         final int finalPosition = position;
 
-        RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.cards_container);
+        //RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.cards_container);
 
         card.setClickable(true);
         card.setOnClickListener(new CardView.OnClickListener()
