@@ -4,11 +4,22 @@
     android:layout_height="match_parent">
 
 
-
-
-    <EditText
-        android:text="test"
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="0dp"
+        android:stretchMode="columnWidth"
+        android:id="@+id/fragment_grid_view"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_marginTop="55dp"
+
+        />
 
 </LinearLayout>

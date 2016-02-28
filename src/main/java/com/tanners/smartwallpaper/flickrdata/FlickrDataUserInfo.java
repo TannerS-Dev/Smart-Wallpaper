@@ -19,17 +19,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlickrDataUserInfo extends FlickrData
+public class FlickrDataUserInfo
 {
     private String real_name;
     private String username;
+    FlickrURLBuilder url;
 
     public FlickrDataUserInfo()
     {
-        super();
+        //super();
         real_name = username = "unknown" ;
+        url = new FlickrURLBuilder();
     }
-
 
     public void generateUserInfo(String temp)
     {

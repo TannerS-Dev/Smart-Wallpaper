@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ public class ResultsActivity extends AppCompatActivity
 
         // TODO insteado f creaitng new nav, call one form main but change title
         tag = getIntent().getStringExtra(EXTRA_MESSAGE);
-        grid_view = (GridView) findViewById(R.id.grid_view);
+
 
         // generate images based on tag
         new CollectTaggedPhotos().execute(tag);
@@ -66,10 +67,12 @@ public class ResultsActivity extends AppCompatActivity
         protected void onPostExecute(FlickrPhotoContainer result)
         {
             super.onPostExecute(result);
+            grid_view = (GridView) findViewById(R.id.grid_view);
             // inflate fragment layout
-            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, null, false);
-            GridView grid = (GridView) view.findViewById(R.id.grid_view);
+           // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+           // View view = layoutInflater.inflate(R.layout.activity_results, null, false);
+            Log.i("debug", "checkpoint");
+            //GridView grid = (GridView) view.findViewById(R.id.grid_view);
             // get list of photo objects
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
             // check if any results were returned
@@ -82,7 +85,8 @@ public class ResultsActivity extends AppCompatActivity
             else
             {
                 // set adapter passing in photo objects
-                grid.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects));
+                Log.i("debug", ResultsActivity.this.toString());
+                grid_view.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects));
             }
         }
 

@@ -24,12 +24,6 @@ public class FlickrData
     //recent
     protected final String GET_RECENT_PHOTOS_METHOD = "flickr.photos.getRecent";
     // url builder
-    protected FlickrURLBuilder url_builder;
-
-    public FlickrData()
-    {
-        url_builder = new FlickrURLBuilder();
-    }
 
 
     // TODO firebase databae call for these vlaues

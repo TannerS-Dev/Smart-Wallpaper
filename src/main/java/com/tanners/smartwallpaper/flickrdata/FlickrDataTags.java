@@ -12,18 +12,16 @@ import java.util.List;
 
 public class FlickrDataTags extends FlickrData
 {
-    //private final String GET_HOT_LIST_TAGS = "flickr.tags.getHotList";
-    //private final String GET_HOT_LIST_TAGS_PARA = "&period=week&count=15";
+    FlickrURLBuilder url;
 
     public FlickrDataTags()
     {
-        super();
+        url = new FlickrURLBuilder();
     }
 
     public List<String> getTagsHotList()
     {
-        // TODO fix hard coding
-        URLConnection connection = new URLConnection(url_builder.getTrendingTags());
+        URLConnection connection = new URLConnection(url.getTrendingTags());
         ByteArrayOutputStream output = connection.readData();
         String json_tags = output.toString();
         List<String> tags = new ArrayList<String>();

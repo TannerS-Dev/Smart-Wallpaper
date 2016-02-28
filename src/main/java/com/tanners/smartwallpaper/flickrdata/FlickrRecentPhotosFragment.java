@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,18 @@ import java.util.List;
 
 public class FlickrRecentPhotosFragment extends Fragment
 {
-    Context context;
+    private Context context;
+    private View view;
+    GridView grid;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         // http://tips.androidhive.info/2013/10/android-getting-application-context-in-fragments/
-        context = getActivity();
+       // context = getContext();
+        context = getActivity().getApplicationContext();
+        Log.i("debug", context.toString());
         // get recent photos in a background task
        // new CollectRecentPhotos(context).execute();
         new CollectRecentPhotos().execute();
@@ -36,18 +41,20 @@ public class FlickrRecentPhotosFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.flickr_fragment_recent, container, false);
+        view = inflater.inflate(R.layout.flickr_fragment_recent, container, false);
+        grid = (GridView) view.findViewById(R.id.fragment_grid_view);
+        return view;
     }
 
     public class CollectRecentPhotos extends AsyncTask<Void, Void, FlickrPhotoContainer>
     {
         // create
         private FlickrDataPhotosRecent photos;
-        private Context context;
+        //private Context context;
 
         public CollectRecentPhotos()
         {
-            //context = con;
+           // context = con;
             photos = new FlickrDataPhotosRecent();
         }
 
@@ -65,7 +72,7 @@ public class FlickrRecentPhotosFragment extends Fragment
             // inflate fragment layout
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, null, false);
-            GridView grid = (GridView) view.findViewById(R.id.grid_view);
+           // GridView grid = (GridView) view.findViewById(R.id.grid_view);
             // get list of photo objects
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
             // check if any results were returned
@@ -77,6 +84,13 @@ public class FlickrRecentPhotosFragment extends Fragment
             }
             else
             {
+                if(grid == null)
+                    Log.i("debug", "grid is null");
+                if(context == null)
+                    Log.i("debug", "context is null");
+
+
+
                 // set adapter passing in photo objects
                 grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects));
             }

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.tanners.smartwallpaper.R;
 
-public class FlickrPhotoSearchFragment  extends Fragment
+public class FlickrPhotoSearchFragment extends Fragment
 {
     @Nullable
     @Override

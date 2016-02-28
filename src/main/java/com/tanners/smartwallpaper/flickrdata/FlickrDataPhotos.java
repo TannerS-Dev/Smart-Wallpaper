@@ -11,11 +11,13 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-public class FlickrDataPhotos extends FlickrData
+public class FlickrDataPhotos
 {
+    FlickrURLBuilder url;
+
     public FlickrDataPhotos()
     {
-        super();
+        url = new FlickrURLBuilder();
     }
 
     public FlickrPhotoContainer populateFlickrPhotos(String tag)
@@ -24,7 +26,7 @@ public class FlickrDataPhotos extends FlickrData
         URLConnection connection = null;
 
         try {
-            connection = new URLConnection(url_builder.getPhotos(tag, 12, 1));
+            connection = new URLConnection(url.getPhotos(tag, 12, 1));
             String responseStr = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
             ObjectMapper objectMapper = new ObjectMapper();
             flickr = objectMapper.readValue(responseStr, FlickrPhotoContainer.class);
