@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,6 +42,7 @@ public class FlickrImageAdapter extends BaseAdapter
     List<FlickrPhotoItem> photos;
     PopupWindow popUp;
     ImageButton image_button;
+    CardView card;
     FlickrDataUserInfo user_data;
 
     public FlickrImageAdapter(Context context, int resource, List<FlickrPhotoItem> photos)
@@ -74,19 +77,29 @@ public class FlickrImageAdapter extends BaseAdapter
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)
     {
+
+        // TODO performacne here, do that convertview = null shit
+
         boolean click = true;
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, parent, false);
-        image_button = (ImageButton) view.findViewById(R.id.grid_image);
 
+        image_button = (ImageButton) view.findViewById(R.id.image_button);
+        card = (CardView) view.findViewById(R.id.grid_image);
+
+Card m;
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int screenWidth = metrics.widthPixels;
-        image_button.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
+        card.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
+       // image_button.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth / 2, screenWidth / 2));
 
         final LayoutInflater newlayoutInflater = layoutInflater;
         final int finalPosition = position;
 
-        image_button.setOnClickListener(new View.OnClickListener()
+        RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.cards_container);
+
+        card.setClickable(true);
+        card.setOnClickListener(new CardView.OnClickListener()
         {
             @Override
             public void onClick(View v)
