@@ -1,19 +1,22 @@
 package com.tanners.smartwallpaper;
+// TODO put no tags, in nav bar when no data, put no imgaes in recent photos
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.widget.ImageView;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.Gravity;
 import android.content.Context;
@@ -25,53 +28,144 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Button;
 
 // Clarifai imports
-import com.clarifai.api.RecognitionResult;
 
 // java imports
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TannerS
-import com.tanners.smartwallpaper.clarifaidata.ClarifaiData;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 
 // picasso
-import com.squareup.picasso.Picasso;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.tanners.smartwallpaper.clarifaidata.ClarifaiFragment;
-import com.tanners.smartwallpaper.clarifaidata.ClarifaiTagAdapter;
+import com.tanners.smartwallpaper.firebase.FireBaseUtil;
 import com.tanners.smartwallpaper.flickrdata.FlickrDataTags;
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 import com.tanners.smartwallpaper.flickrdata.FlickrRecentPhotosFragment;
-import com.tanners.smartwallpaper.flickrdata.FlickrTagAdapter;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener
 {
+    // hashmap to hold nav bar list view adapters
+    //private HashMap<String, ArrayAdapter<String>> tag_adapters;
+    private ArrayAdapter<String> flickr_tag_adapter;
+    private ArrayAdapter<String> firebase_tag_adapter;
+    private final int LIST_VIEW_COUNT = 2;
+
+
+    private ListView nav_bar_list_view;
+
+    // number of menu items
+    private int tag_selector;
+    // number of fragments
+    private final int FRAG_COUNT = 3;
     private Toolbar toolbar;
     private NavigationView navigationView;
-    private FlickrDataTags flickr_tags = null;
+   // private FlickrDataTags flickr_tags = null;
     private final String NO_IMAGES = "No images aviable for this tag";
 
-    // TODO fix this
     //private Toolbar tabs_tool_bar;
     private TabLayout tab_layout;
-   // private ViewPager view_pager;
+
+    //firebase dir
+    private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
+    // firebase utility class
+    private FireBaseUtil fire;
+    private Firebase fire_base;
+    private HashMap<String, String> tags;
+    //private ArrayList<String> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //tag_adapters = new  HashMap<String, ArrayAdapter<String>>(LIST_VIEW_COUNT);
+        nav_bar_list_view = (ListView) findViewById(R.id.nav_bar_adapter);
+
         generateNavBar();
-        flickr_tags = new FlickrDataTags();
+        //flickr_tags = new FlickrDataTags();
         // run background task to generate flickr tags for navegation bar
-        new GenerateTags().execute(flickr_tags);
+        new GenerateFlickrTags().execute(new FlickrDataTags());
+        // run background task to generate flickr tags for navegation bar
+       // new GenerateFireBaseTags(this);
+        initFireBase();
         // find main tool bar and set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         toolbar.setTitle("test");
+
+        tag_selector = 0;
+
         // set up fragment tabs
         setUpTabs();
+        setUpTags();
+    }
+
+    private void initFireBase()
+    {
+        Firebase.setAndroidContext(this);
+        fire_base = new Firebase(FIREBASE_HOME);
+
+        fire_base.child("tags").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                tags = new HashMap<String, String>();
+                Log.i("firebase", "change");
+                setUpAdapter(snapshot.getValue(HashMap.class));
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error)
+            {
+                Log.i("firebase", error.toString());
+            }
+        });
+    }
+
+    private void setUpAdapter(HashMap<String, String> temp)
+    {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_main, null, false);
+       // ListView listview = (ListView) view.findViewById(R.id.nav_bar_adapter);
+       ArrayList<String>  list = new ArrayList<String>(tags.values());
+        list.addAll(temp.values());
+
+        Log.i("shuffle", list.toString());
+        Collections.sort(list);
+        Log.i("shuffle", list.toString());
+
+
+        Log.i("firebase", "size: " + Integer.toString(list.size()));
+       // flickr_tag_adapter
+        firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list);
+        nav_bar_list_view.setAdapter(firebase_tag_adapter);
+        Log.i("ex", "checkpoint1");
+        Log.i("firebase", "list updated from firebase " + list.toString());
+    }
+
+    private void setUpTags()
+    {
+        // create drop down menu to choose which tags to see in nav bar
+        Spinner spinner = (Spinner) findViewById(R.id.tag_spinner);
+        // TODO try other layouts
+        // apply list array of choices to drop down menu (spinner)
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tag_sources, android.R.layout.simple_spinner_item);
+        // bind the list of choices
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        // set activity to listen to the adapter
+        spinner.setOnItemSelectedListener(this);
+        spinner.setSelection(0);
+        //spinner.
     }
 
     private void setUpTabs()
@@ -82,6 +176,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          */
         // load view pager that allows you to flip through tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        // keeps tabs in memory
+        // TODO constant
+        viewPager.setOffscreenPageLimit(FRAG_COUNT);
         setUpFragments(viewPager);
         // find tab layout
         tab_layout = (TabLayout) findViewById(R.id.tabs);
@@ -150,16 +247,111 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-      //  if (id == R.id.action_settings) {
-        //    return true;
-        //}
-
         return super.onOptionsItemSelected(item);
     }
 
-    private class GenerateTags extends AsyncTask<FlickrDataTags, Void, List<String>>
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+       // Log.i("firebase", "list updated from menu");
+
+        //TODO left off
+        // http://stackoverflow.com/questions/24517494/how-to-add-remove-fragment-on-button-click
+        // https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=load%20fragment%20in%20window%20on%20click
+       // Object ob = nav_bar_tag_adapter.getItem(position);
+        // TODO pass in existi fragment, dont recreate it
+
+        // find list view
+        // TODO one variabke for this not in each method
+       // nav_bar_list_view = (ListView) findViewById(R.id.nav_bar_adapter);
+       // listview.setAdapter((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE));
+
+
+        switch(tag_selector)
+        {
+            case 0:
+                // set adapter
+                nav_bar_list_view.setAdapter(firebase_tag_adapter);
+                //listview.setAdapter((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE));
+                Log.i("firebase", "list updated from menu");
+                break;
+            case 1:
+                //set adapter
+
+                nav_bar_list_view.setAdapter(flickr_tag_adapter);
+                Log.i("firebase", "other list updated from menu");
+                break;
+        }
+        tag_selector = (tag_selector + 1) % LIST_VIEW_COUNT;
+
+    }
+
+    //@Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+        //do nothing
+    }
+
+    /*
+    private class GenerateFireBaseTags
+    {
+        //firebase dir
+        private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
+        // firebase utility class
+        private FireBaseUtil fire;
+        private Firebase fire_base;
+        private HashMap<String, String> tags;
+
+        public GenerateFireBaseTags(Context con)
+        {
+            Firebase.setAndroidContext(con);
+            // fire = new FireBaseUtil(con, FIREBASE_HOME);
+            Firebase.setAndroidContext(con);
+            fire_base = new Firebase(FIREBASE_HOME);
+
+            fire_base.child("tags").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot)
+                {
+                    tags = new HashMap<String, String>();
+                    Log.i("firebase", "change");
+                    setUpAdapter(snapshot.getValue(HashMap.class));
+                }
+
+                @Override
+                public void onCancelled(FirebaseError error)
+                {
+                    Log.i("firebase", error.toString());
+                }
+            });
+        }
+
+        private void setUpAdapter(HashMap<String, String> temp)
+        {
+            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = layoutInflater.inflate(R.layout.activity_main, null, false);
+            ListView listview = (ListView) view.findViewById(R.id.nav_bar_adapter);
+
+            ArrayList<String> list = new ArrayList<String>(tags.values());
+            list.addAll(temp.values());
+            Collections.sort(list);
+
+            Log.i("firebase", "list updated from firebase: " + list.toString());
+            tag_adapters.put(NAV_BAR_ADAPTER_FIREBASE, new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list));
+
+            listview.setAdapter((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE));
+
+            // ((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE)).in
+            // ((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE)).add(null);
+            // TODO update dynamically
+            //notifyDataSetChanged();
+            //  invalidateViews();
+            Log.i("firebase", "list updated from firebase " + list.toString());
+        }
+
+    }
+*/
+    private class GenerateFlickrTags extends AsyncTask<FlickrDataTags, Void, List<String>>
     {
         @Override
         protected List<String> doInBackground(FlickrDataTags... flickr_tags)
@@ -180,10 +372,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 noImagesToast(NO_IMAGES);
             else
             {
+                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = layoutInflater.inflate(R.layout.activity_main, null, false);
                 // load listview
-                ListView listview = (ListView) findViewById(R.id.flickrtagview);
+                Log.i("ex" , "checkpoint");
+               // nav_bar_list_view = (ListView) view.findViewById(R.id.nav_bar_adapter);
+
+                flickr_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, result);
+
+
                 // set adapter
-                listview.setAdapter(new FlickrTagAdapter(getApplicationContext(), R.layout.nav_bar_header, result));
+                // TODO consta & R.layout.activiyt_main may not even bee needed
+               // tag_adapters.put(NAV_BAR_ADAPTER_FLICKR, new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, result));
+
+                // TODO do i need to set adapter or only when seletcing menu option?
+               // nav_bar_list_view.setAdapter(flickr_tag_adapter);
+
+                Log.i("ex" , "checkpoint2");
             }
         }
 
@@ -229,6 +434,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             titles.add(title);
         }
 
+        public void addTab(Fragment frag)
+        {
+            frags.add(frag);
+        }
+
         // idk yet
         @Override
         public CharSequence getPageTitle(int position)
@@ -238,4 +448,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
 }

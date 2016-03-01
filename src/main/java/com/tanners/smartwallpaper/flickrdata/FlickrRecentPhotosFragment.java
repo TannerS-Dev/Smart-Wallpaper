@@ -56,12 +56,14 @@ public class FlickrRecentPhotosFragment extends Fragment
         {
            // context = con;
             photos = new FlickrDataPhotosRecent();
+            Log.i("test","this shoul be called once");
         }
 
         @Override
         protected FlickrPhotoContainer doInBackground(Void... v)
         {
             // get flickr object with array of photo url's
+            Log.i("test", "start");
             return photos.populateFlickrPhotos();
         }
 
@@ -70,30 +72,36 @@ public class FlickrRecentPhotosFragment extends Fragment
         {
             super.onPostExecute(result);
             // inflate fragment layout
+            Log.i("test", "done gathering photos");
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, null, false);
            // GridView grid = (GridView) view.findViewById(R.id.grid_view);
             // get list of photo objects
-            List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
-            // check if any results were returned
-            // TODO check this  and other collect class to see if i need both of these
-            if(flickr_objects == null || (flickr_objects.size() == 0))
+            if(result != null)
             {
-                //TODO constant and make activiy ends?
-                NoImagesToast("No Images For This Tag");
+                List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
+
+                Log.i("test", "size og photos: " +Integer.toString(flickr_objects.size()));
+                // check if any results were returned
+                // TODO check this  and other collect class to see if i need both of these
+                if (flickr_objects == null || (flickr_objects.size() == 0))
+                {
+                    //TODO constant and make activiy ends?
+                    NoImagesToast("No Images For This Tag");
+                } else {
+                    if (grid == null)
+                        Log.i("debug", "grid is null");
+                    if (context == null)
+                        Log.i("debug", "context is null");
+
+
+                    // set adapter passing in photo objects
+                    grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects));
+                }
             }
             else
-            {
-                if(grid == null)
-                    Log.i("debug", "grid is null");
-                if(context == null)
-                    Log.i("debug", "context is null");
-
-
-
-                // set adapter passing in photo objects
-                grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects));
-            }
+                //TODO constant and make activiy ends?
+                NoImagesToast("No Images For This Tag");
         }
 
         private void NoImagesToast(String str)

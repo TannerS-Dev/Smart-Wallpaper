@@ -9,6 +9,8 @@ public class FlickrURLBuilder extends FlickrData
         String tag_ = TAG + tag;
         String page_ = GET_PHOTOS_EXTRA_3 + Integer.toString(page);
         String page_per_ = GET_PHOTOS_EXTRA_2 + Integer.toString(per_page);
+        Log.i("test", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + tag_ + GET_PHOTOS_PARA + GET_PHOTOS_EXTRA + page_per_ + page_ + FORMAT);
+
         return (BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + tag_ + GET_PHOTOS_PARA + GET_PHOTOS_EXTRA + page_per_ + page_ + FORMAT);
     }
 
@@ -16,7 +18,8 @@ public class FlickrURLBuilder extends FlickrData
     {
         String page_ = GET_PHOTOS_EXTRA_3 + Integer.toString(page);
         String page_per_ = GET_PHOTOS_EXTRA_2 + Integer.toString(per_page);
-        return (BASEURL + METHOD + GET_RECENT_PHOTOS_METHOD + APP_KEY + GET_PHOTOS_EXTRA + page_per_+ page + FORMAT);
+        Log.i("test","RECENT: " + BASEURL + METHOD + GET_RECENT_PHOTOS_METHOD + APP_KEY + GET_PHOTOS_EXTRA + page_per_+ page_ + FORMAT);
+        return (BASEURL + METHOD + GET_RECENT_PHOTOS_METHOD + APP_KEY + GET_PHOTOS_EXTRA + page_per_+ page_ + FORMAT);
     }
 
     public String getTrendingTags()

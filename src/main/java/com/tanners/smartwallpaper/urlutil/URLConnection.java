@@ -121,26 +121,10 @@ public class URLConnection
         else
             return null;
     }
-/*
-    public InputStream getInputStream()
-    {
-
-
-        try {
-            return connection.getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
 
     public boolean isGood()
     {
         return isGood;
     }
 
-    public void setIsGood(boolean isGood)
-    {
-        this.isGood = isGood;
-    }
 }

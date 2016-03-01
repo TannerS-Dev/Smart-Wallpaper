@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,14 +51,16 @@ public class FlickrImageAdapter extends BaseAdapter
         super();
         this.context = context;
         this.photos = photos;
+        Collections.shuffle(this.photos);
         popUp = new PopupWindow(this.context);
         user_data = new FlickrDataUserInfo();
-        Collections.shuffle(this.photos);
+        //Collections.shuffle(this.photos);
     }
 
     @Override
     public int getCount()
     {
+        Log.i("test","size being returned: " + Integer.toString(this.photos.size()));
         return this.photos.size();
     }
 
@@ -99,7 +102,7 @@ public class FlickrImageAdapter extends BaseAdapter
         //RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.cards_container);
 
         card.setClickable(true);
-        card.setOnClickListener(new CardView.OnClickListener()
+        image_button.setOnClickListener(new CardView.OnClickListener()
         {
             @Override
             public void onClick(View v)

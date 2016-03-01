@@ -8,4 +8,10 @@
     <string name="button_clicked">"Please wait"</string>
     <string name="clarifai_Info">"Clarifai is a image recognition system founded by Matthew Zeiler. Once an image has been selected, it will be sent to the Clarifai API for image recognition. Tags will be returned based off the image; however, image recognition is a very complex technology, this app cannot guarantee the accuracy of the returned tags. Enjoy."</string>
     <string name="title_activity_results">ResultsActivity</string>
+
+    <string-array name="tag_sources">
+        <item>Recommended</item>
+        <item>Trending on Flickr</item>
+    </string-array>
+
 </resources>

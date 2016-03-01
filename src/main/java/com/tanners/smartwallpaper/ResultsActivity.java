@@ -68,17 +68,7 @@ public class ResultsActivity extends AppCompatActivity
         {
 
 
-
-
-
-
-
             super.onPostExecute(result);
-
-
-
-
-
 
 
             grid_view = (GridView) findViewById(R.id.grid_view);

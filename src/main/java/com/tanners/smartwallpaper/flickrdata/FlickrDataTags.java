@@ -22,23 +22,25 @@ public class FlickrDataTags extends FlickrData
     public List<String> getTagsHotList()
     {
         URLConnection connection = new URLConnection(url.getTrendingTags());
-        ByteArrayOutputStream output = connection.readData();
-        String json_tags = output.toString();
-        List<String> tags = new ArrayList<String>();
+        List<String> tags = null;
 
-        try
+        if(connection.isGood())
         {
-            JSONObject root = new JSONObject(json_tags).getJSONObject("hottags");
-            JSONArray tag_arry = root.getJSONArray("tag");
+            ByteArrayOutputStream output = connection.readData();
+            String json_tags = output.toString();
+            tags = new ArrayList<String>();
+
+            try {
+                JSONObject root = new JSONObject(json_tags).getJSONObject("hottags");
+                JSONArray tag_arry = root.getJSONArray("tag");
 
 
-            for (int i = 0; i < tag_arry.length(); i++)
-                tags.add(tag_arry.getJSONObject(i).getString("_content"));
+                for (int i = 0; i < tag_arry.length(); i++)
+                    tags.add(tag_arry.getJSONObject(i).getString("_content"));
 
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return tags;
     }
