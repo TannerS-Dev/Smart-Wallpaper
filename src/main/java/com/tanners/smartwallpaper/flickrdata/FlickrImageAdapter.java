@@ -123,30 +123,17 @@ public class FlickrImageAdapter extends BaseAdapter
                 //user_data.generateUserInfo();
 
 
-                try {
-                    user_data = new GetUserInfo(user_data).execute(data.getOwner()).get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-
-                Log.i("person",user_data.getFullName());
-                //Log.i("person",user_data.getUsername());
+                    new GetUserInfo().execute(data.getOwner());
 
                 photo_info += "Name: " + user_data.getFullName() + "\n";
-
-                Log.i("person", "outside");
                 photo_info += "Username: " + user_data.getUsername() + "\n";
-
-                Log.i("person", "outside2");
-
                 photo_info += "ID: " + data.getId() + "\n";
                 photo_info += "Title: " + data.getTitle() + "\n";
                 photo_info += "Owner: " + data.getOwner() + "\n";
                 photo_info += "Height: " + data.getHeight_z() + "\n";
                 photo_info += "Width: " + data.getWidth_z() + "\n";
+
+
                 intent.putExtra("info", photo_info);
                 intent.putExtra("position", position);
                 intent.putExtra("url", data.getUrl_z());
@@ -158,31 +145,19 @@ public class FlickrImageAdapter extends BaseAdapter
         // get tag for image button
        // final String tag = this.photos.get(position).getUrl_t();
         // put image into grid
-        Picasso.with(context).load(photos.get(position).getUrl_m()).fit().into(image_button);
+        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(image_button);
         // return current view
         return convertView;
     }
 
-
-
-
-
-
-
     public class GetUserInfo extends AsyncTask<String, Void, FlickrDataUserInfo>
     {
-        private FlickrDataUserInfo data;
-
-        public GetUserInfo(FlickrDataUserInfo data)
-        {
-            this.data = data;
-        }
-
         @Override
         protected FlickrDataUserInfo doInBackground(String... str)
         {
-            data.generateUserInfo(str[0]);
-            return data;
+            user_data.generateUserInfo(str[0]);
+
+            return user_data;
         }
     }
 
