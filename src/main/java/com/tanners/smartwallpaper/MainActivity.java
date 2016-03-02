@@ -94,10 +94,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         generateNavBar();
         //flickr_tags = new FlickrDataTags();
         // run background task to generate flickr tags for navegation bar
-        new GenerateFlickrTags().execute(new FlickrDataTags());
+       // TODO UNCOMMENT
+       // new GenerateFlickrTags().execute(new FlickrDataTags());
         // run background task to generate flickr tags for navegation bar
        // new GenerateFireBaseTags(this);
-        initFireBase();
+        // TODO UNCOMMENT
+       // initFireBase();
         // find main tool bar and set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         toolbar.setTitle("test");
@@ -106,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // set up fragment tabs
         setUpTabs();
-        setUpTags();
+        //        // TODO UNCOMMENT
+       // setUpTags();
     }
 
     private void initFireBase()

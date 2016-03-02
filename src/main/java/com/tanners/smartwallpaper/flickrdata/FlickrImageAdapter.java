@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 
 import android.widget.Button;
@@ -29,6 +30,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.PhotoActivity;
 import com.tanners.smartwallpaper.R;
@@ -87,8 +90,8 @@ public class FlickrImageAdapter extends BaseAdapter
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)
     {
-        boolean click = true;
-        ImageButton image_button;
+
+        final ImageButton image_button;
         //CardView card;
 
         if (convertView == null)
@@ -98,9 +101,17 @@ public class FlickrImageAdapter extends BaseAdapter
             //card = (CardView) convertView.findViewById(R.id.grid_image);
             int screen_width = metrics.widthPixels;
             image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
+//image_button.smoothScrollToPosition
+
+
+            Log.i("image", Integer.toString(image_button.getWidth()) + " " + Integer.toString(image_button.getHeight()));
             //card.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
             //card.setClickable(true);
            // convertView.setTag(new ImageViewHolder(image_button, card));
+
+
+
+
             convertView.setTag(new ImageViewHolder(image_button));
         }
         else
@@ -109,6 +120,7 @@ public class FlickrImageAdapter extends BaseAdapter
             image_button = viewHolder.image_button;
            // card = viewHolder.card;
         }
+
 
         image_button.setOnClickListener(new CardView.OnClickListener()
         {
@@ -125,7 +137,7 @@ public class FlickrImageAdapter extends BaseAdapter
                 //user_data.generateUserInfo();
 
 
-                    new GetUserInfo().execute(data.getOwner());
+                new GetUserInfo().execute(data.getOwner());
 
                 photo_info.append("Name: " + user_data.getFullName() + "\n");
                 photo_info.append("Username: " + user_data.getUsername() + "\n");
@@ -142,10 +154,21 @@ public class FlickrImageAdapter extends BaseAdapter
         });
 
 
+
         // get tag for image button
        // final String tag = this.photos.get(position).getUrl_t();
         // put image into grid
-        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(image_button);
+        int w = metrics.widthPixels;
+        int h = metrics.heightPixels;
+
+        //final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        //final int cacheSize = maxMemory / 4;
+
+      //  Picasso p = new Picasso.Builder(context)
+        //        .memoryCache(new LruCache(cacheSize))
+          //      .build();
+
+       Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(image_button);
         // return current view
         return convertView;
     }
@@ -181,6 +204,7 @@ public class FlickrImageAdapter extends BaseAdapter
     private static class ImageViewHolder
     {
         private final ImageButton image_button;
+
         //private final CardView card;
 
 
@@ -188,8 +212,11 @@ public class FlickrImageAdapter extends BaseAdapter
 //        public ImageViewHolder(ImageButton image_button, CardView card)
         {
             this.image_button = image_button;
+
             //this.card = card;
         }
+
+
     }
 
 }
