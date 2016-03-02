@@ -158,7 +158,7 @@ public class FlickrImageAdapter extends BaseAdapter
         // get tag for image button
        // final String tag = this.photos.get(position).getUrl_t();
         // put image into grid
-        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(image_button);
+        Picasso.with(context).load(photos.get(position).getUrl_m()).fit().into(image_button);
         // return current view
         return convertView;
     }

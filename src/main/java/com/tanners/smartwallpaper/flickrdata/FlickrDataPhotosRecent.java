@@ -29,7 +29,7 @@ public class FlickrDataPhotosRecent
         {
             Log.i("test", "getting urls, should be called once?");
             // TODO fix hard coding
-            connection = new URLConnection(url.getRecentPhotos(50, 1));
+            connection = new URLConnection(url.getRecentPhotos(10, 1));
 
             if(connection.isGood())
             {

@@ -9,7 +9,9 @@
     card_view:cardCornerRadius="5dp"
     card_view:cardElevation="5dp"
     card_view:contentPadding="3dp"
-    card_view:cardUseCompatPadding="true">
+    card_view:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:contextClickable="true">
 
 
 

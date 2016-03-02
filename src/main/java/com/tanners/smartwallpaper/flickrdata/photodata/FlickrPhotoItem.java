@@ -12,6 +12,7 @@ public class FlickrPhotoItem
     private String url_t;
     private String url_z;
     private String url_n;
+    private String url_m;
     private int height_z;
     private int width_z;
     private String owner;
@@ -94,5 +95,13 @@ public class FlickrPhotoItem
 
     public void setUrl_n(String url_n) {
         this.url_n = url_n;
+    }
+
+    public String getUrl_m() {
+        return url_m;
+    }
+
+    public void setUrl_m(String url_m) {
+        this.url_m = url_m;
     }
 }
