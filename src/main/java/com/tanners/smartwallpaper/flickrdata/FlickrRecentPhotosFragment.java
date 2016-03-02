@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
+import com.tanners.smartwallpaper.modified.ImprovedGridLayoutManager;
 
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class FlickrRecentPhotosFragment extends Fragment
         new CollectRecentPhotos().execute();
 
 
-        grid = new GridLayoutManager(context, 2);
+        //grid = new GridLayoutManager(context, 2);
+        grid = new ImprovedGridLayoutManager(context, 2, 1800);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.flickr_fragment_recent, null, false);
         recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
