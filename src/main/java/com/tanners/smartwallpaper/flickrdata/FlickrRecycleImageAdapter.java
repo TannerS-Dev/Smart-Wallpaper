@@ -6,6 +6,7 @@ package com.tanners.smartwallpaper.flickrdata;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.PhotoActivity;
 import com.tanners.smartwallpaper.R;
@@ -45,6 +47,9 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         super();
         this.context = context;
         this.photos = photos;
+
+        if(this.photos == null)
+            Log.i("err", "shit 1");
         this.metrics = metrics;
         // TODO uncomments
         //Collections.shuffle(this.photos);
@@ -96,8 +101,6 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             }
         });
 
-
-
         // get tag for image button
         // final String tag = this.photos.get(position).getUrl_t();
         // put image into grid
@@ -118,18 +121,17 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
       //  ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         //holder.image_button.setImageUrl(photos.get(position).getUrl_z(), imageLoader);
 
-        ImageLoader mImageLoader;
-        NetworkImageView mNetworkImageView;
+
 
 // Get the NetworkImageView that will display the image.
        // mNetworkImageView = (NetworkImageView) view.findViewById(R.id.image_button);
 
 // Get the ImageLoader through your singleton class.
-        mImageLoader = VolleySkeleton.getInstance(context).getImageLoader();
+       // mImageLoader = VolleySkeleton.getInstance(context).getImageLoader();
 
 // Set the URL of the image that should be loaded into this view, and
 // specify the ImageLoader that will be used to make the request.
-        holder.image_button.setImageUrl(photos.get(position).getUrl_m(), mImageLoader);
+       /// holder.image_button.setImageUrl(photos.get(position).getUrl_m(), mImageLoader);
 
 
 
@@ -139,6 +141,19 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
 
       //  Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(holder.image_button);
         // return current view
+        if(this.photos == null)
+            Log.i("err", "shit 1");
+        else
+            Log.i("err", photos.get(position).getUrl_z());
+
+
+Log.i("tt","TEST " +  photos.get(position).getUrl_z());
+
+        Uri uri = Uri.parse(photos.get(position).getUrl_z());
+        //SimpleDraweeView draweeView = (SimpleDraweeView) view.findViewById(R.id.);
+        holder.image_button.setImageURI(uri);
+
+
     }
 
     @Override
@@ -150,12 +165,12 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
     public static class ImageViewHolder extends RecyclerView.ViewHolder
     {
         //private final ImageButton image_button;
-        private final NetworkImageView image_button;
+        private final SimpleDraweeView image_button;
 
         public ImageViewHolder(View view, DisplayMetrics metrics)
         {
             super(view);
-            image_button = (NetworkImageView) view.findViewById(R.id.image_button);
+            image_button = (SimpleDraweeView) view.findViewById(R.id.image_button);
            // final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int screen_width = metrics.widthPixels;
             image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));

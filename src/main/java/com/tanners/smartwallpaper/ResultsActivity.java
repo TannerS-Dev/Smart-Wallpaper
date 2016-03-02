@@ -1,6 +1,5 @@
 package com.tanners.smartwallpaper;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,19 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotos;
-import com.tanners.smartwallpaper.flickrdata.FlickrImageAdapter;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
 import java.util.List;
-
-import javax.xml.transform.Result;
 
 public class ResultsActivity extends AppCompatActivity
 {
@@ -89,7 +83,8 @@ public class ResultsActivity extends AppCompatActivity
                 // set adapter passing in photo objects
                 Log.i("debug", ResultsActivity.this.toString());
                 final DisplayMetrics metrics = getResources().getDisplayMetrics();
-                grid_view.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects, metrics));
+                //TODO recycle stuff in this class,  needs to edit entire class
+               // grid_view.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects, metrics));
             }
         }
 

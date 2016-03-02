@@ -8,25 +8,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotos;
-import com.tanners.smartwallpaper.flickrdata.FlickrImageAdapter;
-import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
-import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PhotoActivity extends AppCompatActivity
 {

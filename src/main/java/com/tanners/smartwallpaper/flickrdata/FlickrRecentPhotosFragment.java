@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
@@ -38,6 +39,7 @@ public class FlickrRecentPhotosFragment extends Fragment
        // context = getContext();
         context = getActivity().getApplicationContext();
         // get recent photos in a background task
+        Fresco.initialize(context);
 
 
         new CollectRecentPhotos().execute();
@@ -107,6 +109,8 @@ public class FlickrRecentPhotosFragment extends Fragment
 
 // blic FlickrRecycleImageAdapter(Context context, int resource, List<FlickrPhotoItem> photos, DisplayMetrics metrics)
                     final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+
+                    Log.i("err", flickr_objects.get(0).getUrl_n());
                     FlickrRecycleImageAdapter adapter = new FlickrRecycleImageAdapter(context, flickr_objects, metrics);
                     recycle_view.setAdapter(adapter);
                 }
