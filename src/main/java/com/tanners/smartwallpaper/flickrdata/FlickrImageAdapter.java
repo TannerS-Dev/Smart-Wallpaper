@@ -3,6 +3,7 @@ package com.tanners.smartwallpaper.flickrdata;
 import android.app.WallpaperManager;
 import android.content.Context;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -26,8 +27,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.tanners.smartwallpaper.PhotoActivity;
 import com.tanners.smartwallpaper.R;
 
+import com.tanners.smartwallpaper.ResultsActivity;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
 import java.io.IOException;
@@ -102,35 +105,23 @@ public class FlickrImageAdapter extends BaseAdapter
         //RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.cards_container);
 
         card.setClickable(true);
+
+
         image_button.setOnClickListener(new CardView.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                // create view to hold content for popup window
-                final View popup_view = newlayoutInflater.inflate(R.layout.flickr_popup_picture_layout, null);
-                // grab elements for the view that will be in the popup window
-                ImageView image_view = (ImageView) popup_view.findViewById(R.id.background_image);
-                Button set_background_btn = (Button) popup_view.findViewById(R.id.background_btn);
-                TextView text_view = (TextView) popup_view.findViewById(R.id.background_text);
-                LinearLayout main = (LinearLayout) popup_view.findViewById(R.id.background_container);
+                final Intent intent = new Intent(context, PhotoActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 // create string to hold image information
                 String photo_info = null;
                 // call object's generateUserInfo to collect the user's name based on ID
                 user_data.generateUserInfo(photos.get(finalPosition).getOwner());
                 // call proper classes / methods to collect info for photo
                 // and append it to the string
-                set_background_btn.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        new setWallpaper().execute(finalPosition);
-                    }
-                });
 
 
-                /*
                 photo_info += "Name: " + user_data.getFullName() + "\n";
                 photo_info += "Username: " + user_data.getUsername() + "\n";
                 photo_info += "ID: " + photos.get(finalPosition).getId() + "\n";
@@ -138,86 +129,39 @@ public class FlickrImageAdapter extends BaseAdapter
                 photo_info += "Owner: " + photos.get(finalPosition).getOwner() + "\n";
                 photo_info += "Height: " + photos.get(finalPosition).getHeight_z() + "\n";
                 photo_info += "Width: " + photos.get(finalPosition).getWidth_z() + "\n";
-                // set the textview in the popup window to show the info
-                text_view.setText(photo_info);
-                */
-                //Log.i("info", photo_info);
-                // put image into popup window
-                Picasso.with(context).load(photos.get(finalPosition).getUrl_z()).into(image_view);
-                // get width and height of screen
-                int screen_width = metrics.widthPixels;
-                int screen_hight = metrics.heightPixels;
-                // create popup window
-                final PopupWindow popup_window = new PopupWindow(popup_view, (int)(screen_width *.9) , (int)(screen_hight * .7));
-                // TODO use constant ints for width height
-                // set popup window properties
-                popup_window.setOutsideTouchable(true);
-                popup_window.setTouchable(true);
-                popup_window.setBackgroundDrawable(new ColorDrawable());
-                popup_window.showAtLocation(v, Gravity.CENTER, 0, 0);
-                //set click listener when layout holding the popup window is clicked
-                main.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        // dismiss popup window
-                        popup_window.dismiss();
-                    }
-                });
+
+                intent.putExtra("info", photo_info);
+                intent.putExtra("position", finalPosition);
+                intent.putExtra("url", photos.get(finalPosition).getUrl_z());
+                context.startActivity(intent);
             }
         });
+
+
+
+
+
+
         // get tag for image button
-        final String tag = this.photos.get(position).getUrl_z();
+        final String tag = this.photos.get(position).getUrl_t();
         // put image into grid
-        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(image_button);
+        Picasso.with(context).load(photos.get(position).getUrl_t()).centerInside().into(image_button);
         // return current view
         return view;
     }
 
-    private class setWallpaper extends AsyncTask<Integer, Void, Bitmap>
+    private static class ViewHolder
     {
-        @Override
-        protected Bitmap doInBackground(Integer... position)
+        private final ImageView image_button;
+        private final CardView card;
+
+        public ViewHolder(ImageView image_button, CardView card)
         {
-            // get the Image to as Bitmap
-            Bitmap bitmap = null;
-            try {
-                bitmap = Picasso.with(context).load(photos.get(position[0]).getUrl_z()).get();
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-            return bitmap;
+            this.image_button = image_button;
+            this.card = card;
         }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap)
-        {
-            super.onPostExecute(bitmap);
-
-
-            final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-            int screenWidth = metrics.widthPixels;
-
-            // get the height and width of screen
-            int height = metrics.heightPixels;
-            int width = metrics.widthPixels;
-
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
-
-            try {
-                wallpaperManager.setBitmap(bitmap);
-
-                wallpaperManager.suggestDesiredDimensions(width, height);
-                //Toast.makeText(this, "Wallpaper Set", Toast.LENGTH_SHORT).show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
+
 }
 
 

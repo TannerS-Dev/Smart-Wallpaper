@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         // AUTO GENERATED
         toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
-        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -292,65 +292,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //do nothing
     }
 
-    /*
-    private class GenerateFireBaseTags
-    {
-        //firebase dir
-        private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
-        // firebase utility class
-        private FireBaseUtil fire;
-        private Firebase fire_base;
-        private HashMap<String, String> tags;
-
-        public GenerateFireBaseTags(Context con)
-        {
-            Firebase.setAndroidContext(con);
-            // fire = new FireBaseUtil(con, FIREBASE_HOME);
-            Firebase.setAndroidContext(con);
-            fire_base = new Firebase(FIREBASE_HOME);
-
-            fire_base.child("tags").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot)
-                {
-                    tags = new HashMap<String, String>();
-                    Log.i("firebase", "change");
-                    setUpAdapter(snapshot.getValue(HashMap.class));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError error)
-                {
-                    Log.i("firebase", error.toString());
-                }
-            });
-        }
-
-        private void setUpAdapter(HashMap<String, String> temp)
-        {
-            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(R.layout.activity_main, null, false);
-            ListView listview = (ListView) view.findViewById(R.id.nav_bar_adapter);
-
-            ArrayList<String> list = new ArrayList<String>(tags.values());
-            list.addAll(temp.values());
-            Collections.sort(list);
-
-            Log.i("firebase", "list updated from firebase: " + list.toString());
-            tag_adapters.put(NAV_BAR_ADAPTER_FIREBASE, new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list));
-
-            listview.setAdapter((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE));
-
-            // ((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE)).in
-            // ((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE)).add(null);
-            // TODO update dynamically
-            //notifyDataSetChanged();
-            //  invalidateViews();
-            Log.i("firebase", "list updated from firebase " + list.toString());
-        }
-
-    }
-*/
     private class GenerateFlickrTags extends AsyncTask<FlickrDataTags, Void, List<String>>
     {
         @Override

@@ -94,6 +94,7 @@ public class ClarifaiFragment extends Fragment
                 selectButton.setText("Please wait");
                 selectButton.setEnabled(false);
 
+                Log.i("cla","befire excute");
                 new GetTags().execute(image);
             }
             else
@@ -106,6 +107,7 @@ public class ClarifaiFragment extends Fragment
         @Override
         protected RecognitionResult doInBackground(Uri... image)
         {
+            Log.i("cla","do in background");
             return cdata.recognizeBitmap(image[0]);
         }
 
@@ -113,7 +115,7 @@ public class ClarifaiFragment extends Fragment
         protected void onPostExecute(RecognitionResult result)
         {
             super.onPostExecute(result);
-
+            Log.i("cla", "post results");
             if (cdata.addTags(result))
             {
                 selectButton.setEnabled(true);
@@ -125,11 +127,14 @@ public class ClarifaiFragment extends Fragment
             ListView listview = (ListView) view.findViewById(R.id.clarifaitagview);
             List<String> tags = cdata.getTags().getTagList();
 
+            Log.i("cla","tags: " +tags.toString() );
+
             //no tags!
             if(tags == null || (tags.size() == 0))
                 noTagsToast(NO_TAGS);
             else
             {
+                Log.i("cla","set tags");
                 ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(context, R.layout.clarifai_tags_layout, tags);
                 listview.setAdapter(adapter);
             }

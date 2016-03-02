@@ -94,7 +94,6 @@ public class FlickrRecentPhotosFragment extends Fragment
                     if (context == null)
                         Log.i("debug", "context is null");
 
-
                     // set adapter passing in photo objects
                     grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects));
                 }

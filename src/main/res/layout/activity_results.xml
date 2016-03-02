@@ -15,12 +15,8 @@
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_scrollFlags="scroll|enterAlways"
-
-        android:baselineAligned="false"
         android:contextClickable="false"
-        android:divider="#a53333"
-        android:nestedScrollingEnabled="true"
-        android:showDividers="middle|beginning">
+       >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/main_tool_bar"
@@ -31,10 +27,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
+
+
+
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"
+        android:layout_marginTop="50dp"
 
 
         android:stretchMode="columnWidth"
@@ -49,6 +51,5 @@
 
         />
 
-    />
 
 </android.support.design.widget.CoordinatorLayout>
