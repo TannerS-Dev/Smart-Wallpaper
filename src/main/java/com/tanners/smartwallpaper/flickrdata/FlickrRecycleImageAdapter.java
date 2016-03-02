@@ -24,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.PhotoActivity;
@@ -138,6 +140,42 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
       //  Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(holder.image_button);
         // return current view
 
+        String temp = null;
+        FlickrPhotoItem data = photos.get(position);
+
+        if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
+        {
+            if(data.getUrl_m() == null || (data.getUrl_m().length() <= 0))
+            {
+                if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
+                {
+
+                    temp = data.getUrl_z();
+                }
+            }
+            else
+                temp = (data.getUrl_m());
+        }
+        else
+            temp = (data.getUrl_n());
+
+
+
+
+
+
+        Glide.with(context)
+                .load(temp).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.image_button);
+
+
+
+
+
+        //TODO fresco
+
+        /*
+
         FlickrPhotoItem data = photos.get(position);
         Uri uri = null;
 
@@ -160,7 +198,7 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         //Uri uri = Uri.parse(data.getUrl_m());
 
         holder.image_button.setImageURI(uri);
-
+*/
 
     }
 
@@ -172,13 +210,14 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder
     {
-        //private final ImageButton image_button;
-        private final SimpleDraweeView image_button;
+        private final ImageButton image_button;
+       // private final SimpleDraweeView image_button;
 
         public ImageViewHolder(View view, DisplayMetrics metrics)
         {
             super(view);
-            image_button = (SimpleDraweeView) view.findViewById(R.id.image_button);
+           // image_button = (SimpleDraweeView) view.findViewById(R.id.image_button);
+            image_button = (ImageButton) view.findViewById(R.id.image_button);
            // final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int screen_width = metrics.widthPixels;
             image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
