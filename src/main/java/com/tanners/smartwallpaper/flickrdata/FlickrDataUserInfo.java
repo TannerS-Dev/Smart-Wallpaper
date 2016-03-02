@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanners.smartwallpaper.flickrdata.FlickrData;
+import com.tanners.smartwallpaper.urlutil.URLConnection;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -25,56 +26,72 @@ public class FlickrDataUserInfo
     private String username;
     FlickrURLBuilder url;
 
+
+
     public FlickrDataUserInfo()
     {
         //super();
-        real_name = username = "unknown" ;
+        real_name ="";
+        username = "";
         url = new FlickrURLBuilder();
+        //connection = null;
+
     }
 
     public void generateUserInfo(String temp)
     {
-// TODO call flickrurlbuilder and finish, fix temp parameter
-        /*
-        ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
+
+
+       // FlickrURLBuilder url;
+       // ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
         //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
 
-        //String json_info = output.toString();
+        // pass id into to get user info of that id, then pass that into urlconnection to create url, then pas url to connection
 
-        String name = null;
+        Log.i("person", "URL  : " + url.getUserInfo(temp));
 
 
-        try
+        URLConnection connection = new URLConnection(url.getUserInfo(temp));
+
+
+
+
+        if(connection.isGood())
         {
-            JSONObject root = new JSONObject(json_info).getJSONObject("person");
-            JSONObject name_object = root.getJSONObject("realname");
-            name_object = name_object.getJSONObject("_content");
-            this.real_name = name_object.toString();
 
-            name_object = root.getJSONObject("username");
-            name_object = name_object.getJSONObject("_content");
-            this.username = name_object.toString();
+            ByteArrayOutputStream output = connection.readData();
+
+
+            String json_info = output.toString();
+
+            try
+            {
+                JSONObject root = new JSONObject(json_info).getJSONObject("person");
+                JSONObject username_attribute = root.getJSONObject("username");
+                this.username = username_attribute.getString("_content");
+                JSONObject realname_attribute = root.getJSONObject("realname");
+                this.real_name = realname_attribute.getString("_content");
+
+
+
+            }
+
+            catch (JSONException e)
+            {
+
+                e.printStackTrace();
+            }
+
         }
 
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }*/
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getFullName() {
         return this.real_name;
     }
 
-    public void setFullName(String fullname) {
-        this.real_name = fullname;
-    }
 }

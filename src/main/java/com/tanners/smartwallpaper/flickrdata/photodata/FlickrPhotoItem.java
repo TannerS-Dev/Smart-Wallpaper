@@ -11,6 +11,7 @@ public class FlickrPhotoItem
     private String url_q;
     private String url_t;
     private String url_z;
+    private String url_n;
     private int height_z;
     private int width_z;
     private String owner;
@@ -85,5 +86,13 @@ public class FlickrPhotoItem
 
     public void setWidth_z(int width_z) {
         this.width_z = width_z;
+    }
+
+    public String getUrl_n() {
+        return url_n;
+    }
+
+    public void setUrl_n(String url_n) {
+        this.url_n = url_n;
     }
 }

@@ -31,6 +31,8 @@ public class FlickrURLBuilder extends FlickrData
     {
         String complete_user_id = GET_INFO_ID + user_id;
         //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
-        return (BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
+        Log.i("person",BASEURL + METHOD + GET_INFO_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT );
+
+        return (BASEURL + METHOD + GET_INFO_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
     }
 }

@@ -20,7 +20,6 @@ import java.io.IOException;
 
 public class ClarifaiData extends ClarifaiClient
 {
-    // TODO firebase
     // needed variables
     private final static String APP_ID = "Xijy3WCA1l4UwEb_zLDx10Kixh068oitW7PcHMv8";
     private final static String APP_SECRET = "U-e8tQDPSQxKl2MTvoQW1W1MbOE59oepZr8j92Gf";

@@ -69,9 +69,6 @@ public class ClarifaiTagAdapter extends ArrayAdapter<String>
         return convertView;
     }
 
-    // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html
-    // http://developer.android.com/training/improving-layouts/smooth-scrolling.html
-
     static class ClarifaiViewHolder
     {
         Button btn;

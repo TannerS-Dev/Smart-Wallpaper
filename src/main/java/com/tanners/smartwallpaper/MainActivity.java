@@ -1,5 +1,5 @@
 package com.tanners.smartwallpaper;
-// TODO put no tags, in nav bar when no data, put no imgaes in recent photos
+// TODO placeholders for imageview and navbar
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -155,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         // create drop down menu to choose which tags to see in nav bar
         Spinner spinner = (Spinner) findViewById(R.id.tag_spinner);
-        // TODO try other layouts
         // apply list array of choices to drop down menu (spinner)
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tag_sources, android.R.layout.simple_spinner_item);
         // bind the list of choices
@@ -177,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // load view pager that allows you to flip through tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         // keeps tabs in memory
-        // TODO constant
         viewPager.setOffscreenPageLimit(FRAG_COUNT);
         setUpFragments(viewPager);
         // find tab layout
@@ -191,9 +189,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Return the FragmentManager for interacting with fragments associated with this activity.
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
         // add fragment objects to list with a title
-        adapter.addTab(new FlickrRecentPhotosFragment(), "TAB1");
-        adapter.addTab(new FlickrPhotoSearchFragment(), "TAB2");
-        adapter.addTab(new ClarifaiFragment(), "TAB3");
+        adapter.addTab(new FlickrRecentPhotosFragment(), "Recent");
+        adapter.addTab(new FlickrPhotoSearchFragment(), "Search");
+        adapter.addTab(new ClarifaiFragment(), "Clarifai");
         // set adapter with layout
         viewPager.setAdapter(adapter);
     }
@@ -253,20 +251,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-       // Log.i("firebase", "list updated from menu");
-
-        //TODO left off
-        // http://stackoverflow.com/questions/24517494/how-to-add-remove-fragment-on-button-click
-        // https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=load%20fragment%20in%20window%20on%20click
-       // Object ob = nav_bar_tag_adapter.getItem(position);
-        // TODO pass in existi fragment, dont recreate it
-
-        // find list view
-        // TODO one variabke for this not in each method
-       // nav_bar_list_view = (ListView) findViewById(R.id.nav_bar_adapter);
-       // listview.setAdapter((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE));
-
-
         switch(tag_selector)
         {
             case 0:
@@ -321,13 +305,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 flickr_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, result);
 
-
-                // set adapter
-                // TODO consta & R.layout.activiyt_main may not even bee needed
-               // tag_adapters.put(NAV_BAR_ADAPTER_FLICKR, new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, result));
-
-                // TODO do i need to set adapter or only when seletcing menu option?
-               // nav_bar_list_view.setAdapter(flickr_tag_adapter);
 
                 Log.i("ex" , "checkpoint2");
             }

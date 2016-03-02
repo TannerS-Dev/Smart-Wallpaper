@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,8 +38,6 @@ public class ResultsActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         // set toolbar as action bar (has back button)
         setSupportActionBar(toolbar);
-
-        // TODO insteado f creaitng new nav, call one form main but change title
         tag = getIntent().getStringExtra(EXTRA_MESSAGE);
 
 
@@ -80,20 +79,17 @@ public class ResultsActivity extends AppCompatActivity
             // get list of photo objects
             List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
             // check if any results were returned
-            // TODO check this  and other collect class to see if i need both of these
-
-
 
             if(flickr_objects == null || (flickr_objects.size() == 0))
             {
-                //TODO cnstant & make activity end?
                 NoImagesToast("No Images For This Tag");
             }
             else
             {
                 // set adapter passing in photo objects
                 Log.i("debug", ResultsActivity.this.toString());
-                grid_view.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects));
+                final DisplayMetrics metrics = getResources().getDisplayMetrics();
+                grid_view.setAdapter(new FlickrImageAdapter(ResultsActivity.this, R.layout.activity_results, flickr_objects, metrics));
             }
         }
 

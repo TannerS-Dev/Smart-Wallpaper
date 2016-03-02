@@ -2,8 +2,6 @@ package com.tanners.smartwallpaper.flickrdata;
 
 public class FlickrData
 {
-    // TODO do this betterr
-    // base
     protected final String APP_KEY = "&api_key=1adb86b105be09a175478f8a4f2945aa";
     protected final String BASEURL = "https://api.flickr.com/services/rest/";
     protected final String METHOD = "?method=";
@@ -24,7 +22,4 @@ public class FlickrData
     //recent
     protected final String GET_RECENT_PHOTOS_METHOD = "flickr.photos.getRecent";
     // url builder
-
-
-    // TODO firebase databae call for these vlaues
 }

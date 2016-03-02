@@ -22,7 +22,7 @@ public class GenericTagAdapter extends ArrayAdapter<String>
 
     public GenericTagAdapter(Context context, int resource, List<String> objects)
     {
-        //TODO resourcei a passed layout thta is not used
+
         super(context, resource, objects);
         this.context = context;
         this.taglist = objects;

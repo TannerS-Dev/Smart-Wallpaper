@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -83,10 +84,8 @@ public class FlickrRecentPhotosFragment extends Fragment
 
                 Log.i("test", "size og photos: " +Integer.toString(flickr_objects.size()));
                 // check if any results were returned
-                // TODO check this  and other collect class to see if i need both of these
                 if (flickr_objects == null || (flickr_objects.size() == 0))
                 {
-                    //TODO constant and make activiy ends?
                     NoImagesToast("No Images For This Tag");
                 } else {
                     if (grid == null)
@@ -95,11 +94,12 @@ public class FlickrRecentPhotosFragment extends Fragment
                         Log.i("debug", "context is null");
 
                     // set adapter passing in photo objects
-                    grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects));
+
+                    final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                    grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects, metrics));
                 }
             }
             else
-                //TODO constant and make activiy ends?
                 NoImagesToast("No Images For This Tag");
         }
 
