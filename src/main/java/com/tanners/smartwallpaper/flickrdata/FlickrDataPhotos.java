@@ -26,7 +26,7 @@ public class FlickrDataPhotos
         URLConnection connection = null;
 
         try {
-            connection = new URLConnection(url.getPhotos(tag, 12, 1));
+            connection = new URLConnection(url.getPhotos(tag, 10, 1));
             String responseStr = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
             ObjectMapper objectMapper = new ObjectMapper();
             flickr = objectMapper.readValue(responseStr, FlickrPhotoContainer.class);

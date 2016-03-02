@@ -5,6 +5,7 @@ package com.tanners.smartwallpaper.flickrdata;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +18,16 @@ import android.widget.ImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.PhotoActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
+import com.tanners.smartwallpaper.volley.VolleySkeleton;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +38,7 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
     List<FlickrPhotoItem> photos;
     FlickrDataUserInfo user_data;
     DisplayMetrics metrics;
+    View view;
 
     public FlickrRecycleImageAdapter(Context context, List<FlickrPhotoItem> photos, DisplayMetrics metrics)
     {
@@ -48,14 +56,14 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
     public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.flickr_grid_image_layout, null);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.flickr_grid_image_layout, null);
         ImageViewHolder holder = new ImageViewHolder(view, metrics);
         return holder;
 
     }
 
     @Override
-    public void onBindViewHolder(ImageViewHolder holder, final int position)
+    public void onBindViewHolder(final ImageViewHolder holder, final int position)
     {
         holder.image_button.setOnClickListener(new CardView.OnClickListener()
         {
@@ -103,7 +111,33 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         //        .memoryCache(new LruCache(cacheSize))
         //      .build();
 
-        Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(holder.image_button);
+
+
+        // TODO volley
+
+      //  ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+        //holder.image_button.setImageUrl(photos.get(position).getUrl_z(), imageLoader);
+
+        ImageLoader mImageLoader;
+        NetworkImageView mNetworkImageView;
+
+// Get the NetworkImageView that will display the image.
+       // mNetworkImageView = (NetworkImageView) view.findViewById(R.id.image_button);
+
+// Get the ImageLoader through your singleton class.
+        mImageLoader = VolleySkeleton.getInstance(context).getImageLoader();
+
+// Set the URL of the image that should be loaded into this view, and
+// specify the ImageLoader that will be used to make the request.
+        holder.image_button.setImageUrl(photos.get(position).getUrl_m(), mImageLoader);
+
+
+
+// Access the RequestQueue through your singleton class.
+       // VolleySkeleton.getInstance(context).addToRequestQueue(request);
+
+
+      //  Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(holder.image_button);
         // return current view
     }
 
@@ -115,12 +149,13 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder
     {
-        private final ImageButton image_button;
+        //private final ImageButton image_button;
+        private final NetworkImageView image_button;
 
         public ImageViewHolder(View view, DisplayMetrics metrics)
         {
             super(view);
-            image_button = (ImageButton) view.findViewById(R.id.image_button);
+            image_button = (NetworkImageView) view.findViewById(R.id.image_button);
            // final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int screen_width = metrics.widthPixels;
             image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));

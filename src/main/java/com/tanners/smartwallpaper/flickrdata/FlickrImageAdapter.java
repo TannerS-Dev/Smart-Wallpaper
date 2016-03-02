@@ -180,8 +180,8 @@ public class FlickrImageAdapter extends BaseAdapter
 
 // TODO volley
 
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-        imgNetWorkView.setImageUrl(photos.get(position).getUrl_z(), imageLoader);
+//        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+      //  imgNetWorkView.setImageUrl(photos.get(position).getUrl_z(), imageLoader);
 
         /*
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();

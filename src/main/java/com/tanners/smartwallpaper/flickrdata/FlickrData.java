@@ -12,7 +12,7 @@ public class FlickrData
     // get photos
     protected final String GET_PHOTOS_METHOD = "flickr.photos.search";
     protected final String GET_PHOTOS_PARA = "&privacy_filter=public&content_type=1&safe_search=1&media=photos";
-    protected final String GET_PHOTOS_EXTRA = "&extras=url_t%2C+url_q%2C+url_z";
+    protected final String GET_PHOTOS_EXTRA = "&extras=url_t%2C+url_q%2C+url_z+url_n%2Curl_m";
     protected final String GET_PHOTOS_EXTRA_2 = "&per_page=";
     protected final String GET_PHOTOS_EXTRA_3 = "&page=";
     protected final String TAG = "&tags=";
