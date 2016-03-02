@@ -89,23 +89,25 @@ public class FlickrImageAdapter extends BaseAdapter
     {
         boolean click = true;
         ImageButton image_button;
-        CardView card;
+        //CardView card;
 
         if (convertView == null)
         {
             convertView = LayoutInflater.from(context).inflate(R.layout.flickr_grid_image_layout, parent, false);
             image_button = (ImageButton) convertView.findViewById(R.id.image_button);
-            card = (CardView) convertView.findViewById(R.id.grid_image);
+            //card = (CardView) convertView.findViewById(R.id.grid_image);
             int screen_width = metrics.widthPixels;
-            card.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
-            card.setClickable(true);
-            convertView.setTag(new ImageViewHolder(image_button, card));
+            image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
+            //card.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
+            //card.setClickable(true);
+           // convertView.setTag(new ImageViewHolder(image_button, card));
+            convertView.setTag(new ImageViewHolder(image_button));
         }
         else
         {
             ImageViewHolder viewHolder = (ImageViewHolder) convertView.getTag();
             image_button = viewHolder.image_button;
-            card = viewHolder.card;
+           // card = viewHolder.card;
         }
 
         image_button.setOnClickListener(new CardView.OnClickListener()
@@ -115,7 +117,7 @@ public class FlickrImageAdapter extends BaseAdapter
             {
                 final Intent intent = new Intent(context, PhotoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                String photo_info = "";
+                StringBuilder photo_info = new StringBuilder("");
                 FlickrPhotoItem data = photos.get(position);
 
                 Log.i("person", data.getOwner());
@@ -125,16 +127,14 @@ public class FlickrImageAdapter extends BaseAdapter
 
                     new GetUserInfo().execute(data.getOwner());
 
-                photo_info += "Name: " + user_data.getFullName() + "\n";
-                photo_info += "Username: " + user_data.getUsername() + "\n";
-                photo_info += "ID: " + data.getId() + "\n";
-                photo_info += "Title: " + data.getTitle() + "\n";
-                photo_info += "Owner: " + data.getOwner() + "\n";
-                photo_info += "Height: " + data.getHeight_z() + "\n";
-                photo_info += "Width: " + data.getWidth_z() + "\n";
-
-
-                intent.putExtra("info", photo_info);
+                photo_info.append("Name: " + user_data.getFullName() + "\n");
+                photo_info.append("Username: " + user_data.getUsername() + "\n");
+                photo_info.append("ID: " + data.getId() + "\n");
+                photo_info.append("Title: " + data.getTitle() + "\n");
+                photo_info.append("Owner: " + data.getOwner() + "\n");
+                photo_info.append("Height: " + data.getHeight_z() + "\n");
+                photo_info.append("Width: " + data.getWidth_z() + "\n");
+                intent.putExtra("info", photo_info.toString());
                 intent.putExtra("position", position);
                 intent.putExtra("url", data.getUrl_z());
                 context.startActivity(intent);
@@ -181,12 +181,14 @@ public class FlickrImageAdapter extends BaseAdapter
     private static class ImageViewHolder
     {
         private final ImageButton image_button;
-        private final CardView card;
+        //private final CardView card;
 
-        public ImageViewHolder(ImageButton image_button, CardView card)
+
+        public ImageViewHolder(ImageButton image_button)
+//        public ImageViewHolder(ImageButton image_button, CardView card)
         {
             this.image_button = image_button;
-            this.card = card;
+            //this.card = card;
         }
     }
 
