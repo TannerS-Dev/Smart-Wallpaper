@@ -79,12 +79,8 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 StringBuilder photo_info = new StringBuilder("");
                 FlickrPhotoItem data = photos.get(position);
-
                 Log.i("person", data.getOwner());
-
                 //user_data.generateUserInfo();
-
-
                 new GetUserInfo().execute(data.getOwner());
 
                 photo_info.append("Name: " + user_data.getFullName() + "\n");
@@ -141,16 +137,28 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
 
       //  Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(holder.image_button);
         // return current view
-        if(this.photos == null)
-            Log.i("err", "shit 1");
+
+        FlickrPhotoItem data = photos.get(position);
+        Uri uri = null;
+
+        if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
+        {
+            if(data.getUrl_m() == null || (data.getUrl_m().length() <= 0))
+            {
+                if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
+                {
+
+                        uri = Uri.parse(data.getUrl_z());
+                }
+            }
+            else
+                uri = Uri.parse(data.getUrl_m());
+        }
         else
-            Log.i("err", photos.get(position).getUrl_z());
+            uri = Uri.parse(data.getUrl_n());
 
+        //Uri uri = Uri.parse(data.getUrl_m());
 
-Log.i("tt","TEST " +  photos.get(position).getUrl_z());
-
-        Uri uri = Uri.parse(photos.get(position).getUrl_z());
-        //SimpleDraweeView draweeView = (SimpleDraweeView) view.findViewById(R.id.);
         holder.image_button.setImageURI(uri);
 
 
