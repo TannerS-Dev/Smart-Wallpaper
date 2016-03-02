@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,7 +25,9 @@ public class FlickrRecentPhotosFragment extends Fragment
 {
     private Context context;
     private View view;
-    GridView grid;
+    //GridView grid;
+    private GridLayoutManager grid;
+    private RecyclerView recycle_view;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -32,18 +36,29 @@ public class FlickrRecentPhotosFragment extends Fragment
         // http://tips.androidhive.info/2013/10/android-getting-application-context-in-fragments/
        // context = getContext();
         context = getActivity().getApplicationContext();
-        Log.i("debug", context.toString());
         // get recent photos in a background task
-       // new CollectRecentPhotos(context).execute();
+
+
         new CollectRecentPhotos().execute();
+
+
+        grid = new GridLayoutManager(context, 2);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflater.inflate(R.layout.flickr_fragment_recent, null, false);
+        recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recycle_view.setHasFixedSize(true);
+        recycle_view.setLayoutManager(grid);
+      ///  FlickrRecycleImageAdapter rcAdapter = new FlickrRecycleImageAdapter(context, rowListItem);
+       // rView.setAdapter(rcAdapter);
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        view = inflater.inflate(R.layout.flickr_fragment_recent, container, false);
-        grid = (GridView) view.findViewById(R.id.fragment_grid_view);
+       // view = inflater.inflate(R.layout.flickr_fragment_recent, container, false);
+      //  grid = (GridView) view.findViewById(R.id.fragment_grid_view);
         return view;
     }
 
@@ -55,7 +70,6 @@ public class FlickrRecentPhotosFragment extends Fragment
 
         public CollectRecentPhotos()
         {
-           // context = con;
             photos = new FlickrDataPhotosRecent();
             Log.i("test","this shoul be called once");
         }
@@ -63,8 +77,6 @@ public class FlickrRecentPhotosFragment extends Fragment
         @Override
         protected FlickrPhotoContainer doInBackground(Void... v)
         {
-            // get flickr object with array of photo url's
-            Log.i("test", "start");
             return photos.populateFlickrPhotos();
         }
 
@@ -87,16 +99,14 @@ public class FlickrRecentPhotosFragment extends Fragment
                 if (flickr_objects == null || (flickr_objects.size() == 0))
                 {
                     NoImagesToast("No Images For This Tag");
-                } else {
-                    if (grid == null)
-                        Log.i("debug", "grid is null");
-                    if (context == null)
-                        Log.i("debug", "context is null");
+                }
+                else
+                {
 
-                    // set adapter passing in photo objects
-
+// blic FlickrRecycleImageAdapter(Context context, int resource, List<FlickrPhotoItem> photos, DisplayMetrics metrics)
                     final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                    grid.setAdapter(new FlickrImageAdapter(context, R.layout.activity_results, flickr_objects, metrics));
+                    FlickrRecycleImageAdapter adapter = new FlickrRecycleImageAdapter(context, flickr_objects, metrics);
+                    recycle_view.setAdapter(adapter);
                 }
             }
             else

@@ -49,9 +49,7 @@ public class FlickrImageAdapter extends BaseAdapter
 {
     Context context;
     List<FlickrPhotoItem> photos;
-    //PopupWindow popUp;
-   // ImageButton image_button;
-   // CardView card;
+
     FlickrDataUserInfo user_data;
     DisplayMetrics metrics;
 

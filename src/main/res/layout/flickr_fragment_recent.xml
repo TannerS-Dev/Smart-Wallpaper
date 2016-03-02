@@ -10,16 +10,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-    <GridView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
-        android:columnWidth="90dp"
-        android:horizontalSpacing="0dp"
-        android:verticalSpacing="0dp"
-        android:stretchMode="columnWidth"
-        android:id="@+id/fragment_grid_view"
+        android:scrollbars="vertical"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"
@@ -27,5 +24,6 @@
         android:layout_marginTop="100dp"
 
         />
+
 
 </LinearLayout>
