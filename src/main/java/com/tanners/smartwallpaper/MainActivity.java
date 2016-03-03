@@ -1,5 +1,6 @@
 package com.tanners.smartwallpaper;
 // TODO placeholders for imageview and navbar
+// TODO fix nav bar lfick not loading
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -95,11 +96,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //flickr_tags = new FlickrDataTags();
         // run background task to generate flickr tags for navegation bar
        // TODO UNCOMMENT
-       // new GenerateFlickrTags().execute(new FlickrDataTags());
+       new GenerateFlickrTags().execute(new FlickrDataTags());
         // run background task to generate flickr tags for navegation bar
        // new GenerateFireBaseTags(this);
         // TODO UNCOMMENT
-       // initFireBase();
+        initFireBase();
         // find main tool bar and set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         toolbar.setTitle("test");
@@ -108,8 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // set up fragment tabs
         setUpTabs();
-        //        // TODO UNCOMMENT
-       // setUpTags();
+        setUpTags();
     }
 
     private void initFireBase()
@@ -300,10 +300,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 noImagesToast(NO_IMAGES);
             else
             {
-                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view = layoutInflater.inflate(R.layout.activity_main, null, false);
+               // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //View view = layoutInflater.inflate(R.layout.activity_main, null, false);
                 // load listview
-                Log.i("ex" , "checkpoint");
+               // Log.i("ex" , "checkpoint");
                // nav_bar_list_view = (ListView) view.findViewById(R.id.nav_bar_adapter);
 
                 flickr_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, result);

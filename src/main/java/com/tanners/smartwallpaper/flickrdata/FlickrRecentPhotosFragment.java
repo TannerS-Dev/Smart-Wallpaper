@@ -53,13 +53,15 @@ public class FlickrRecentPhotosFragment extends Fragment
       ///  FlickrRecycleImageAdapter rcAdapter = new FlickrRecycleImageAdapter(context, rowListItem);
        // rView.setAdapter(rcAdapter);
 
+        Log.i("fuck", " here 1");
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-       // view = inflater.inflate(R.layout.flickr_fragment_recent, container, false);
+       //view = inflater.inflate(R.layout.flickr_fragment_recent, container, false);
       //  grid = (GridView) view.findViewById(R.id.fragment_grid_view);
         return view;
     }
@@ -94,6 +96,7 @@ public class FlickrRecentPhotosFragment extends Fragment
             // get list of photo objects
             if(result != null)
             {
+
                 List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
 
                 Log.i("test", "size og photos: " +Integer.toString(flickr_objects.size()));

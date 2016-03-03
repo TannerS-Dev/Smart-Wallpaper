@@ -54,7 +54,7 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             Log.i("err", "shit 1");
         this.metrics = metrics;
         // TODO uncomments
-        //Collections.shuffle(this.photos);
+        Collections.shuffle(this.photos);
         user_data = new FlickrDataUserInfo();
     }
 
@@ -99,47 +99,6 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             }
         });
 
-        // get tag for image button
-        // final String tag = this.photos.get(position).getUrl_t();
-        // put image into grid
-        int w = metrics.widthPixels;
-        int h = metrics.heightPixels;
-
-        //final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        //final int cacheSize = maxMemory / 4;
-
-        //  Picasso p = new Picasso.Builder(context)
-        //        .memoryCache(new LruCache(cacheSize))
-        //      .build();
-
-
-
-        // TODO volley
-
-      //  ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-        //holder.image_button.setImageUrl(photos.get(position).getUrl_z(), imageLoader);
-
-
-
-// Get the NetworkImageView that will display the image.
-       // mNetworkImageView = (NetworkImageView) view.findViewById(R.id.image_button);
-
-// Get the ImageLoader through your singleton class.
-       // mImageLoader = VolleySkeleton.getInstance(context).getImageLoader();
-
-// Set the URL of the image that should be loaded into this view, and
-// specify the ImageLoader that will be used to make the request.
-       /// holder.image_button.setImageUrl(photos.get(position).getUrl_m(), mImageLoader);
-
-
-
-// Access the RequestQueue through your singleton class.
-       // VolleySkeleton.getInstance(context).addToRequestQueue(request);
-
-
-      //  Picasso.with(context).load(photos.get(position).getUrl_z()).fit().into(holder.image_button);
-        // return current view
-
         String temp = null;
         FlickrPhotoItem data = photos.get(position);
 
@@ -149,7 +108,6 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             {
                 if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
                 {
-
                     temp = data.getUrl_z();
                 }
             }
@@ -159,47 +117,7 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         else
             temp = (data.getUrl_n());
 
-
-
-
-
-
-        Glide.with(context)
-                .load(temp).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(holder.image_button);
-
-
-
-
-
-        //TODO fresco
-
-        /*
-
-        FlickrPhotoItem data = photos.get(position);
-        Uri uri = null;
-
-        if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
-        {
-            if(data.getUrl_m() == null || (data.getUrl_m().length() <= 0))
-            {
-                if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
-                {
-
-                        uri = Uri.parse(data.getUrl_z());
-                }
-            }
-            else
-                uri = Uri.parse(data.getUrl_m());
-        }
-        else
-            uri = Uri.parse(data.getUrl_n());
-
-        //Uri uri = Uri.parse(data.getUrl_m());
-
-        holder.image_button.setImageURI(uri);
-*/
-
+        Glide.with(context).load(temp).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
     }
 
     @Override

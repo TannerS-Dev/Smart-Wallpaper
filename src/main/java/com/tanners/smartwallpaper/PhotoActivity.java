@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -34,23 +36,19 @@ public class PhotoActivity extends AppCompatActivity
         TextView text = (TextView) findViewById(R.id.text_view);
         Button wallpaper_btn = (Button) findViewById(R.id.set_wallpaper);
 
-        wallpaper_btn.setOnClickListener(new CardView.OnClickListener()
-        {
+        wallpaper_btn.setOnClickListener(new CardView.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 new setWallpaper(getApplicationContext(), url).execute();
             }
         });
 
-        Picasso.with(this).load(url).into(image);
+
+
+        Glide.with(this).load(url).centerCrop().fitCenter().into(image);
+        //Picasso.with(this).load(url).into(image);
 
         text.setText(info);
-
-
-        // new setWallpaper(this, url);
-
-
 
     }
 
