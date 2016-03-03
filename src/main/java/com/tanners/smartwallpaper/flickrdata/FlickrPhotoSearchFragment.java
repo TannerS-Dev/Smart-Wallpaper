@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 
 import com.tanners.smartwallpaper.R;
+import com.tanners.smartwallpaper.ResultsActivity;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
@@ -93,13 +94,18 @@ public class FlickrPhotoSearchFragment extends Fragment
                         search_view.setQuery("", false);
                         search_view.setFocusable(false);
                         // generate images based on tag
-                        Log.i("fuck","TEST : " + search_view.getQuery().toString());
-                        new CollectTaggedPhotos().execute(tag);
+                        //new CollectTaggedPhotos().execute(tag);
+                        // PASS TO RESULTS PAGE
+                        // TODO SEARCH FRAGMENT -> RESULTSACTIVITY
+                        Intent intent = new Intent(context, ResultsActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        // math up to TAG in results page, i mean you have two osame vlaues, put them into class?
+
+                        Log.i("new", tag);
+                        intent.putExtra("TAG", tag);
+                        startActivity(intent);
                     }
                 }.run();
-
-
-               // Log.i("search", );
                 return false;
             }
 
@@ -107,15 +113,8 @@ public class FlickrPhotoSearchFragment extends Fragment
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
-
-
         });
-
-
     }
-
-
-
 
 
     @Nullable
@@ -133,69 +132,6 @@ public class FlickrPhotoSearchFragment extends Fragment
 
 
 
-
-
-
-
-
-// TODO move into sepeatre class later?
-    public class CollectTaggedPhotos extends AsyncTask<String, Void, FlickrPhotoContainer>
-    {
-        private FlickrDataPhotosSearch photos;
-
-        public CollectTaggedPhotos()
-        {
-            // set context
-            photos = new FlickrDataPhotosSearch();
-        }
-
-        @Override
-        protected FlickrPhotoContainer doInBackground(String... str)
-        {
-            // run background task to get photo oobjects based on tag
-            return photos.populateFlickrPhotos(str[0]);
-        }
-
-        @Override
-        protected void onPostExecute(FlickrPhotoContainer result)
-        {
-            super.onPostExecute(result);
-
-            //recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
-            // grid_view = (GridView) findViewById(R.id.grid_view);
-            // inflate fragment layout
-            // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            // View view = layoutInflater.inflate(R.layout.activity_results, null, false);
-
-            //GridView grid = (GridView) view.findViewById(R.id.grid_view);
-            // get list of photo objects
-            List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
-            // check if any results were returned
-            Log.i("debug", "checkpoint : " + flickr_objects.size());
-            if(flickr_objects == null || (flickr_objects.size() == 0))
-            {
-                NoImagesToast("No Images For This Tag");
-            }
-            else
-            {
-                // set adapter passing in photo objects
-                Log.i("debug", context.toString());
-                final DisplayMetrics metrics = getResources().getDisplayMetrics();
-
-                // TODO may needto change context, it was resultsactivity,this, not sure what it is now, do log
-                FlickrRecycleImageAdapter adapter = new FlickrRecycleImageAdapter(context, flickr_objects, metrics);
-                recycle_view.setAdapter(adapter);
-            }
-        }
-
-        private void NoImagesToast(String str)
-        {
-            // set up toast
-            Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
-            toast.show();
-        }
-    }
 
 
 }

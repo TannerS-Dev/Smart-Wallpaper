@@ -1,5 +1,6 @@
 package com.tanners.smartwallpaper;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,94 +16,121 @@ import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotosSearch;
 import com.tanners.smartwallpaper.flickrdata.FlickrRecycleImageAdapter;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
+import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotos;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ResultsActivity extends AppCompatActivity
-{
+import javax.xml.transform.Result;
+
+public class ResultsActivity extends AppCompatActivity {
     // key to access the intent extra (this key will return the tag)
     private final String EXTRA_MESSAGE = "TAG";
     private String tag;
     private GridLayoutManager grid;
     private RecyclerView recycle_view;
 
+    // dynamic grid
+    private int previousTotal = 0;
+    private boolean loading = true;
+    private int visibleThreshold = 5;
+    private int firstVisibleItem, visibleItemCount, totalItemCount;
+
+
+
+    private int per_page;
+    private int page;
+    private int total_pics;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         // load UI elements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        //photos = new ArrayList<FlickrPhotoItem>(100);
+        per_page = 500;
+        page = 1;
+        total_pics = 2000;
+
+
+
+        // flickr atmost can reutnr 4000, this is a default
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         // set toolbar as action bar (has back button)
         setSupportActionBar(toolbar);
         tag = getIntent().getStringExtra(EXTRA_MESSAGE);
 
         grid = new GridLayoutManager(this, 2);
-       // LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //View view = inflater.inflate(R.layout.activity_results, null, false);
-       recycle_view = (RecyclerView) findViewById(R.id.recycler_view_results);
+        recycle_view = (RecyclerView) findViewById(R.id.recycler_view_results);
         recycle_view.setHasFixedSize(true);
-       recycle_view.setLayoutManager(grid);
 
+        new CollectTaggedPhotos(recycle_view, this).execute(tag);
 
-        // generate images based on tag
-        new CollectTaggedPhotos().execute(tag);
+        recycle_view.setLayoutManager(grid);
     }
 
-    public class CollectTaggedPhotos extends AsyncTask<String, Void, FlickrPhotoContainer>
+
+    private class CollectTaggedPhotos extends AsyncTask<String, Void, List<FlickrPhotoItem>>
     {
-        private FlickrDataPhotosSearch photos;
+        private FlickrDataPhotosSearch flickr_object;
+        private RecyclerView recycler_view;
+        private Context context;
 
-        public CollectTaggedPhotos()
-        {
+        public CollectTaggedPhotos(RecyclerView recycler_view, Context context) {
             // set context
-            photos = new FlickrDataPhotosSearch();
+            flickr_object = new FlickrDataPhotosSearch(total_pics, per_page, page);
+            this.recycler_view = recycler_view;
+            this.context = context;
         }
 
         @Override
-        protected FlickrPhotoContainer doInBackground(String... str)
-        {
+        protected List<FlickrPhotoItem> doInBackground(String... str) {
             // run background task to get photo oobjects based on tag
-            return photos.populateFlickrPhotos(str[0]);
+
+            Log.i("new", "TAGL : " + str[0]);
+            return flickr_object.populateFlickrPhotos(str[0]);
         }
 
         @Override
-        protected void onPostExecute(FlickrPhotoContainer result)
-        {
-
-
+        protected void onPostExecute(List<FlickrPhotoItem> result) {
             super.onPostExecute(result);
 
             //recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
-           // grid_view = (GridView) findViewById(R.id.grid_view);
+            // grid_view = (GridView) findViewById(R.id.grid_view);
             // inflate fragment layout
-           // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-           // View view = layoutInflater.inflate(R.layout.activity_results, null, false);
+            // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            // View view = layoutInflater.inflate(R.layout.activity_results, null, false);
 
             //GridView grid = (GridView) view.findViewById(R.id.grid_view);
             // get list of photo objects
-            List<FlickrPhotoItem> flickr_objects = result.getPhotos().getPhoto();
-            // check if any results were returned
-            Log.i("debug", "checkpoint : " + flickr_objects.size());
-            if(flickr_objects == null || (flickr_objects.size() == 0))
-            {
-                NoImagesToast("No Images For This Tag");
-            }
-            else
-            {
-                // set adapter passing in photo objects
-                Log.i("debug", ResultsActivity.this.toString());
-                final DisplayMetrics metrics = getResources().getDisplayMetrics();
+            // TODO does this refrence veer get deleted?
+           // flickr_objects = result.getPhotos();
 
-                FlickrRecycleImageAdapter adapter = new FlickrRecycleImageAdapter(ResultsActivity.this, flickr_objects, metrics);
-                recycle_view.setAdapter(adapter);
+
+
+           // photos = result;
+            Collections.shuffle(result);
+
+            if (result == null || (result.size() <= 0)) {
+                NoImagesToast("No Images For This Tag");
+            } else {
+                // set adapter passing in photo objects
+                Log.i("new  ", "does it get here");
+                final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                // TODO may needto change context, it was resultsactivity,this, not sure what it is now, do log
+                FlickrRecycleImageAdapter adapter = new FlickrRecycleImageAdapter(context, result, metrics);
+                recycler_view.setAdapter(adapter);
             }
         }
 
-        private void NoImagesToast(String str)
-        {
+        private void NoImagesToast(String str) {
             // set up toast
-            Toast toast = Toast.makeText(ResultsActivity.this, str, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
             toast.show();
         }

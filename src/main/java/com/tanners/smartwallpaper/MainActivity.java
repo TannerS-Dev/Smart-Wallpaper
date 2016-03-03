@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Log.i("firebase", "size: " + Integer.toString(list.size()));
        // flickr_tag_adapter
+        //TODO tags
         firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list);
         nav_bar_list_view.setAdapter(firebase_tag_adapter);
         Log.i("ex", "checkpoint1");
