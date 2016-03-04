@@ -22,11 +22,6 @@ public class FlickrURLBuilder extends FlickrData
         return (BASEURL + METHOD + GET_RECENT_PHOTOS_METHOD + APP_KEY + GET_PHOTOS_EXTRA + page_per_+ page_ + FORMAT);
     }
 
-    public String getTrendingTags()
-    {
-        return (BASEURL + METHOD + GET_HOT_LIST_TAGS + APP_KEY + GET_HOT_LIST_TAGS_PARA + FORMAT);
-    }
-
     public String getUserInfo(String user_id )
     {
         String complete_user_id = GET_INFO_ID + user_id;

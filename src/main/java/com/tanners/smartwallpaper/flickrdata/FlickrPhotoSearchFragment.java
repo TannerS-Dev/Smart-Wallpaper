@@ -29,6 +29,7 @@ import com.tanners.smartwallpaper.ResultsActivity;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FlickrPhotoSearchFragment extends Fragment
@@ -40,6 +41,13 @@ public class FlickrPhotoSearchFragment extends Fragment
     private RecyclerView recycle_view;
     private View view;
 
+    private FlickrRecycleImageAdapter adapter;
+
+
+// TODO uses same class, and these vars for results tag and ehre
+    private int per_page;
+    private int page;
+    private int total_pics;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -48,15 +56,32 @@ public class FlickrPhotoSearchFragment extends Fragment
         setHasOptionsMenu(true);
         context = getActivity().getApplicationContext();
         //handleIntent(getIntent());
+        per_page = 500;
+        page = 1;
+        total_pics = 2000;
+
+       // String tag = null;
+
+        //if(savedInstanceState != null)
+          //  tag = savedInstanceState.getString(EXTRA_MESSAGE);
+
+       // String tag = getArguments().getString(EXTRA_MESSAGE);
+
+       // Log.i("tag", "is tag null?: " + tag );
+       // return inflater.inflate(R.layout.fragment, container, false);
+
+
 
         grid = new GridLayoutManager(context, 2);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // TODO this needed if this pages inflates view?
         view = inflater.inflate(R.layout.flickr_fragment_search, null, false);
         recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view_search);
         recycle_view.setHasFixedSize(true);
         recycle_view.setLayoutManager(grid);
-        ///  FlickrRecycleImageAdapter rcAdapter = new FlickrRecycleImageAdapter(context, rowListItem);
-        // rView.setAdapter(rcAdapter);
+        //FlickrRecycleImageAdapter rcAdapter = new FlickrRecycleImageAdapter(context, rowListItem);
+        //rView.setAdapter(rcAdapter);
+
     }
 
     // http://stackoverflow.com/questions/15653737/oncreateoptionsmenu-inside-fragments
@@ -73,7 +98,6 @@ public class FlickrPhotoSearchFragment extends Fragment
         final SearchView search_view = (SearchView) menu.findItem(R.id.menu_search).getActionView();
         search_view.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         search_view.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             // http://stackoverflow.com/questions/23928253/how-to-dismiss-close-collapse-searchview-in-actionbar-in-mainactivity
@@ -97,13 +121,27 @@ public class FlickrPhotoSearchFragment extends Fragment
                         //new CollectTaggedPhotos().execute(tag);
                         // PASS TO RESULTS PAGE
                         // TODO SEARCH FRAGMENT -> RESULTSACTIVITY
-                        Intent intent = new Intent(context, ResultsActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                       // Intent intent = new Intent(context, ResultsActivity.class);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         // math up to TAG in results page, i mean you have two osame vlaues, put them into class?
 
                         Log.i("new", tag);
-                        intent.putExtra("TAG", tag);
-                        startActivity(intent);
+                        // TODO backup..
+                       // intent.putExtra("TAG", tag);
+                       // startActivity(intent);
+
+                        /*
+                        final Intent intent = new Intent(context, ResultsActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(EXTRA_MESSAGE, tag);
+                        context.startActivity(intent);
+                        */
+
+                        new CollectTaggedPhotos(recycle_view, context).execute(tag);
+
+                        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                        //FlickrRecycleImageAdapter adapter = new FlickrRecycleImageAdapter(context, photos, metrics);
+                        //recycle_view.setAdapter(adapter);
                     }
                 }.run();
                 return false;
@@ -124,14 +162,67 @@ public class FlickrPhotoSearchFragment extends Fragment
         return view;
     }
 
+    public void searchByTag(String tag)
+    {
+        Log.i("tag", "Test Tag 2: " + tag);
+        if(adapter != null)
+            adapter.clear();
 
 
+        new CollectTaggedPhotos(recycle_view, context).execute(tag);
+    }
+
+    private class CollectTaggedPhotos extends AsyncTask<String, Void, List<FlickrPhotoItem>>
+    {
+        private FlickrDataPhotosSearch flickr_object;
+        private RecyclerView recycler_view;
+        private Context context;
+
+        public CollectTaggedPhotos(RecyclerView recycler_view, Context context) {
+            // set context
+            flickr_object = new FlickrDataPhotosSearch(total_pics, per_page, page);
+            this.recycler_view = recycler_view;
+            this.context = context;
+            Log.i("tag", "Test Tag 1.0: " );
+
+        }
+
+        @Override
+        protected List<FlickrPhotoItem> doInBackground(String... str) {
+            // run background task to get photo oobjects based on tag
+            Log.i("tag", "Test Tag 1.1: ");
+
+            Log.i("new", "TAGL : " + str[0]);
+            return flickr_object.populateFlickrPhotos(str[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<FlickrPhotoItem> result)
+        {
+            super.onPostExecute(result);
+            Collections.shuffle(result);
+
+            Log.i("tag", "Test Tag 3");
 
 
+            if (result == null || (result.size() <= 0)) {
+                NoImagesToast("No Images For This Tag");
+            } else {
+                // set adapter passing in photo objects
+                Log.i("new  ", "does it get here");
+                final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                // TODO may needto change context, it was resultsactivity,this, not sure what it is now, do log
+                adapter = new FlickrRecycleImageAdapter(context, result, metrics);
+                recycler_view.setAdapter(adapter);
+            }
+        }
 
-
-
-
-
+        private void NoImagesToast(String str) {
+            // set up toast
+            Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
+            toast.show();
+        }
+    }
 
 }

@@ -30,14 +30,10 @@ public class ResultsActivity extends AppCompatActivity {
     private String tag;
     private GridLayoutManager grid;
     private RecyclerView recycle_view;
+   // private List<FlickrPhotoItem> photos;
 
     // dynamic grid
-    private int previousTotal = 0;
     private boolean loading = true;
-    private int visibleThreshold = 5;
-    private int firstVisibleItem, visibleItemCount, totalItemCount;
-
-
 
     private int per_page;
     private int page;
@@ -54,9 +50,7 @@ public class ResultsActivity extends AppCompatActivity {
         page = 1;
         total_pics = 2000;
 
-
-
-        // flickr atmost can reutnr 4000, this is a default
+       // photos = new ArrayList<FlickrPhotoItem>();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         // set toolbar as action bar (has back button)
@@ -68,10 +62,11 @@ public class ResultsActivity extends AppCompatActivity {
         //View view = inflater.inflate(R.layout.activity_results, null, false);
         recycle_view = (RecyclerView) findViewById(R.id.recycler_view_results);
         recycle_view.setHasFixedSize(true);
-
+        // TODO move after collect imgaes?
+        recycle_view.setLayoutManager(grid);
         new CollectTaggedPhotos(recycle_view, this).execute(tag);
 
-        recycle_view.setLayoutManager(grid);
+
     }
 
 
@@ -100,20 +95,7 @@ public class ResultsActivity extends AppCompatActivity {
         protected void onPostExecute(List<FlickrPhotoItem> result) {
             super.onPostExecute(result);
 
-            //recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
-            // grid_view = (GridView) findViewById(R.id.grid_view);
-            // inflate fragment layout
-            // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            // View view = layoutInflater.inflate(R.layout.activity_results, null, false);
 
-            //GridView grid = (GridView) view.findViewById(R.id.grid_view);
-            // get list of photo objects
-            // TODO does this refrence veer get deleted?
-           // flickr_objects = result.getPhotos();
-
-
-
-           // photos = result;
             Collections.shuffle(result);
 
             if (result == null || (result.size() <= 0)) {

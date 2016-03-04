@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
@@ -24,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -35,6 +38,8 @@ import com.tanners.smartwallpaper.volley.VolleySkeleton;
 
 import java.util.Collections;
 import java.util.List;
+
+import static android.support.v7.widget.RecyclerView.*;
 
 public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycleImageAdapter.ImageViewHolder>
 {
@@ -117,7 +122,13 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         else
             temp = (data.getUrl_n());
 
-        Glide.with(context).load(temp).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
+        // TODO try diff options to make it fit right
+        // http://vardhan-justlikethat.blogspot.com/2014/09/android-image-loading-libraries-picasso.html
+
+        Glide.with(context).load(temp).thumbnail(.7f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
+
+
+       // this.get
     }
 
     @Override
@@ -126,7 +137,14 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
     }
 
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder
+    public void clear()
+    {
+   photos.clear();
+//        this.clear();
+        notifyDataSetChanged();
+    }
+
+    public static class ImageViewHolder extends ViewHolder
     {
         private final ImageButton image_button;
        // private final SimpleDraweeView image_button;
@@ -142,14 +160,6 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             //this.image_button = image_button;
         }
     }
-
-
-
-
-
-
-
-
 
     public class GetUserInfo extends AsyncTask<String, Void, FlickrDataUserInfo>
     {

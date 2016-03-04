@@ -6,9 +6,6 @@ public class FlickrData
     protected final String BASEURL = "https://api.flickr.com/services/rest/";
     protected final String METHOD = "?method=";
     protected final String FORMAT = "&format=json&nojsoncallback=1";
-    // trending tags
-    protected final String GET_HOT_LIST_TAGS = "flickr.tags.getHotList";
-    protected final String GET_HOT_LIST_TAGS_PARA = "&period=week&count=15";
     // get photos
     protected final String GET_PHOTOS_METHOD = "flickr.photos.search";
     protected final String GET_PHOTOS_PARA = "&privacy_filter=public&content_type=1&safe_search=1&media=photos";

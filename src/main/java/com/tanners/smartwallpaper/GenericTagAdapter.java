@@ -1,5 +1,7 @@
 package com.tanners.smartwallpaper;
 
+import android.app.ActionBar;
+import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TabHost;
+
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.ResultsActivity;
 
@@ -62,10 +66,19 @@ public class GenericTagAdapter extends ArrayAdapter<String>
         view_holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(context, ResultsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(EXTRA_MESSAGE, tag);
-                context.startActivity(intent);
+
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                // TODO this needed if this pages inflates view?
+              //  View view = inflater.inflate(R.layout.activity_main_content, null, false);
+
+               // TabHost tab_host = (TabHost) view.findViewById(android.R.id.tabs);
+                //tab_host.setCurrentTab(2);
+
+
+               // final Intent intent = new Intent(context, ResultsActivity.class);
+                ///intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.putExtra(EXTRA_MESSAGE, tag);
+                //context.startActivity(intent);
             }
         });
 

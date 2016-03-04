@@ -30,7 +30,7 @@ public class PhotoActivity extends AppCompatActivity
         Intent intent = getIntent();
         String info = intent.getStringExtra("info");
         final String url = intent.getStringExtra("url");
-        int pos = intent.getIntExtra("position", 0);
+       // int pos = intent.getIntExtra("position", 0);
 
         ImageView image = (ImageView) findViewById(R.id.image);
         TextView text = (TextView) findViewById(R.id.text_view);

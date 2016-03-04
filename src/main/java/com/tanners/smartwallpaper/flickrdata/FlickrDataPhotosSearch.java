@@ -33,6 +33,14 @@ public class FlickrDataPhotosSearch
         this.total = total;
     }
 
+    public FlickrDataPhotosSearch()
+    {
+        url = new FlickrURLBuilder();
+        this.page = 1;
+        this.per_page = 100;
+        this.total = 2000;
+    }
+
     public List<FlickrPhotoItem> populateFlickrPhotos(String tag)
     {
         FlickrPhotoContainer flickr = null;
@@ -51,7 +59,7 @@ public class FlickrDataPhotosSearch
 
                 Log.i("new", "looping : " + loop + " out of : " + i);
                 // TODO default hard codded values
-                connection = new URLConnection(url.getPhotos(tag, per_page, page));
+                connection = new URLConnection(url.getPhotos(tag, per_page, page++));
                 String responseStr = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
                 ObjectMapper objectMapper = new ObjectMapper();
                 flickr = objectMapper.readValue(responseStr, FlickrPhotoContainer.class);

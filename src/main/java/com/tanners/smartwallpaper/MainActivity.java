@@ -2,24 +2,22 @@ package com.tanners.smartwallpaper;
 // TODO placeholders for imageview and navbar
 // TODO fix nav bar lfick not loading
 
-import android.os.AsyncTask;
+import android.app.TabActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.widget.Adapter;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.view.Gravity;
 import android.content.Context;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -29,6 +27,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TabHost;
 
 // Clarifai imports
 
@@ -37,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 // TannerS
 import com.firebase.client.DataSnapshot;
@@ -48,21 +46,17 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.tanners.smartwallpaper.clarifaidata.ClarifaiFragment;
 import com.tanners.smartwallpaper.firebase.FireBaseUtil;
-import com.tanners.smartwallpaper.flickrdata.FlickrDataTags;
+import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotosSearch;
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 import com.tanners.smartwallpaper.flickrdata.FlickrRecentPhotosFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     // hashmap to hold nav bar list view adapters
     //private HashMap<String, ArrayAdapter<String>> tag_adapters;
-    private ArrayAdapter<String> flickr_tag_adapter;
     private ArrayAdapter<String> firebase_tag_adapter;
-    private final int LIST_VIEW_COUNT = 2;
-
 
     private ListView nav_bar_list_view;
-
     // number of menu items
     private int tag_selector;
     // number of fragments
@@ -70,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private NavigationView navigationView;
    // private FlickrDataTags flickr_tags = null;
-    private final String NO_IMAGES = "No images aviable for this tag";
+   // private final String NO_IMAGES = "No images aviable for this tag";
+    private DrawerLayout drawer;
 
     //private Toolbar tabs_tool_bar;
     private TabLayout tab_layout;
@@ -83,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private HashMap<String, String> tags;
     //private ArrayList<String> list;
 
+    private FlickrViewHolder view_holder;
+
+    private  ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -96,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //flickr_tags = new FlickrDataTags();
         // run background task to generate flickr tags for navegation bar
        // TODO UNCOMMENT
-       new GenerateFlickrTags().execute(new FlickrDataTags());
         // run background task to generate flickr tags for navegation bar
        // new GenerateFireBaseTags(this);
         // TODO UNCOMMENT
@@ -109,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // set up fragment tabs
         setUpTabs();
-        setUpTags();
+
+
     }
 
     private void initFireBase()
@@ -140,35 +138,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        // ListView listview = (ListView) view.findViewById(R.id.nav_bar_adapter);
        ArrayList<String>  list = new ArrayList<String>(tags.values());
         list.addAll(temp.values());
-
-        Log.i("shuffle", list.toString());
         Collections.sort(list);
-        Log.i("shuffle", list.toString());
-
-
-        Log.i("firebase", "size: " + Integer.toString(list.size()));
        // flickr_tag_adapter
         //TODO tags
         firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list);
         nav_bar_list_view.setAdapter(firebase_tag_adapter);
-        Log.i("ex", "checkpoint1");
-        Log.i("firebase", "list updated from firebase " + list.toString());
-    }
-
-    private void setUpTags()
-    {
-        // create drop down menu to choose which tags to see in nav bar
-        Spinner spinner = (Spinner) findViewById(R.id.tag_spinner);
-        // apply list array of choices to drop down menu (spinner)
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tag_sources, android.R.layout.simple_spinner_item);
-        // bind the list of choices
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        // set activity to listen to the adapter
-        spinner.setOnItemSelectedListener(this);
-        spinner.setSelection(0);
-        //spinner.
     }
 
     private void setUpTabs()
@@ -178,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         You supply an implementation of a PagerAdapter to generate the pages that the view shows.
          */
         // load view pager that allows you to flip through tabs
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         // keeps tabs in memory
         viewPager.setOffscreenPageLimit(FRAG_COUNT);
         setUpFragments(viewPager);
@@ -205,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // AUTO GENERATED
         toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
        setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -250,77 +224,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
-        switch(tag_selector)
-        {
-            case 0:
-                // set adapter
-                nav_bar_list_view.setAdapter(firebase_tag_adapter);
-                //listview.setAdapter((ArrayAdapter) tag_adapters.get(NAV_BAR_ADAPTER_FIREBASE));
-                Log.i("firebase", "list updated from menu");
-                break;
-            case 1:
-                //set adapter
-
-                nav_bar_list_view.setAdapter(flickr_tag_adapter);
-                Log.i("firebase", "other list updated from menu");
-                break;
-        }
-        tag_selector = (tag_selector + 1) % LIST_VIEW_COUNT;
-
-    }
-
-    //@Override
-    public void onNothingSelected(AdapterView<?> parent)
-    {
-        //do nothing
-    }
-
-    private class GenerateFlickrTags extends AsyncTask<FlickrDataTags, Void, List<String>>
-    {
-        @Override
-        protected List<String> doInBackground(FlickrDataTags... flickr_tags)
-        {
-            // call object to get list of trending tags
-            flickr_tags[0] = new FlickrDataTags();
-            return flickr_tags[0].getTagsHotList();
-        }
-
-        @Override
-        protected void onPostExecute(List<String> result)
-        {
-            super.onPostExecute(result);
-
-            // check if there were possible results or not
-            if(result == null || (result.size() == 0))
-                // display toast
-                noImagesToast(NO_IMAGES);
-            else
-            {
-               // LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                //View view = layoutInflater.inflate(R.layout.activity_main, null, false);
-                // load listview
-               // Log.i("ex" , "checkpoint");
-               // nav_bar_list_view = (ListView) view.findViewById(R.id.nav_bar_adapter);
-
-                flickr_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, result);
-
-
-                Log.i("ex" , "checkpoint2");
-            }
-        }
-
-        private void noImagesToast(String str)
-        {
-            // set and load toast
-            Toast toast = Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM | Gravity.LEFT, 0, 0);
-            toast.show();
-        }
     }
 
     class FragmentAdapter extends FragmentPagerAdapter
@@ -369,6 +272,173 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return titles.get(position);
         }
 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public class GenericTagAdapter extends ArrayAdapter<String>
+    {
+        private Context context;
+        private List<String> taglist;
+        private final String EXTRA_MESSAGE = "TAG";
+
+        public GenericTagAdapter(Context context, int resource, List<String> objects)
+        {
+
+            super(context, resource, objects);
+            this.context = context;
+            this.taglist = objects;
+            //notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount()
+        {
+            return taglist.size();
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent)
+        {
+            // create custom view holder class to hold views
+            //private FlickrViewHolder view_holder;
+            //notifyDataSetChanged();
+
+            if(convertView == null)
+            {
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = layoutInflater.inflate(R.layout.flickr_menu_tags_layout, parent, false);
+                view_holder = new FlickrViewHolder();
+                view_holder.btn =  (Button) convertView.findViewById(R.id.flickr_tag_button);
+                convertView.setTag(view_holder);
+
+            }
+            else
+            {
+                // no need to call findViewById() on resource again
+                // just use the custom view holder
+                view_holder = (FlickrViewHolder) convertView.getTag();
+            }
+
+            final String tag = this.taglist.get(position);
+            Log.i("tag1", "TAG :  " + tag);
+            view_holder.btn.setText(tag);
+
+            view_holder.btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    viewPager.setCurrentItem(1);
+
+
+                    drawer.closeDrawer(GravityCompat.START);
+
+                    // http://stackoverflow.com/questions/12739909/send-data-from-activity-to-fragment-in-android
+
+                    List<Fragment> fragments = getFragments();
+
+                    int count = 0;
+
+
+                    for (Fragment f : fragments)
+                    {
+                        if (f.getClass().equals(FlickrPhotoSearchFragment.class))
+                        {
+                            //Bundle bundle = new Bundle();
+                            //bundle.putString(EXTRA_MESSAGE, (String) view_holder.btn.getText());
+                            FlickrPhotoSearchFragment temp = (FlickrPhotoSearchFragment) fragments.get(count);
+
+                            Log.i("tag", "Test Tag: " + tag);
+                            temp.searchByTag(tag);
+                            Log.i("tag1", "TAG :  " + tag);
+                          //  f.setArguments();
+                            //Log.i("tag", "test: " + fragments.get(count).getClass());
+
+                        }
+                        count++;
+
+
+                    }
+
+                    Log.i("tag", "test: " + FlickrPhotoSearchFragment.class);
+                    Log.i("tag", "test: " + fragments.get(0).getClass());
+
+
+                    // FlickrPhotoSearchFragment frag = new FlickrPhotoSearchFragment();
+
+                    // frag.setArguments();
+                    // frag.setArguments(bundle);
+                    Log.i("tag", "hhere");
+
+                }
+            });
+
+            return convertView;
+        }
+
+
+        // https://www.codeofaninja.com/2013/09/android-viewholder-pattern-example.html
+        // http://developer.android.com/training/improving-layouts/smooth-scrolling.html
+
+
+    }
+
+    // http://stackoverflow.com/questions/6102007/is-there-a-way-to-get-references-for-all-currently-active-fragments-in-an-activi
+
+    public List<Fragment> getFragments()
+    {
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+
+        if (fragments == null || fragments.isEmpty())
+        {
+            return Collections.emptyList();
+        }
+
+        //List<Fragment> visibleFragments = new ArrayList<Fragment>();
+        //for (Fragment fragment : allFragments) {
+          //  if (fragment.isVisible()) {
+            //    visibleFragments.add(fragment);
+            //}
+        //}
+        return fragments;// visibleFragments;
+    }
+
+    static private class FlickrViewHolder
+    {
+        Button btn;
     }
 
 }
