@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,8 +19,8 @@ import android.content.Context;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+//import android.support.v4.widget.DrawerLayout;
+//import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Firebase fire_base;
     private HashMap<String, String> tags;
     private FlickrViewHolder view_holder;
-    private  ViewPager view_pager;
+    private ViewPager view_pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

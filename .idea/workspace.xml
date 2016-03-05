@@ -11,44 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f433081a-d0d9-4fcb-8412-70b489143a08" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\atv_1_2_8.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\bolts_android_1_1_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\cardview_v7_23_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\drawee_0_9_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\fbcore_0_9_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\fresco_0_9_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\imagepipeline_0_9_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\imagepipeline_base_0_9_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\library_1_0_19.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\.idea\libraries\library_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\src\main\java\com\tanners\smartwallpaper\GenericTagAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\src\main\java\com\tanners\smartwallpaper\volley\VolleySkeleton.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart-Wallpaper-release.apk" afterPath="$PROJECT_DIR$/Smart-Wallpaper-release.apk" />
+      <change type="DELETED" beforePath="C:\Users\Tanner Summers\Documents\GitHub\Smart-Wallpaper\src\main\java\com\tanners\smartwallpaper\clarifaidata\ClarifaiTagAdapter.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiData.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiTagAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiTagAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrData.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosRecent.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosRecent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataUserInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataUserInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotos.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotos.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecentPhotosFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecentPhotosFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrURLBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrURLBuilder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/ResultsActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/ResultsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart-Wallpaper.iml" afterPath="$PROJECT_DIR$/Smart-Wallpaper.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/urlutil/URLConnection.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/urlutil/URLConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Smart-Wallpaper.iws" />
@@ -80,16 +51,16 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.069445">
-              <caret line="244" column="60" selection-start-line="244" selection-start-column="60" selection-end-line="244" selection-end-column="60" />
+            <state vertical-scroll-proportion="-11.180555">
+              <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#7891#8708#0" expanded="true" />
-                <element signature="e#8707#8708#0" expanded="true" />
+                <element signature="e#7994#8811#0" expanded="true" />
+                <element signature="e#8810#8811#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,20 +70,10 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClarifaiTagAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiTagAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="2" selection-start-line="119" selection-start-column="2" selection-end-line="119" selection-end-column="2" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -120,16 +81,31 @@
       <file leaf-file-name="ClarifaiFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0">
-              <caret line="166" column="42" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.44248706">
+              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2101#2412#0" expanded="true" />
-                <element signature="e#2411#2412#0" expanded="true" />
-                <element signature="e#6052#6970#0" expanded="true" />
-                <element signature="e#6969#6970#0" expanded="true" />
+                <element signature="e#1950#2269#0" expanded="true" />
+                <element signature="e#2268#2269#0" expanded="true" />
+                <element signature="e#5318#5319#0" expanded="true" />
+                <element signature="e#5363#5364#0" expanded="true" />
+                <element signature="e#6287#6713#0" expanded="true" />
+                <element signature="e#6712#6713#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.4814814">
+              <caret line="2" column="62" selection-start-line="2" selection-start-column="62" selection-end-line="2" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -203,8 +179,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -1120,7 +1096,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/GenericTagAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_main_content.xml" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrData.java" />
@@ -1137,10 +1112,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/ResultsActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiTagAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/volley/VolleySkeleton.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/volley/VolleySkeleton.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiTagAdapter.java" />
       </list>
     </option>
   </component>
@@ -1215,6 +1191,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Smart-Wallpaper" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Smart-Wallpaper" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Smart-Wallpaper" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1557,37 +1555,37 @@
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4884393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41156068" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3566474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22774567" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25241157" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3566474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22774567" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1810,17 +1808,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main_nav_bar_content.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2030,47 +2017,60 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiTagAdapter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="2" selection-start-line="119" selection-start-column="2" selection-end-line="119" selection-end-column="2" />
+        <state vertical-scroll-proportion="-1.4814814">
+          <caret line="2" column="62" selection-start-line="2" selection-start-column="62" selection-end-line="2" selection-end-column="62" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.069445">
-          <caret line="244" column="60" selection-start-line="244" selection-start-column="60" selection-end-line="244" selection-end-column="60" />
+        <state vertical-scroll-proportion="-11.180555">
+          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
             <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
             <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
             <element signature="class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#7891#8708#0" expanded="true" />
-            <element signature="e#8707#8708#0" expanded="true" />
+            <element signature="e#7994#8811#0" expanded="true" />
+            <element signature="e#8810#8811#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.1.1/support-v4-23.1.1-sources.jar!/android/support/v4/widget/DrawerLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7056995">
+          <caret line="902" column="0" selection-start-line="902" selection-start-column="0" selection-end-line="902" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0">
-          <caret line="166" column="42" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.44248706">
+          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2101#2412#0" expanded="true" />
-            <element signature="e#2411#2412#0" expanded="true" />
-            <element signature="e#6052#6970#0" expanded="true" />
-            <element signature="e#6969#6970#0" expanded="true" />
+            <element signature="e#1950#2269#0" expanded="true" />
+            <element signature="e#2268#2269#0" expanded="true" />
+            <element signature="e#5318#5319#0" expanded="true" />
+            <element signature="e#5363#5364#0" expanded="true" />
+            <element signature="e#6287#6713#0" expanded="true" />
+            <element signature="e#6712#6713#0" expanded="true" />
           </folding>
         </state>
       </provider>
