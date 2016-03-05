@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.clarifai.api.RecognitionResult;
 import com.squareup.picasso.Picasso;
+import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.ResultsActivity;
+import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 
 
+import java.util.Collections;
 import java.util.List;
 
 public class ClarifaiFragment extends Fragment
@@ -34,7 +38,10 @@ public class ClarifaiFragment extends Fragment
     private ImageView image_view;
     private Button selectButton;
     private final String NO_TAGS = "No tags for this image";
+    private DrawerLayout drawer;
+    private ViewPager view_pager;
     private View view;
+    private final int FRAG_COUNT = 3;
 
     @Override
     public void onAttach(Context context)
@@ -60,14 +67,16 @@ public class ClarifaiFragment extends Fragment
         image_view = (ImageView) view.findViewById(R.id.image_view);
         selectButton = (Button) view.findViewById(R.id.select_button);
 
-        selectButton.setOnClickListener(new View.OnClickListener()
-        {
+        selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent media_intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(media_intent, cdata.getOKCode());
             }
         });
+
+        view_pager = (ViewPager) view.findViewById(R.id.view_pager);
+        view_pager.setOffscreenPageLimit(FRAG_COUNT);
     }
 
     @Override
@@ -114,7 +123,6 @@ public class ClarifaiFragment extends Fragment
                 noTagsToast(cdata.getRecError());
 
             ListView listview = (ListView) view.findViewById(R.id.clarifaitagview);
-            //List<String> tags = cdata.getTags().getTagList();
 
             List<String> tags = null;
 
@@ -153,35 +161,6 @@ public class ClarifaiFragment extends Fragment
         toast.show();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public class ClarifaiTagAdapter extends ArrayAdapter<String> {
         private Context context;
         private List<String> taglist;
@@ -204,42 +183,55 @@ public class ClarifaiFragment extends Fragment
 
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            if (convertView == null) {
+            if (convertView == null)
+            {
                 convertView = layoutInflater.inflate(R.layout.clarifai_tags_layout, parent, false);
                 view_holder = new ClarifaiViewHolder();
                 view_holder.btn = (Button) convertView.findViewById(R.id.clarifai_tag_button);
                 convertView.setTag(view_holder);
-            } else {
+            }
+            else
+            {
                 view_holder = (ClarifaiViewHolder) convertView.getTag();
             }
 
             final String tag = this.taglist.get(position);
 
-            if (this.taglist != null) {
+            if (this.taglist != null)
+            {
+
                 view_holder.btn.setText(tag);
-                view_holder.btn.setOnClickListener(new View.OnClickListener() {
+
+                view_holder.btn.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
-                    public void onClick(View v) {
-                        final Intent intent = new Intent(context, ResultsActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(EXTRA_MESSAGE, tag);
-                        context.startActivity(intent);
+                    public void onClick(View v)
+                    {
+                        List<Fragment> fragments = getActivity().getSupportFragmentManager().getFragments();
+                        int count = 0;
+
+                        for (Fragment f : fragments)
+                        {
+                            if (f.getClass().equals(FlickrPhotoSearchFragment.class))
+                            {
+                                FlickrPhotoSearchFragment temp = (FlickrPhotoSearchFragment) fragments.get(count);
+                                temp.searchByTag(tag);
+                                //TODO FIXXED!!!!!
+                                ((MainActivity)getActivity()).getViewPager().setCurrentItem(1);
+                            }
+                            count++;
+                        }
                     }
                 });
             }
-
             return convertView;
         }
-
-
-
-
     }
 
-    static class ClarifaiViewHolder {
+    static class ClarifaiViewHolder
+    {
         Button btn;
+        ViewPager view_pager;
     }
-
-
-    }
+}
 

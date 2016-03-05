@@ -72,18 +72,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Firebase.setAndroidContext(this);
         fire_base = new Firebase(FIREBASE_HOME);
 
-        fire_base.child("tags").addValueEventListener(new ValueEventListener()
-        {
+        fire_base.child("tags").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot)
-            {
+            public void onDataChange(DataSnapshot snapshot) {
                 tags = new HashMap<String, String>();
                 setUpAdapter(snapshot.getValue(HashMap.class));
             }
 
             @Override
-            public void onCancelled(FirebaseError error)
-            {}
+            public void onCancelled(FirebaseError error) {
+            }
         });
     }
 
@@ -158,6 +156,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+    public ViewPager getViewPager() {
+        if (null == view_pager) {
+            view_pager = (ViewPager) findViewById(R.id.view_pager);
+        }
+        return view_pager;
+    }
+
+
+
 
     class FragmentAdapter extends FragmentPagerAdapter
     {
@@ -244,6 +257,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     // TODO bookmark
                     view_pager.setCurrentItem(1);
+
+
                     drawer.closeDrawer(GravityCompat.START);
                     List<Fragment> fragments = getFragments();
                     int count = 0;
@@ -257,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         count++;
                     }
+
                 }
             });
             return convertView;
