@@ -112,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.addTab(new FlickrPhotoSearchFragment(), "Search");
         adapter.addTab(new ClarifaiFragment(), "Clarifai");
         viewPager.setAdapter(adapter);
+
+
+
     }
 
     private void generateNavBar()

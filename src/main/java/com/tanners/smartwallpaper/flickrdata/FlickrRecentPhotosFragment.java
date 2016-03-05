@@ -1,5 +1,6 @@
 package com.tanners.smartwallpaper.flickrdata;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
@@ -26,6 +29,7 @@ public class FlickrRecentPhotosFragment extends Fragment
     private View view;
     private GridLayoutManager grid;
     private RecyclerView recycle_view;
+    private ProgressDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -41,6 +45,7 @@ public class FlickrRecentPhotosFragment extends Fragment
         recycle_view.setLayoutManager(grid);
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -48,9 +53,12 @@ public class FlickrRecentPhotosFragment extends Fragment
         return view;
     }
 
+
+
     public class CollectRecentPhotos extends AsyncTask<Void, Void, FlickrPhotoContainer>
     {
         private FlickrDataPhotosRecent photos;
+        private ProgressDialog dialog;
 
         public CollectRecentPhotos()
         {
@@ -64,10 +72,17 @@ public class FlickrRecentPhotosFragment extends Fragment
         }
 
         @Override
+        protected void onPreExecute()
+        {
+            dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
+                    "Please wait, this depends on your internet connection \n" +
+                            "Note: Too many searches in a close close proximity may cause server to time out and crash", true);
+        }
+
+        @Override
         protected void onPostExecute(FlickrPhotoContainer result)
         {
             super.onPostExecute(result);
-            Log.i("test", "done gathering photos");
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.flickr_grid_image_layout, null, false);
 
@@ -88,6 +103,8 @@ public class FlickrRecentPhotosFragment extends Fragment
             }
             else
                 NoImagesToast("No Images For This Tag");
+
+            dialog.dismiss();
         }
 
         private void NoImagesToast(String str)

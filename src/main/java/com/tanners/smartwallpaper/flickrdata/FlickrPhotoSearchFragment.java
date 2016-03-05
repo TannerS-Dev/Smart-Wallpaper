@@ -1,5 +1,6 @@
 package com.tanners.smartwallpaper.flickrdata;
 
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -34,6 +35,7 @@ public class FlickrPhotoSearchFragment extends Fragment
     private int per_page;
     private int page;
     private int total_pics;
+    //private ProgressDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -67,21 +69,18 @@ public class FlickrPhotoSearchFragment extends Fragment
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
-            public boolean onQueryTextSubmit(String query)
-            {
+            public boolean onQueryTextSubmit(String query) {
                 final String tag = search_view.getQuery().toString();
-                new Runnable()
-                {
+                new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         MenuItemCompat.collapseActionView(search_bar);
                         search_bar.collapseActionView();
                         search_view.clearFocus();
                         search_view.setQuery("", false);
                         search_view.setFocusable(false);
                         searchByTag(tag);
-                       // new CollectTaggedPhotos(recycle_view, context).execute(tag);
+                        // new CollectTaggedPhotos(recycle_view, context).execute(tag);
                         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
                     }
                 }.run();
@@ -115,12 +114,21 @@ public class FlickrPhotoSearchFragment extends Fragment
         private FlickrDataPhotosSearch flickr_object;
         private RecyclerView recycler_view;
         private Context context;
+        private ProgressDialog dialog;
 
         public CollectTaggedPhotos(RecyclerView recycler_view, Context context)
         {
             flickr_object = new FlickrDataPhotosSearch(total_pics, per_page, page);
             this.recycler_view = recycler_view;
             this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
+                    "Please wait, this depends on your internet connection \n" +
+                            "Note: Too many searches in a close close proximity may cause server to time out and crash", true);
         }
 
         @Override
@@ -145,6 +153,8 @@ public class FlickrPhotoSearchFragment extends Fragment
                 adapter = new FlickrRecycleImageAdapter(context, result, metrics);
                 recycler_view.setAdapter(adapter);
             }
+
+            dialog.dismiss();
         }
 
         private void NoImagesToast(String str)
@@ -153,5 +163,9 @@ public class FlickrPhotoSearchFragment extends Fragment
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
             toast.show();
         }
+
+
+
+
     }
 }
