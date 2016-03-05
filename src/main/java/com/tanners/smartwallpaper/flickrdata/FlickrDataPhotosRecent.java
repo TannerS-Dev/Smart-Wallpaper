@@ -1,13 +1,10 @@
 package com.tanners.smartwallpaper.flickrdata;
 
 import android.util.Log;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.urlutil.URLConnection;
-
 import org.apache.commons.io.IOUtils;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -27,7 +24,6 @@ public class FlickrDataPhotosRecent
 
         try
         {
-            Log.i("test", "getting urls, should be called once?");
             // TODO fix hard coding
             connection = new URLConnection(url.getRecentPhotos(500, 1));
 
@@ -36,13 +32,7 @@ public class FlickrDataPhotosRecent
                 String responseStr = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
                 ObjectMapper objectMapper = new ObjectMapper();
                 flickr = objectMapper.readValue(responseStr, FlickrPhotoContainer.class);
-                Log.i("test", "CUR SIZE:  "+ Integer.toString(flickr.getPhotos().getPhoto().size()) );
-
             }
-
-
-
-
         }
         catch (MalformedURLException e)
         {
@@ -54,9 +44,6 @@ public class FlickrDataPhotosRecent
         }
         return flickr;
     }
-
-
-
 }
 
 

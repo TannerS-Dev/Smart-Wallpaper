@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
@@ -14,13 +13,11 @@ import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.R;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class ClarifaiData extends ClarifaiClient
 {
-    // needed variables
     private final static String APP_ID = "Xijy3WCA1l4UwEb_zLDx10Kixh068oitW7PcHMv8";
     private final static String APP_SECRET = "U-e8tQDPSQxKl2MTvoQW1W1MbOE59oepZr8j92Gf";
     private final String ERROR_REC_IMAGE = "Unable to recognize image";
@@ -43,7 +40,6 @@ public class ClarifaiData extends ClarifaiClient
 
     public boolean addTags(RecognitionResult result)
     {
-        // check if results were returned
         if (result != null)
         {
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK)
@@ -87,9 +83,10 @@ public class ClarifaiData extends ClarifaiClient
             {
                 e.printStackTrace();
             }
-            // Compress the image as a JPEG.
+
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, out);
+
             return recognize(new RecognitionRequest(out.toByteArray())).get(0);
         }
         catch (ClarifaiException e)

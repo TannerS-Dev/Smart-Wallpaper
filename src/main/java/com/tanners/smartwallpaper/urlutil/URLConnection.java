@@ -24,14 +24,11 @@ public class URLConnection
     {
         HttpURLConnection connection = null;
 
-
         try
         {
-            Log.i("person", "here 5");
             url = new URL(url_str);
-            Log.i("person", "here 6");
             connection = (HttpURLConnection) url.openConnection();
-            Log.i("person", "here 7");
+
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
             {
                 connection.setConnectTimeout(TIMEOUT_CONNECTION_MS);
@@ -44,22 +41,17 @@ public class URLConnection
         catch (MalformedURLException e)
         {
             isGood = false;
-            Log.i("person", "err 1");
             e.printStackTrace();
         }
         catch (IOException e)
         {
             isGood = false;
-            Log.i("person", "err 2");
             e.printStackTrace();
         }
         finally
         {
             if(connection != null)
             {
-                Log.i("person", "discconect");
-                Log.i("person", "THREAD: " + Thread.currentThread());
-                //connection.
                 connection.disconnect();
             }
         }
@@ -132,5 +124,4 @@ public class URLConnection
     {
         return isGood;
     }
-
 }

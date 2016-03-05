@@ -1,41 +1,21 @@
-
-
-
 package com.tanners.smartwallpaper.flickrdata;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
-
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.NetworkImageView;
-import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.PhotoActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
-import com.tanners.smartwallpaper.volley.VolleySkeleton;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -54,15 +34,10 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         super();
         this.context = context;
         this.photos = photos;
-
-        if(this.photos == null)
-            Log.i("err", "shit 1");
         this.metrics = metrics;
-        // TODO uncomments
         Collections.shuffle(this.photos);
         user_data = new FlickrDataUserInfo();
     }
-
 
     @Override
     public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -71,13 +46,12 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.flickr_grid_image_layout, null);
         ImageViewHolder holder = new ImageViewHolder(view, metrics);
         return holder;
-
     }
 
     @Override
     public void onBindViewHolder(final ImageViewHolder holder, final int position)
     {
-        holder.image_button.setOnClickListener(new CardView.OnClickListener()
+        holder.image_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -86,10 +60,7 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 StringBuilder photo_info = new StringBuilder("");
                 FlickrPhotoItem data = photos.get(position);
-                Log.i("person", data.getOwner());
-                //user_data.generateUserInfo();
                 new GetUserInfo().execute(data.getOwner());
-
                 photo_info.append("Name: " + user_data.getFullName() + "\n");
                 photo_info.append("Username: " + user_data.getUsername() + "\n");
                 photo_info.append("ID: " + data.getId() + "\n");
@@ -122,13 +93,7 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         else
             temp = (data.getUrl_n());
 
-        // TODO try diff options to make it fit right
-        // http://vardhan-justlikethat.blogspot.com/2014/09/android-image-loading-libraries-picasso.html
-
         Glide.with(context).load(temp).thumbnail(.7f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
-
-
-       // this.get
     }
 
     @Override
@@ -136,28 +101,21 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         return this.photos.size();
     }
 
-
     public void clear()
     {
-   photos.clear();
-//        this.clear();
+        photos.clear();
         notifyDataSetChanged();
     }
 
     public static class ImageViewHolder extends ViewHolder
     {
         private final ImageButton image_button;
-       // private final SimpleDraweeView image_button;
-
         public ImageViewHolder(View view, DisplayMetrics metrics)
         {
             super(view);
-           // image_button = (SimpleDraweeView) view.findViewById(R.id.image_button);
             image_button = (ImageButton) view.findViewById(R.id.image_button);
-           // final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int screen_width = metrics.widthPixels;
             image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
-            //this.image_button = image_button;
         }
     }
 
@@ -167,11 +125,8 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         protected FlickrDataUserInfo doInBackground(String... str)
         {
             user_data.generateUserInfo(str[0]);
-
             return user_data;
         }
     }
-
-
 }
 

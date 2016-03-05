@@ -26,42 +26,20 @@ public class FlickrDataUserInfo
     private String username;
     FlickrURLBuilder url;
 
-
-
     public FlickrDataUserInfo()
     {
-        //super();
         real_name ="";
         username = "";
         url = new FlickrURLBuilder();
-        //connection = null;
-
     }
 
     public void generateUserInfo(String temp)
     {
-
-
-       // FlickrURLBuilder url;
-       // ByteArrayOutputStream output = url_connection.readData(BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
-        //Log.i("info", BASEURL + METHOD + GET_PHOTOS_METHOD + APP_KEY + complete_user_id + GET_PHOTOS_PARA + FORMAT);
-
-        // pass id into to get user info of that id, then pass that into urlconnection to create url, then pas url to connection
-
-        Log.i("person", "URL  : " + url.getUserInfo(temp));
-
-
         URLConnection connection = new URLConnection(url.getUserInfo(temp));
-
-
-
 
         if(connection.isGood())
         {
-
             ByteArrayOutputStream output = connection.readData();
-
-
             String json_info = output.toString();
 
             try
@@ -71,27 +49,21 @@ public class FlickrDataUserInfo
                 this.username = username_attribute.getString("_content");
                 JSONObject realname_attribute = root.getJSONObject("realname");
                 this.real_name = realname_attribute.getString("_content");
-
-
-
             }
-
             catch (JSONException e)
             {
-
                 e.printStackTrace();
             }
-
         }
-
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
-    public String getFullName() {
+    public String getFullName()
+    {
         return this.real_name;
     }
-
 }

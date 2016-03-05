@@ -25,6 +25,8 @@ import java.util.List;
 import javax.xml.transform.Result;
 
 public class ResultsActivity extends AppCompatActivity {
+    /*
+
     // key to access the intent extra (this key will return the tag)
     private final String EXTRA_MESSAGE = "TAG";
     private String tag;
@@ -117,4 +119,5 @@ public class ResultsActivity extends AppCompatActivity {
             toast.show();
         }
     }
+    */
 }
