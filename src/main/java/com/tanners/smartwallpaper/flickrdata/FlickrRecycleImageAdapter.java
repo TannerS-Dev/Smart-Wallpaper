@@ -70,7 +70,22 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
                 photo_info.append("Width: " + data.getWidth_z() + "\n");
                 intent.putExtra("info", photo_info.toString());
                 intent.putExtra("position", position);
-                intent.putExtra("url", data.getUrl_z());
+
+                if(data.getUrl_z() == null || (data.getUrl_z().length() <= 0))
+                {
+                    if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
+                    {
+                        if(data.getUrl_m() == null || (data.getUrl_m().length() <= 0))
+                        {
+                            intent.putExtra("url", data.getUrl_m());
+                        }
+                    }
+                    else
+                        intent.putExtra("url", data.getUrl_n());
+                }
+                else
+                    intent.putExtra("url", data.getUrl_z());
+
                 context.startActivity(intent);
             }
         });

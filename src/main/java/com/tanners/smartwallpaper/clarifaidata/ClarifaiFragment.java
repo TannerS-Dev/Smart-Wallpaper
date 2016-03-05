@@ -24,7 +24,7 @@ import com.clarifai.api.RecognitionResult;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
-import com.tanners.smartwallpaper.ResultsActivity;
+
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 
 
@@ -75,8 +75,8 @@ public class ClarifaiFragment extends Fragment
             }
         });
 
-        view_pager = (ViewPager) view.findViewById(R.id.view_pager);
-        view_pager.setOffscreenPageLimit(FRAG_COUNT);
+        //view_pager = (ViewPager) view.findViewById(R.id.view_pager);
+        //view_pager.setOffscreenPageLimit(FRAG_COUNT);
     }
 
     @Override

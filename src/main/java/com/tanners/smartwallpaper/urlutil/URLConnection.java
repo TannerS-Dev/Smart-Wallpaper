@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class URLConnection
 {
-    private static int TIMEOUT_CONNECTION_MS = 7000;
+    private static int TIMEOUT_CONNECTION_MS = 10000;
     private static int TIMEOUT_READ_MS = 15000;
     private URL url;
     private boolean isGood;
@@ -27,16 +27,22 @@ public class URLConnection
         try
         {
             url = new URL(url_str);
+            Log.e("url", "url: " + url_str );
             connection = (HttpURLConnection) url.openConnection();
+
+            Log.e("url", "update: " + Integer.toString(connection.getResponseCode()) );
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
             {
                 connection.setConnectTimeout(TIMEOUT_CONNECTION_MS);
                 connection.setReadTimeout(TIMEOUT_READ_MS);
                 isGood = true;
+                Log.e("url", "update 1: " +"good" );
             }
-            else
+            else {
+                Log.e("url", "err: " );
                 throw new IOException();
+            }
         }
         catch (MalformedURLException e)
         {
@@ -52,6 +58,7 @@ public class URLConnection
         {
             if(connection != null)
             {
+                Log.e("url", "disconnect: " );
                 connection.disconnect();
             }
         }

@@ -29,7 +29,7 @@ public class FlickrDataPhotosSearch
     {
         url = new FlickrURLBuilder();
         this.page = 1;
-        this.per_page = 100;
+        this.per_page = 1000;
         this.total = 1000;
     }
 
@@ -41,12 +41,13 @@ public class FlickrDataPhotosSearch
 
         try {
 
-            int i = (int) Math.ceil(total / per_page);
+          //  int i = (int) Math.ceil(total / per_page);
 
-            for(int loop = 0; loop < i; loop++)
-            {
+          //  for(int loop = 0; loop < i; loop++)
+           // {
                 // TODO default hard codded values
-                connection = new URLConnection(url.getPhotos(tag, per_page, page++));
+                connection = new URLConnection(url.getPhotos(tag, per_page, page));
+            // connection = new URLConnection(url.getPhotos(tag, per_page, page++));
                 String responseStr = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
                 ObjectMapper objectMapper = new ObjectMapper();
                 flickr = objectMapper.readValue(responseStr, FlickrPhotoContainer.class);
@@ -62,7 +63,7 @@ public class FlickrDataPhotosSearch
                         photos.addAll(flickr.getPhotos().getPhoto());
                     }
                 }
-            }
+           // }
         }
         catch (MalformedURLException e)
         {

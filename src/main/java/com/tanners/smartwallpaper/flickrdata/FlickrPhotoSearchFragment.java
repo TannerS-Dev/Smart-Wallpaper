@@ -11,7 +11,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,9 +41,11 @@ public class FlickrPhotoSearchFragment extends Fragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         context = getActivity().getApplicationContext();
-        per_page = 500;
+       // per_page = 500;
+        per_page = 1000;
         page = 1;
-        total_pics = 2000;
+        //total_pics = 1000;
+        total_pics = 1000;
         grid = new GridLayoutManager(context, 2);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.flickr_fragment_search, null, false);
@@ -133,6 +134,7 @@ public class FlickrPhotoSearchFragment extends Fragment
         {
             super.onPostExecute(result);
             Collections.shuffle(result);
+
             if (result == null || (result.size() <= 0))
             {
                 NoImagesToast("No Images For This Tag");
