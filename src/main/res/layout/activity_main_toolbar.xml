@@ -9,40 +9,50 @@
     tools:context="com.example.tannersummers.com.MainActivity"
     android:background="#054070">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        >
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/main_tool_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-
-            android:singleLine="true"
-            android:text="Toolbar Title"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            android:background="#ff89ff" />
+            android:orientation="vertical"
+            android:id="@+id/toolbar_container"
+            >
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.design.widget.AppBarLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
 
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/main_tool_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
 
+                    android:singleLine="true"
+                    android:text="Toolbar Title"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        android:gravity="center_vertical|center_horizontal" />
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"
+                    android:background="#ff89ff" />
+            </android.support.design.widget.AppBarLayout>
+        </LinearLayout>
 
+        <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/view_pager"
+            android:layout_below="@id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal" />
+
+   </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
