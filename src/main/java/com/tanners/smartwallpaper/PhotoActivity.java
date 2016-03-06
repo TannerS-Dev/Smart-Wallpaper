@@ -37,6 +37,7 @@ public class PhotoActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 new setWallpaper(getApplicationContext(), url).execute();
+                Toast.makeText(context, "Wallpaper Set", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -81,7 +82,6 @@ public class PhotoActivity extends AppCompatActivity
             {
                 wallpaperManager.setBitmap(bitmap);
                 wallpaperManager.suggestDesiredDimensions(width, height);
-                Toast.makeText(context, "Wallpaper Set", Toast.LENGTH_SHORT).show();
             }
             catch (IOException e)
             {

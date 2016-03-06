@@ -2,14 +2,11 @@ package com.tanners.smartwallpaper.firebase;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class FireBaseUtil

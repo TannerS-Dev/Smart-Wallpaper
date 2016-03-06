@@ -24,8 +24,7 @@ public class FlickrDataPhotosRecent
 
         try
         {
-            // TODO fix hard coding
-            connection = new URLConnection(url.getRecentPhotos(500, 1));
+            connection = new URLConnection(url.getRecentPhotos(700, 1));
 
             if(connection.isGood())
             {

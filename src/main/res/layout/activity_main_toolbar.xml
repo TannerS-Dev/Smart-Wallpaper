@@ -28,7 +28,7 @@
                     android:id="@+id/main_tool_bar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
+                    android:background="#020241"
 
                     android:singleLine="true"
                     android:text="Toolbar Title"
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     app:tabMode="fixed"
                     app:tabGravity="fill"
-                    android:background="#ff89ff" />
+                    android:background="#020241" />
             </android.support.design.widget.AppBarLayout>
         </LinearLayout>
 
@@ -52,7 +52,8 @@
             android:layout_below="@id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:background="#020241" />
 
    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

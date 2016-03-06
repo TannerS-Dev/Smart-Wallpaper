@@ -24,7 +24,6 @@ import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class FlickrPhotoSearchFragment extends Fragment
 {
@@ -42,7 +41,6 @@ public class FlickrPhotoSearchFragment extends Fragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         context = getActivity().getApplicationContext();
-       // per_page = 500;
         per_page = 1000;
         page = 1;
         grid = new GridLayoutManager(context, 2);
@@ -77,10 +75,7 @@ public class FlickrPhotoSearchFragment extends Fragment
                         search_view.clearFocus();
                         search_view.setQuery("", false);
                         search_view.setFocusable(false);
-                        // TODO flickerdataphotosearch
                         searchByTag(tag, FlickrDataPhotosSearch.OPEN_SEARCH);
-                        // new CollectTaggedPhotos(recycle_view, context).execute(tag);
-                        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
                     }
                 }.run();
                 return false;
@@ -104,9 +99,7 @@ public class FlickrPhotoSearchFragment extends Fragment
     {
         if(adapter != null)
             adapter.clear();
-        // TODO flickrphotosearchfragment
         new CollectTaggedPhotos(recycle_view, context, selection).execute(tag);
-        //CollectTaggedPhotos temp = new CollectTaggedPhotos(recycle_view, context, selection);
     }
 
     private class CollectTaggedPhotos extends AsyncTask<String, Void, List<FlickrPhotoItem>>
@@ -119,7 +112,6 @@ public class FlickrPhotoSearchFragment extends Fragment
 
         public CollectTaggedPhotos(RecyclerView recycler_view, Context context, int selection)
         {
-            // TODO flickerdataphotosearch
             flickr_object = new FlickrDataPhotosSearch(context, per_page, page);
             this.recycler_view = recycler_view;
             this.context = context;
@@ -130,14 +122,14 @@ public class FlickrPhotoSearchFragment extends Fragment
         protected void onPreExecute()
         {
             dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
-                    "Please wait, this depends on your internet connection \n" +
-                            "Note: Too many searches in a close proximity may cause server to time out and crash", true);
+                    "Please wait, this depends on your internet connection", true);
+
+
         }
 
         @Override
         protected List<FlickrPhotoItem> doInBackground(String... str)
         {
-            // TODO flickrdataphotosearch, str[0] is tag
             return flickr_object.searchFlickr(str[0], selection);
         }
 
@@ -164,10 +156,8 @@ public class FlickrPhotoSearchFragment extends Fragment
         private void NoImagesToast(String str)
         {
             Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER, 0, 0);
             toast.show();
         }
-
-
     }
 }

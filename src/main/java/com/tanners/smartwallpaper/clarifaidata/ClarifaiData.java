@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
@@ -22,7 +21,6 @@ import com.tanners.smartwallpaper.R;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,8 +39,6 @@ public class ClarifaiData extends ClarifaiClient
     private HashMap<String, String> bad_tags;
     private ArrayList<String> approved_tags;
     private final String FIREBASE_BAD_TAGS = "blocked_words";
-
-
 
     public ClarifaiData(Context context)
     {
@@ -147,8 +143,6 @@ public class ClarifaiData extends ClarifaiClient
 
     private boolean filerTags(String tag)
     {
-       // boolean checker = false;
-
         for(String bad_tag : bad_tags.values())
         {
             //TODO lowercase?
@@ -159,9 +153,6 @@ public class ClarifaiData extends ClarifaiClient
         }
 
         return true;
-
-      //  if(!checker)
-           // approved_tags.add(tag);
     }
 
     public List<String> getTags()

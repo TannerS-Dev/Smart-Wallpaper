@@ -9,18 +9,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
-
 import java.util.List;
 
 public class FlickrRecentPhotosFragment extends Fragment
@@ -29,7 +25,6 @@ public class FlickrRecentPhotosFragment extends Fragment
     private View view;
     private GridLayoutManager grid;
     private RecyclerView recycle_view;
-    private ProgressDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -45,15 +40,12 @@ public class FlickrRecentPhotosFragment extends Fragment
         recycle_view.setLayoutManager(grid);
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         return view;
     }
-
-
 
     public class CollectRecentPhotos extends AsyncTask<Void, Void, FlickrPhotoContainer>
     {
@@ -75,8 +67,7 @@ public class FlickrRecentPhotosFragment extends Fragment
         protected void onPreExecute()
         {
             dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
-                    "Please wait, this depends on your internet connection \n" +
-                            "Note: Too many searches in a close proximity may cause server to time out and crash", true);
+                    "Please wait, this depends on your internet connection", true);
         }
 
         @Override
@@ -110,7 +101,7 @@ public class FlickrRecentPhotosFragment extends Fragment
         private void NoImagesToast(String str)
         {
             Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER, 0, 0);
             toast.show();
         }
     }

@@ -7,14 +7,15 @@
     android:layout_height="match_parent"
     android:gravity="center|bottom"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="#000000">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:id="@+id/image_view"
-        android:background="#653fff"
+        android:background="#020241"
         android:layout_weight="0.25"
         />
 
@@ -24,7 +25,7 @@
         android:layout_weight="0.1"
         android:layout_height="0dp"
         android:padding="5dp"
-        android:background="#68343f"
+        android:background="#020241"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:textAlignment="center" />
@@ -39,7 +40,7 @@
             android:layout_marginBottom="16dp"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
-            android:background="#3d88ec" />
+            android:background="#020241" />
 
 
 

@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,20 +19,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 import com.clarifai.api.RecognitionResult;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotosSearch;
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class ClarifaiFragment extends Fragment
@@ -92,8 +84,7 @@ public class ClarifaiFragment extends Fragment
 
             if (image != null)
             {
-                // TODO glide
-                Picasso.with(context).load(image).centerInside().fit().into(image_view);
+                Glide.with(this).load(image).centerCrop().fitCenter().into(image_view);
                 selectButton.setText("Please wait");
                 selectButton.setEnabled(false);
                 new GetTags().execute(image);
@@ -140,7 +131,6 @@ public class ClarifaiFragment extends Fragment
             else
                 noTagsToast(NO_TAGS);
 
-            //TODO maay not be needed
             if(tags.size() == 0)
                 noTagsToast(NO_TAGS);
             else
@@ -196,7 +186,6 @@ public class ClarifaiFragment extends Fragment
 
             if (this.taglist != null)
             {
-
                 view_holder.btn.setText(tag);
 
                 view_holder.btn.setOnClickListener(new View.OnClickListener()
@@ -213,7 +202,6 @@ public class ClarifaiFragment extends Fragment
                             {
                                 FlickrPhotoSearchFragment temp = (FlickrPhotoSearchFragment) fragments.get(count);
                                 temp.searchByTag(tag, FlickrDataPhotosSearch.OPEN_SEARCH);
-                                //TODO FIXXED!!!!!
                                 ((MainActivity)getActivity()).getViewPager().setCurrentItem(1);
                             }
                             count++;
@@ -229,8 +217,5 @@ public class ClarifaiFragment extends Fragment
     {
         Button btn;
     }
-
-
-
 }
 

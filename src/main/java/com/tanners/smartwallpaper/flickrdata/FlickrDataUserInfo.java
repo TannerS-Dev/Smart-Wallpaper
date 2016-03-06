@@ -2,10 +2,8 @@ package com.tanners.smartwallpaper.flickrdata;
 
 import com.tanners.smartwallpaper.flickrdata.urldata.FlickrURLBuilder;
 import com.tanners.smartwallpaper.urlutil.URLConnection;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 
 public class FlickrDataUserInfo

@@ -9,10 +9,6 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
-
-
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -21,10 +17,9 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"
-        android:background="@android:color/holo_blue_bright"
+        android:background="#020224"
 
 
         />
-
 
 </LinearLayout>

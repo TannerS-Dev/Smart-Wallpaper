@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -53,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FlickrViewHolder view_holder;
     private ViewPager view_pager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -62,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_bar_list_view = (ListView) findViewById(R.id.nav_bar_adapter);
         generateNavBar();
         initFireBase();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         tag_selector = 0;
         setUpTabs();
     }
@@ -72,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Firebase.setAndroidContext(this);
         fire_base = new Firebase(FIREBASE_HOME);
 
-        // TODO firebase cal
         fire_base.child("tags").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -117,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void generateNavBar()
     {
-        // AUTO GENERATED
         toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
        setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -131,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed()
     {
-        // AUTO GENERATED
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);

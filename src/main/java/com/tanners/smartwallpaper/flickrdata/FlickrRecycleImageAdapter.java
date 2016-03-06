@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,7 @@ import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 import java.util.Collections;
 import java.util.List;
-
-import static android.support.v7.widget.RecyclerView.*;
+import android.support.v7.widget.RecyclerView.*;
 
 public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycleImageAdapter.ImageViewHolder>
 {
@@ -60,7 +58,6 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         photo_info.append("Owner: " + data.getOwner() + "\n");
         photo_info.append("Height: " + data.getHeight_z() + "\n");
         photo_info.append("Width: " + data.getWidth_z() + "\n");
-
         return photo_info.toString();
     }
 
@@ -74,20 +71,6 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             {
                 final Intent intent = new Intent(context, PhotoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                /*
-                StringBuilder photo_info = new StringBuilder("");
-                FlickrPhotoItem data = photos.get(position);
-                new GetUserInfo().execute(data.getOwner());
-                photo_info.append("Name: " + user_data.getFullName() + "\n");
-                photo_info.append("Username: " + user_data.getUsername() + "\n");
-                photo_info.append("ID: " + data.getId() + "\n");
-                photo_info.append("Title: " + data.getTitle() + "\n");
-                photo_info.append("Owner: " + data.getOwner() + "\n");
-                photo_info.append("Height: " + data.getHeight_z() + "\n");
-                photo_info.append("Width: " + data.getWidth_z() + "\n");
-                */
-
                 FlickrPhotoItem data = photos.get(position);
                 intent.putExtra("info", getInfo(position));
 

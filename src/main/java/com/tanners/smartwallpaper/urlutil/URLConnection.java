@@ -1,14 +1,9 @@
 package com.tanners.smartwallpaper.urlutil;
 
-import android.util.Log;
-
 import org.apache.commons.io.IOUtils;
-
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InvalidObjectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;

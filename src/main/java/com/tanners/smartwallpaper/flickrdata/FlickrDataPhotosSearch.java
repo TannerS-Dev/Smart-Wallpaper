@@ -2,7 +2,6 @@ package com.tanners.smartwallpaper.flickrdata;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanners.smartwallpaper.firebase.FireBaseUtil;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
@@ -53,26 +52,14 @@ public class FlickrDataPhotosSearch
                 case FlickrDataPhotosSearch.GROUP_SEARCH:
                     String group = fb_util.searchGroupByTag(tag);
                     connection = new URLConnection(url.getGroupPhotos(group, per_page, page));
-                    //Log.i("new", "FUCK: " + url.getAllPhotos(group, per_page, page));
                     break;
 
                 case FlickrDataPhotosSearch.OPEN_SEARCH:
-                    // TODO fix, for now temp
-                   // String ids = fb_util.getPhotoGroupIds();
                     connection = new URLConnection(url.getAllPhotos(tag, per_page, page));
-                   // Log.i("new",url.getPhotos(tag, id, per_page, page));
                     break;
             }
 
-
-
-
-
-           // connection.getHttpURLConnection().getInputStream().toString())
-
-            Log.i("new", "get object");
             String response = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
-            Log.i("new", "NNNE: " + response);
             ObjectMapper objectMapper = new ObjectMapper();
             flickr = objectMapper.readValue(response, FlickrPhotoContainer.class);
 
