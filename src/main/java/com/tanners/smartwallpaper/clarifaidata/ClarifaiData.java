@@ -3,18 +3,29 @@ package com.tanners.smartwallpaper.clarifaidata;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
 import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.R;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 
 public class ClarifaiData extends ClarifaiClient
 {
@@ -24,13 +35,20 @@ public class ClarifaiData extends ClarifaiClient
     private final String ERROR_LOAD_IMAGE = "Unable to load image";
     private final int OK_CODE = 1;
     private Context context;
-    private Tags tags;
+    private Firebase fire_base;
+    private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
+    private HashMap<String, String> questionable_tags;
+    private HashMap<String, String> bad_tags;
+    private ArrayList<String> approved_tags;
+    private final String FIREBASE_BAD_TAGS = "blocked_words";
+
+
 
     public ClarifaiData(Context context)
     {
         super(APP_ID, APP_SECRET);
         this.context = context;
-        this.tags = null;
+        initFireBase();
     }
 
     public int getOKCode()
@@ -40,14 +58,20 @@ public class ClarifaiData extends ClarifaiClient
 
     public boolean addTags(RecognitionResult result)
     {
+        initFireBase();
+        approved_tags = new ArrayList<String>();
+
         if (result != null)
         {
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK)
             {
-                this.tags = new Tags();
-
-                for (Tag t : result.getTags())
-                    tags.addTag(t.getName());
+                for(Tag t : result.getTags())
+                {
+                    if(filerTags(t.getName()))
+                    {
+                        approved_tags.add(t.getName());
+                    }
+                }
             }
             else
             {
@@ -59,11 +83,6 @@ public class ClarifaiData extends ClarifaiClient
             return false;
         }
         return true;
-    }
-
-    public Tags getTags()
-    {
-        return this.tags;
     }
 
     public RecognitionResult recognizeBitmap(Uri uri)
@@ -85,7 +104,7 @@ public class ClarifaiData extends ClarifaiClient
             }
 
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            image.compress(Bitmap.CompressFormat.JPEG, 70, out);
 
             return recognize(new RecognitionRequest(out.toByteArray())).get(0);
         }
@@ -99,8 +118,54 @@ public class ClarifaiData extends ClarifaiClient
     {
         return ERROR_REC_IMAGE;
     }
+
     public String getLoadError()
     {
         return ERROR_LOAD_IMAGE;
+    }
+
+    private void initFireBase()
+    {
+        Firebase.setAndroidContext(context);
+        fire_base = new Firebase(FIREBASE_HOME);
+
+        fire_base.child("blocked_words").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Log.i("tags", "called***************");
+                bad_tags = snapshot.getValue(HashMap.class);
+                Log.i("tags", "TEST: " + snapshot.getValue());
+                Log.i("tags", "called***************" + bad_tags.toString());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+                Log.i("tags", "BADDD" + error);
+            }
+        });
+    }
+
+    private boolean filerTags(String tag)
+    {
+       // boolean checker = false;
+
+        for(String bad_tag : bad_tags.values())
+        {
+            //TODO lowercase?
+            if(tag.equals(bad_tag))
+            {
+                return false;
+            }
+        }
+
+        return true;
+
+      //  if(!checker)
+           // approved_tags.add(tag);
+    }
+
+    public List<String> getTags()
+    {
+        return approved_tags;
     }
 }

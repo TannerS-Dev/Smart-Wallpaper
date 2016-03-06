@@ -27,20 +27,15 @@ public class URLConnection
         try
         {
             url = new URL(url_str);
-            Log.e("url", "url: " + url_str );
             connection = (HttpURLConnection) url.openConnection();
-
-            Log.e("url", "update: " + Integer.toString(connection.getResponseCode()) );
-
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
             {
                 connection.setConnectTimeout(TIMEOUT_CONNECTION_MS);
                 connection.setReadTimeout(TIMEOUT_READ_MS);
                 isGood = true;
-                Log.e("url", "update 1: " +"good" );
             }
-            else {
-                Log.e("url", "err: " );
+            else
+            {
                 throw new IOException();
             }
         }

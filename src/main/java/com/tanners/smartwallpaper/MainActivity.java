@@ -19,8 +19,6 @@ import android.content.Context;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-//import android.support.v4.widget.DrawerLayout;
-//import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -33,7 +31,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.tanners.smartwallpaper.clarifaidata.ClarifaiFragment;
-import com.tanners.smartwallpaper.firebase.FireBaseUtil;
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 import com.tanners.smartwallpaper.flickrdata.FlickrRecentPhotosFragment;
 
@@ -48,11 +45,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private TabLayout tab_layout;
     private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
-    private FireBaseUtil fire;
     private Firebase fire_base;
     private HashMap<String, String> tags;
     private FlickrViewHolder view_holder;
     private ViewPager view_pager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -85,6 +82,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+/*
+    private void initFireBase()
+    {
+        Firebase.setAndroidContext(this);
+        fire_base = new Firebase(FIREBASE_HOME);
+
+        // list comes back as null unless we give it time before checking
+        new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                fire_base.child("tags").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        Log.i("tags", "called***************");
+                        list = snapshot.getValue(HashMap.class);
+                        Log.i("tags", "TEST: " + snapshot.getValue() + " " + list.toString());
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError error) {
+                        Log.i("tags", "BADDD" + error);
+                    }
+                });
+
+                setUpAdapter();
+            }
+        }.run();
+    }
+
+
+
+    private void setUpAdapter()
+    {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_main, null, false);
+        ArrayList<String> temp = new ArrayList<String>(list.values());
+        Collections.sort(temp);
+        firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, temp);
+        nav_bar_list_view.setAdapter(firebase_tag_adapter);
+    }
+    */
+
     private void setUpAdapter(HashMap<String, String> temp)
     {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -112,9 +153,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.addTab(new FlickrPhotoSearchFragment(), "Search");
         adapter.addTab(new ClarifaiFragment(), "Clarifai");
         viewPager.setAdapter(adapter);
-
-
-
     }
 
     private void generateNavBar()
@@ -160,20 +198,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
-
-
-    public ViewPager getViewPager() {
-        if (null == view_pager) {
+    public ViewPager getViewPager()
+    {
+        if (null == view_pager)
+        {
             view_pager = (ViewPager) findViewById(R.id.view_pager);
         }
         return view_pager;
     }
-
-
-
 
     class FragmentAdapter extends FragmentPagerAdapter
     {
@@ -297,5 +329,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         Button btn;
     }
-
 }

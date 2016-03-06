@@ -128,7 +128,7 @@ public class FlickrPhotoSearchFragment extends Fragment
         {
             dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
                     "Please wait, this depends on your internet connection \n" +
-                            "Note: Too many searches in a close close proximity may cause server to time out and crash", true);
+                            "Note: Too many searches in a close proximity may cause server to time out and crash", true);
         }
 
         @Override

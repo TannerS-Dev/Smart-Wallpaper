@@ -1,6 +1,7 @@
 package com.tanners.smartwallpaper.firebase;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -15,19 +16,27 @@ import java.util.HashMap;
 public class FireBaseUtil
 {
     private Firebase firebase;
-    private HashMap<String, String> tags;
+    private HashMap<String, String> child;
 
-    public FireBaseUtil(Context con, String dir)
+    //public FireBaseUtil(FireBase base, Context con, String dir)
+    public FireBaseUtil(Activity con, String dir)
     {
-        Firebase.setAndroidContext(con);
+        //Firebase.setAndroidContext(con);
         firebase = new Firebase(dir);
+    }
 
-        firebase.child("tags").addValueEventListener(new ValueEventListener()
+    public HashMap<String, String> getChild(String key)
+    {
+        Log.i("tags", "test" );
+
+        firebase.child(key).addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot snapshot)
             {
-                tags = snapshot.getValue(HashMap.class);
+                child = snapshot.getValue(HashMap.class);
+
+                Log.i("tags", "is null: " + child.toString());
             }
 
             @Override
@@ -35,16 +44,8 @@ public class FireBaseUtil
                 Log.i("firebase", error.toString());
             }
         });
-    }
 
-    public HashMap<String, String> getTags()
-    {
-        return tags;
-    }
-
-    public void setTags(HashMap<String, String> tags)
-    {
-        this.tags = tags;
+        return child;
     }
 }
 

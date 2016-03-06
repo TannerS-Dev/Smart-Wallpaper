@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +22,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.clarifai.api.RecognitionResult;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
-
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 
-
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class ClarifaiFragment extends Fragment
@@ -39,9 +44,8 @@ public class ClarifaiFragment extends Fragment
     private Button selectButton;
     private final String NO_TAGS = "No tags for this image";
     private DrawerLayout drawer;
-    private ViewPager view_pager;
     private View view;
-    private final int FRAG_COUNT = 3;
+
 
     @Override
     public void onAttach(Context context)
@@ -61,7 +65,7 @@ public class ClarifaiFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        cdata = new ClarifaiData(context);
+        cdata = new ClarifaiData(getActivity());
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(R.layout.clarifai_fragment_main, null, false);
         image_view = (ImageView) view.findViewById(R.id.image_view);
@@ -74,9 +78,6 @@ public class ClarifaiFragment extends Fragment
                 startActivityForResult(media_intent, cdata.getOKCode());
             }
         });
-
-        //view_pager = (ViewPager) view.findViewById(R.id.view_pager);
-        //view_pager.setOffscreenPageLimit(FRAG_COUNT);
     }
 
     @Override
@@ -130,12 +131,7 @@ public class ClarifaiFragment extends Fragment
             {
                 if(cdata.getTags() != null)
                 {
-                    if(cdata.getTags().getTagList() != null )
-                    {
-                        tags = cdata.getTags().getTagList();
-                    }
-                    else
-                        noTagsToast(NO_TAGS);
+                    tags = cdata.getTags();
                 }
                 else
                     noTagsToast(NO_TAGS);
@@ -157,14 +153,14 @@ public class ClarifaiFragment extends Fragment
     private void noTagsToast(String str)
     {
         Toast toast = Toast.makeText(context, str, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER, 0, 0);
         toast.show();
     }
 
-    public class ClarifaiTagAdapter extends ArrayAdapter<String> {
+    public class ClarifaiTagAdapter extends ArrayAdapter<String>
+    {
         private Context context;
         private List<String> taglist;
-        public final static String EXTRA_MESSAGE = "TAG";
 
         public ClarifaiTagAdapter(Context context, int resource, List<String> objects) {
             super(context, resource, objects);
@@ -231,7 +227,9 @@ public class ClarifaiFragment extends Fragment
     static class ClarifaiViewHolder
     {
         Button btn;
-        ViewPager view_pager;
     }
+
+
+
 }
 
