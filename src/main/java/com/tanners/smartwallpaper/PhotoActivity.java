@@ -60,7 +60,7 @@ public class PhotoActivity extends AppCompatActivity
         {
             Bitmap bitmap = null;
             try {
-                // TODO convert to glide
+
                 bitmap = Picasso.with(context).load(url).get();
             } catch (IOException e) {
                 e.printStackTrace();

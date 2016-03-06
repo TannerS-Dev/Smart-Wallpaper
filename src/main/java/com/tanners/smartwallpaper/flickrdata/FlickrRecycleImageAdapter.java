@@ -48,6 +48,22 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         return holder;
     }
 
+    public String getInfo(int position)
+    {
+        StringBuilder photo_info = new StringBuilder("");
+        FlickrPhotoItem data = photos.get(position);
+        new GetUserInfo().execute(data.getOwner());
+        photo_info.append("Name: " + user_data.getFullName() + "\n");
+        photo_info.append("Username: " + user_data.getUsername() + "\n");
+        photo_info.append("ID: " + data.getId() + "\n");
+        photo_info.append("Title: " + data.getTitle() + "\n");
+        photo_info.append("Owner: " + data.getOwner() + "\n");
+        photo_info.append("Height: " + data.getHeight_z() + "\n");
+        photo_info.append("Width: " + data.getWidth_z() + "\n");
+
+        return photo_info.toString();
+    }
+
     @Override
     public void onBindViewHolder(final ImageViewHolder holder, final int position)
     {
@@ -58,6 +74,8 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
             {
                 final Intent intent = new Intent(context, PhotoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                /*
                 StringBuilder photo_info = new StringBuilder("");
                 FlickrPhotoItem data = photos.get(position);
                 new GetUserInfo().execute(data.getOwner());
@@ -68,8 +86,10 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
                 photo_info.append("Owner: " + data.getOwner() + "\n");
                 photo_info.append("Height: " + data.getHeight_z() + "\n");
                 photo_info.append("Width: " + data.getWidth_z() + "\n");
-                intent.putExtra("info", photo_info.toString());
-                intent.putExtra("position", position);
+                */
+
+                FlickrPhotoItem data = photos.get(position);
+                intent.putExtra("info", getInfo(position));
 
                 if(data.getUrl_z() == null || (data.getUrl_z().length() <= 0))
                 {

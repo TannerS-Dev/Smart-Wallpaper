@@ -1,8 +1,8 @@
 package com.tanners.smartwallpaper.flickrdata;
 
-import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
+import com.tanners.smartwallpaper.flickrdata.urldata.FlickrURLBuilder;
 import com.tanners.smartwallpaper.urlutil.URLConnection;
 import org.apache.commons.io.IOUtils;
 import java.io.IOException;

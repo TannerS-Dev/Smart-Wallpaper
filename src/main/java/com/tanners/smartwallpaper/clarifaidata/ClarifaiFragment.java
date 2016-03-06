@@ -29,6 +29,7 @@ import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tanners.smartwallpaper.MainActivity;
 import com.tanners.smartwallpaper.R;
+import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotosSearch;
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 
 import java.util.ArrayList;
@@ -211,7 +212,7 @@ public class ClarifaiFragment extends Fragment
                             if (f.getClass().equals(FlickrPhotoSearchFragment.class))
                             {
                                 FlickrPhotoSearchFragment temp = (FlickrPhotoSearchFragment) fragments.get(count);
-                                temp.searchByTag(tag);
+                                temp.searchByTag(tag, FlickrDataPhotosSearch.OPEN_SEARCH);
                                 //TODO FIXXED!!!!!
                                 ((MainActivity)getActivity()).getViewPager().setCurrentItem(1);
                             }

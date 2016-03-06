@@ -1,24 +1,12 @@
 package com.tanners.smartwallpaper.flickrdata;
 
-import android.util.Log;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tanners.smartwallpaper.flickrdata.FlickrData;
+import com.tanners.smartwallpaper.flickrdata.urldata.FlickrURLBuilder;
 import com.tanners.smartwallpaper.urlutil.URLConnection;
 
-import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FlickrDataUserInfo
 {

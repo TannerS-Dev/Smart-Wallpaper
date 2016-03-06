@@ -1,28 +1,35 @@
 package com.tanners.smartwallpaper.flickrdata;
 
+import android.content.Context;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tanners.smartwallpaper.firebase.FireBaseUtil;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
+import com.tanners.smartwallpaper.flickrdata.urldata.FlickrURLBuilder;
 import com.tanners.smartwallpaper.urlutil.URLConnection;
 import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FlickrDataPhotosSearch
 {
-    FlickrURLBuilder url;
-    int per_page;
-    int page;
-    int total;
+    private FlickrURLBuilder url;
+    private int per_page;
+    private int page;
+    private FireBaseUtil fb_util;
+    public static final int GROUP_SEARCH = 0;
+    public static final int OPEN_SEARCH = 1;
 
-    public FlickrDataPhotosSearch(int total, int per_pages, int page)
+    public FlickrDataPhotosSearch(Context context, int per_pages, int page)
     {
         url = new FlickrURLBuilder();
         this.page = page;
         this.per_page = per_pages;
-        this.total = total;
+        fb_util = new FireBaseUtil(context);
     }
 
     public FlickrDataPhotosSearch()
@@ -30,50 +37,52 @@ public class FlickrDataPhotosSearch
         url = new FlickrURLBuilder();
         this.page = 1;
         this.per_page = 1000;
-        this.total = 1000;
     }
 
-    public List<FlickrPhotoItem> populateFlickrPhotos(String tag)
+    public List<FlickrPhotoItem> searchFlickr(String tag, int selection)
     {
         FlickrPhotoContainer flickr = null;
         List<FlickrPhotoItem> photos = new ArrayList<FlickrPhotoItem>();
         URLConnection connection = null;
 
-        try {
+        try
+        {
+            switch(selection)
+            {
+                case FlickrDataPhotosSearch.GROUP_SEARCH:
+                    //TODO FINISH
 
-          //  int i = (int) Math.ceil(total / per_page);
+                    String group = fb_util.searchGroupByTag(tag);
+                    connection = new URLConnection(url.getPhotos(group, per_page, page));
+                    break;
 
-          //  for(int loop = 0; loop < i; loop++)
-           // {
-                // TODO default hard codded values
-                connection = new URLConnection(url.getPhotos(tag, per_page, page));
-            // connection = new URLConnection(url.getPhotos(tag, per_page, page++));
-                String responseStr = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
-                ObjectMapper objectMapper = new ObjectMapper();
-                flickr = objectMapper.readValue(responseStr, FlickrPhotoContainer.class);
+                case FlickrDataPhotosSearch.OPEN_SEARCH:
+                    String ids = fb_util.getPhotoGroupIds();
+                    connection = new URLConnection(url.getPhotos(tag, ids, per_page, page));
+                    break;
+            }
 
+            String response = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
+            ObjectMapper objectMapper = new ObjectMapper();
+            flickr = objectMapper.readValue(response, FlickrPhotoContainer.class);
 
-                if(flickr != null)
-                {
-                    if (photos != null)
-                        photos.addAll(flickr.getPhotos().getPhoto());
-                    else
-                    {
-                        photos = new ArrayList<FlickrPhotoItem>();
-                        photos.addAll(flickr.getPhotos().getPhoto());
-                    }
-                }
-           // }
+            if(flickr != null)
+            {
+                return flickr.getPhotos().getPhoto();
+            }
+            else
+                return Collections.EMPTY_LIST;
         }
         catch (MalformedURLException e)
         {
             e.printStackTrace();
+            return Collections.EMPTY_LIST;
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            return Collections.EMPTY_LIST;
         }
-        return photos;
     }
 }
 

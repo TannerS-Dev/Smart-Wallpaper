@@ -26,11 +26,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.tanners.smartwallpaper.clarifaidata.ClarifaiFragment;
+import com.tanners.smartwallpaper.flickrdata.FlickrDataPhotosSearch;
 import com.tanners.smartwallpaper.flickrdata.FlickrPhotoSearchFragment;
 import com.tanners.smartwallpaper.flickrdata.FlickrRecentPhotosFragment;
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TabLayout tab_layout;
     private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
     private Firebase fire_base;
-    private HashMap<String, String> tags;
+    private HashMap<String, HashMap<String, HashMap<String, String>>> tags;
     private FlickrViewHolder view_holder;
     private ViewPager view_pager;
 
@@ -69,11 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Firebase.setAndroidContext(this);
         fire_base = new Firebase(FIREBASE_HOME);
 
+        // TODO firebase cal
         fire_base.child("tags").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                tags = new HashMap<String, String>();
-                setUpAdapter(snapshot.getValue(HashMap.class));
+                tags = snapshot.getValue(HashMap.class);
+                setUpAdapter(tags.keySet());
             }
 
             @Override
@@ -82,56 +86,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-/*
-    private void initFireBase()
-    {
-        Firebase.setAndroidContext(this);
-        fire_base = new Firebase(FIREBASE_HOME);
-
-        // list comes back as null unless we give it time before checking
-        new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                fire_base.child("tags").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        Log.i("tags", "called***************");
-                        list = snapshot.getValue(HashMap.class);
-                        Log.i("tags", "TEST: " + snapshot.getValue() + " " + list.toString());
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError error) {
-                        Log.i("tags", "BADDD" + error);
-                    }
-                });
-
-                setUpAdapter();
-            }
-        }.run();
-    }
-
-
-
-    private void setUpAdapter()
+    private void setUpAdapter(Set<String> temp)
     {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.activity_main, null, false);
-        ArrayList<String> temp = new ArrayList<String>(list.values());
-        Collections.sort(temp);
-        firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, temp);
-        nav_bar_list_view.setAdapter(firebase_tag_adapter);
-    }
-    */
 
-    private void setUpAdapter(HashMap<String, String> temp)
-    {
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.activity_main, null, false);
-        ArrayList<String>  list = new ArrayList<String>(tags.values());
-        list.addAll(temp.values());
+        if(tags == null)
+            Log.i("new", "tags is null inside main");
+
+        if(tags.values() == null)
+            Log.i("new", "tags.value is null inside main");
+
+        Log.i("new", "tags." + tags.values().toString());
+
+        ArrayList<String>  list = new ArrayList<String>();
+        list.addAll(temp);
+        //list.addAll(temp.values());
+
+
         Collections.sort(list);
         firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list);
         nav_bar_list_view.setAdapter(firebase_tag_adapter);
@@ -290,10 +262,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onClick(View v)
                 {
-                    // TODO bookmark
+
                     view_pager.setCurrentItem(1);
-
-
                     drawer.closeDrawer(GravityCompat.START);
                     List<Fragment> fragments = getFragments();
                     int count = 0;
@@ -303,7 +273,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (f.getClass().equals(FlickrPhotoSearchFragment.class))
                         {
                             FlickrPhotoSearchFragment temp = (FlickrPhotoSearchFragment) fragments.get(count);
-                            temp.searchByTag(tag);
+                            // TODO flcikrphotosearchfragment
+                            temp.searchByTag(tag, FlickrDataPhotosSearch.GROUP_SEARCH);
                         }
                         count++;
                     }

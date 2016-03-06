@@ -34,8 +34,6 @@ public class FlickrPhotoSearchFragment extends Fragment
     private FlickrRecycleImageAdapter adapter;
     private int per_page;
     private int page;
-    private int total_pics;
-    //private ProgressDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -46,8 +44,6 @@ public class FlickrPhotoSearchFragment extends Fragment
        // per_page = 500;
         per_page = 1000;
         page = 1;
-        //total_pics = 1000;
-        total_pics = 1000;
         grid = new GridLayoutManager(context, 2);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.flickr_fragment_search, null, false);
@@ -68,6 +64,7 @@ public class FlickrPhotoSearchFragment extends Fragment
         search_view.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
+            // would only work if on a seperate thread
             @Override
             public boolean onQueryTextSubmit(String query) {
                 final String tag = search_view.getQuery().toString();
@@ -79,7 +76,8 @@ public class FlickrPhotoSearchFragment extends Fragment
                         search_view.clearFocus();
                         search_view.setQuery("", false);
                         search_view.setFocusable(false);
-                        searchByTag(tag);
+                        // TODO flickerdataphotosearch
+                        searchByTag(tag, FlickrDataPhotosSearch.OPEN_SEARCH);
                         // new CollectTaggedPhotos(recycle_view, context).execute(tag);
                         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
                     }
@@ -94,7 +92,6 @@ public class FlickrPhotoSearchFragment extends Fragment
         });
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -102,11 +99,12 @@ public class FlickrPhotoSearchFragment extends Fragment
         return view;
     }
 
-    public void searchByTag(String tag)
+    public void searchByTag(String tag, int selection)
     {
         if(adapter != null)
             adapter.clear();
-        new CollectTaggedPhotos(recycle_view, context).execute(tag);
+        // TODO flickrphotosearchfragment
+        new CollectTaggedPhotos(recycle_view, context, selection).execute(tag);
     }
 
     private class CollectTaggedPhotos extends AsyncTask<String, Void, List<FlickrPhotoItem>>
@@ -115,12 +113,15 @@ public class FlickrPhotoSearchFragment extends Fragment
         private RecyclerView recycler_view;
         private Context context;
         private ProgressDialog dialog;
+        private int selection;
 
-        public CollectTaggedPhotos(RecyclerView recycler_view, Context context)
+        public CollectTaggedPhotos(RecyclerView recycler_view, Context context, int selection)
         {
-            flickr_object = new FlickrDataPhotosSearch(total_pics, per_page, page);
+            // TODO flickerdataphotosearch
+            flickr_object = new FlickrDataPhotosSearch(context, per_page, page);
             this.recycler_view = recycler_view;
             this.context = context;
+            this.selection = selection;
         }
 
         @Override
@@ -134,7 +135,8 @@ public class FlickrPhotoSearchFragment extends Fragment
         @Override
         protected List<FlickrPhotoItem> doInBackground(String... str)
         {
-            return flickr_object.populateFlickrPhotos(str[0]);
+            // TODO flickrdataphotosearch, str[0] is tag
+            return flickr_object.searchFlickr(str[0], selection);
         }
 
         @Override
@@ -163,9 +165,5 @@ public class FlickrPhotoSearchFragment extends Fragment
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
             toast.show();
         }
-
-
-
-
     }
 }
