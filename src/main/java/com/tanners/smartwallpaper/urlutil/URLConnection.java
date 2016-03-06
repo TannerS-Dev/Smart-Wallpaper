@@ -53,7 +53,7 @@ public class URLConnection
         {
             if(connection != null)
             {
-                Log.e("url", "disconnect: " );
+
                 connection.disconnect();
             }
         }

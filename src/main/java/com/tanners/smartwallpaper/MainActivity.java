@@ -90,20 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.activity_main, null, false);
-
-        if(tags == null)
-            Log.i("new", "tags is null inside main");
-
-        if(tags.values() == null)
-            Log.i("new", "tags.value is null inside main");
-
-        Log.i("new", "tags." + tags.values().toString());
-
         ArrayList<String>  list = new ArrayList<String>();
         list.addAll(temp);
-        //list.addAll(temp.values());
-
-
         Collections.sort(list);
         firebase_tag_adapter = new GenericTagAdapter(getApplicationContext(), R.layout.activity_main, list);
         nav_bar_list_view.setAdapter(firebase_tag_adapter);
@@ -225,12 +213,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         private Context context;
         private List<String> taglist;
+        private FlickrPhotoSearchFragment search_frag;
 
         public GenericTagAdapter(Context context, int resource, List<String> objects)
         {
             super(context, resource, objects);
             this.context = context;
             this.taglist = objects;
+            int count = 0;
+
+            List<Fragment> fragments = getFragments();
+
+            for (Fragment f : fragments)
+            {
+                if (f.getClass().equals(FlickrPhotoSearchFragment.class))
+                {
+                    search_frag = (FlickrPhotoSearchFragment) fragments.get(count);
+                }
+                count++;
+            }
         }
 
         @Override
@@ -262,25 +263,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onClick(View v)
                 {
-
                     view_pager.setCurrentItem(1);
                     drawer.closeDrawer(GravityCompat.START);
-                    List<Fragment> fragments = getFragments();
-                    int count = 0;
-
-                    for (Fragment f : fragments)
-                    {
-                        if (f.getClass().equals(FlickrPhotoSearchFragment.class))
-                        {
-                            FlickrPhotoSearchFragment temp = (FlickrPhotoSearchFragment) fragments.get(count);
-                            // TODO flcikrphotosearchfragment
-                            temp.searchByTag(tag, FlickrDataPhotosSearch.GROUP_SEARCH);
-                        }
-                        count++;
-                    }
-
+                    search_frag.searchByTag(tag, FlickrDataPhotosSearch.GROUP_SEARCH);
                 }
+
             });
+
             return convertView;
         }
     }

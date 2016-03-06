@@ -24,6 +24,7 @@ import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class FlickrPhotoSearchFragment extends Fragment
 {
@@ -105,6 +106,7 @@ public class FlickrPhotoSearchFragment extends Fragment
             adapter.clear();
         // TODO flickrphotosearchfragment
         new CollectTaggedPhotos(recycle_view, context, selection).execute(tag);
+        //CollectTaggedPhotos temp = new CollectTaggedPhotos(recycle_view, context, selection);
     }
 
     private class CollectTaggedPhotos extends AsyncTask<String, Void, List<FlickrPhotoItem>>
@@ -165,5 +167,7 @@ public class FlickrPhotoSearchFragment extends Fragment
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
             toast.show();
         }
+
+
     }
 }

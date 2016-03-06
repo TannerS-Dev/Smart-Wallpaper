@@ -1,6 +1,7 @@
 package com.tanners.smartwallpaper.firebase;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -16,7 +17,9 @@ public class FireBaseUtil
     private Context context;
     private Firebase fb;
     private final String FIREBASE_HOME = "https://smartwallpaper.firebaseio.com/";
-    private final String PARENT = "tags";
+
+    private final String TAGS = "tags";
+    private final String BAD_TAGS = "blocked_words";
     private HashMap<String, HashMap<String, HashMap<String,String>>> root;
     private StringBuilder str;
     private String tag;
@@ -28,69 +31,103 @@ public class FireBaseUtil
         fb = new Firebase(FIREBASE_HOME);
     }
 
-    private String pickRandomHashValue(String tag, HashMap<String, String> hash)
-    {
-        Random generator = new Random();
-        String[] values = (String[]) hash.values().toArray();
-        return values[generator.nextInt(values.length)];
-    }
 
     public String searchGroupByTag(String tag_)
     {
         this.tag = tag_;
 
-        fb.child(PARENT).addValueEventListener(new ValueEventListener() {
+        Log.i("new", "before fb call");
+
+
+        fb.child(TAGS).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot)
-            {
+            public void onDataChange(DataSnapshot snapshot) {
                 root = snapshot.getValue(HashMap.class);
 
-                str = new StringBuilder();
-                HashMap<String, HashMap<String,String>> temp = root.get(PARENT);
-                // search keys which are the name of the category
-                for(String id : temp.keySet())
-                {
-                    if(tag.equals(id))
-                    {
-                        // randomly pick a gallery
-
-                        HashMap<String,String> tag_hash = temp.get(tag);
-                        String value = pickRandomHashValue(tag, tag_hash);
-                        flickr_group = tag_hash.get(value);
+                for (String id : root.keySet()) {
+                    if (tag.equals(id)) {
+                        HashMap<String, HashMap<String, String>> categories = root.get(tag);
+                        Random generator = new Random();
+                        String[] values = new String[categories.keySet().size()];
+                        categories.keySet().toArray(values);
+                        String value = values[generator.nextInt(values.length)];
+                        flickr_group = String.valueOf((root.get(tag)).get(value));
+                        Log.i("new", "valu->>: " + flickr_group);
+                        Log.i("new", "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                        break;
                     }
                 }
             }
 
+
+
             @Override
             public void onCancelled(FirebaseError error) {
+                Log.i("new", "err" + error.toString());
             }
         });
 
+        // we need data from the firebase call put it has a delay
+        try {
+            Thread.sleep(850);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("new","after fb call");
+        //Log.i("new", "return flickr");
         return flickr_group;
     }
 
     public String getPhotoGroupIds()
     {
-        fb.child(PARENT).addValueEventListener(new ValueEventListener() {
+        /*
+        fb.child(TAGS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot)
             {
                 root = snapshot.getValue(HashMap.class);
-                HashMap<String, HashMap<String, String>> temp = root.get(PARENT);
+              //  HashMap<String, HashMap<String, String>> temp = root.get(BAD_TAGS);
                 str = new StringBuilder();
+                HashMap<String, HashMap<String, String>> temp;
 
-                for(String id : temp.keySet())
+
+                Log.i("new", "KeySet: " + root.keySet());
+                for(HashMap<String, HashMap<String, String>> categories : root.values())
                 {
-                    str.append(id);
-                    str.append(",");
+                    for(HashMap<String, String> groups : categories.values())
+                    {
+
+                                           String value = values[generator.nextInt(values.length)];
+                        flickr_group = String.valueOf((root.get(tag)).get(value));
+
+
+
+                     //   for(String groups_info : groups.values())
+                      //  {
+
+                          //  str.append(groups_info);
+                          //  Log.i("new", "!!!!!!!!!!!!!!!!!: " + str);
+                          //  str.append(",");
+                      //  }
+                    }
                 }
                 str.deleteCharAt(str.length()-1);
+
             }
 
             @Override
             public void onCancelled(FirebaseError error) {
             }
         });
+
+        //let the listner load whith its delays
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    */
 
         return str.toString();
     }
