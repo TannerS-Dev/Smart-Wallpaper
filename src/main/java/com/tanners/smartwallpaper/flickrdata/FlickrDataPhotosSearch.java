@@ -1,7 +1,6 @@
 package com.tanners.smartwallpaper.flickrdata;
 
 import android.content.Context;
-import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanners.smartwallpaper.firebase.FireBaseUtil;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;

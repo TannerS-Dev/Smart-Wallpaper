@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         nav_bar_list_view = (ListView) findViewById(R.id.nav_bar_adapter);
         generateNavBar();
-        initFireBase();
         tag_selector = 0;
         callDisclaimerAlert();
     }
@@ -74,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
+                initFireBase();
                 setUpTabs();
             }
         });
@@ -227,24 +227,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         private Context context;
         private List<String> taglist;
         private FlickrPhotoSearchFragment search_frag;
+        private int frag_count;
 
         public GenericTagAdapter(Context context, int resource, List<String> objects)
         {
             super(context, resource, objects);
             this.context = context;
             this.taglist = objects;
-            int count = 0;
-
-            List<Fragment> fragments = getFragments();
-
-            for (Fragment f : fragments)
-            {
-                if (f.getClass().equals(FlickrPhotoSearchFragment.class))
-                {
-                    search_frag = (FlickrPhotoSearchFragment) fragments.get(count);
-                }
-                count++;
-            }
+            this.frag_count = 0;
         }
 
         @Override
@@ -276,6 +266,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onClick(View v)
                 {
+                    if(search_frag == null)
+                        searchForFragment();
                     view_pager.setCurrentItem(1);
                     drawer.closeDrawer(GravityCompat.START);
                     search_frag.searchByTag(tag, FlickrDataPhotosSearch.GROUP_SEARCH);
@@ -285,6 +277,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             return convertView;
         }
+
+        private void searchForFragment()
+        {
+            List<Fragment> fragments = getFragments();
+
+            for (Fragment f : fragments)
+            {
+                if (f.getClass().equals(FlickrPhotoSearchFragment.class))
+                    search_frag = (FlickrPhotoSearchFragment) fragments.get(frag_count);
+                frag_count++;
+            }
+        }
     }
 
     public List<Fragment> getFragments()
@@ -292,9 +296,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
 
         if (fragments == null || fragments.isEmpty())
-        {
             return Collections.emptyList();
-        }
         return fragments;
     }
 

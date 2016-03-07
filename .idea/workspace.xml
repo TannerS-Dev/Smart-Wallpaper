@@ -15,13 +15,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecentPhotosFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecentPhotosFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/urldata/FlickrURLBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/urldata/FlickrURLBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart-Wallpaper.iml" afterPath="$PROJECT_DIR$/Smart-Wallpaper.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Smart-Wallpaper.iws" />
@@ -56,8 +56,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="120" column="9" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
+              <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
               <folding>
+                <element signature="method#onCreateOptionsMenu#0;class#FlickrPhotoSearchFragment#0" expanded="false" />
                 <element signature="method#onCreateView#0;class#FlickrPhotoSearchFragment#0" expanded="false" />
               </folding>
             </state>
@@ -67,22 +68,29 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
+            <state vertical-scroll-proportion="8.625">
+              <caret line="182" column="54" selection-start-line="182" selection-start-column="54" selection-end-line="182" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2898#3090#0" expanded="true" />
-                <element signature="e#3089#3090#0" expanded="true" />
+                <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#2786#2805#0" expanded="true" />
+                <element signature="e#2874#3098#0" expanded="true" />
+                <element signature="e#3097#3098#0" expanded="true" />
                 <element signature="method#initFireBase#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#setUpAdapter#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#setUpTabs#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#setUpFragments#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#generateNavBar#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#5369#5400#0" expanded="true" />
+                <element signature="e#5402#5434#0" expanded="true" />
                 <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getViewPager#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#GenericTagAdapter#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#FragmentAdapter#0;class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#addTab#0;class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#GenericTagAdapter#0;class#GenericTagAdapter#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#8885#9321#0" expanded="true" />
+                <element signature="e#9320#9321#0" expanded="true" />
+                <element signature="method#searchForFragment#0;class#GenericTagAdapter#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getFragments#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#FlickrViewHolder#0;class#MainActivity#0" expanded="false" />
               </folding>
@@ -95,18 +103,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClarifaiData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#2902#2903#0" expanded="false" />
+                <element signature="e#2931#2932#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -125,16 +125,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlickrRecycleImageAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FlickrRecycleImageAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79357797">
-              <caret line="123" column="80" selection-start-line="123" selection-start-column="80" selection-end-line="123" selection-end-column="80" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
               <folding>
-                <element signature="e#2444#4049#0" expanded="true" />
-                <element signature="e#4048#4049#0" expanded="true" />
-                <element signature="e#5306#5307#0" expanded="true" />
-                <element signature="e#5347#5348#0" expanded="true" />
+                <element signature="e#2499#4621#0" expanded="true" />
+                <element signature="e#2894#2911#0" expanded="true" />
+                <element signature="e#4620#4621#0" expanded="true" />
+                <element signature="e#6296#6297#0" expanded="true" />
+                <element signature="e#6337#6338#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,26 +145,25 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+              <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
               <folding>
-                <element signature="e#461#462#0" expanded="true" />
-                <element signature="e#489#490#0" expanded="true" />
-                <element signature="e#525#526#0" expanded="true" />
-                <element signature="e#553#554#0" expanded="true" />
-                <element signature="e#581#582#0" expanded="true" />
-                <element signature="e#606#607#0" expanded="true" />
-                <element signature="e#638#639#0" expanded="true" />
-                <element signature="e#666#667#0" expanded="true" />
-                <element signature="e#699#700#0" expanded="true" />
-                <element signature="e#727#728#0" expanded="true" />
-                <element signature="e#759#760#0" expanded="true" />
-                <element signature="e#787#788#0" expanded="true" />
-                <element signature="e#819#820#0" expanded="true" />
-                <element signature="e#847#848#0" expanded="true" />
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#907#908#0" expanded="true" />
-                <element signature="e#939#940#0" expanded="true" />
-                <element signature="e#967#968#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1019#1020#0" expanded="true" />
+                <element signature="e#1047#1048#0" expanded="true" />
+                <element signature="e#1079#1080#0" expanded="true" />
+                <element signature="e#1107#1108#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlickrDataPhotosSearch.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.7083333">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,12 +179,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhotoActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PhotoActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="0.40503433">
+              <caret line="169" column="32" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="32" />
+              <folding>
+                <element signature="e#2557#4227#0" expanded="true" />
+                <element signature="e#4226#4227#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1135,7 +1138,6 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/firebase/FireBaseUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosRecent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataUserInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/urlutil/URLConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/clarifaidata/ClarifaiFragment.java" />
@@ -1154,14 +1156,15 @@
         <option value="$PROJECT_DIR$/src/main/res/values-v21/styles.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecentPhotosFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/urldata/FlickrURLBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java" />
       </list>
     </option>
   </component>
@@ -1207,7 +1210,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1225,10 +1227,6 @@
               <option name="myItemId" value="Smart-Wallpaper" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1246,28 +1244,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="smartwallpaper" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smartwallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="urlutil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1289,32 +1265,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="flickrdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smartwallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flickrdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="urldata" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1366,45 +1316,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smartwallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="clarifaidata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Smart-Wallpaper" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
@@ -1416,6 +1329,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1632,17 +1547,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2248555" sideWeight="0.4989282" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4653179" sideWeight="0.50535905" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46416184" sideWeight="0.50643086" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984996" sideWeight="0.4964965" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4653179" sideWeight="0.49464095" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46416184" sideWeight="0.49356914" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890174" sideWeight="0.4989282" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1680,19 +1595,22 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java</url>
-          <line>162</line>
-          <properties />
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="63" />
+      <option name="time" value="67" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding>
+            <element signature="e#274#275#0" expanded="true" />
+            <element signature="e#303#304#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/mipmap-mdpi/ic_launcher.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1969,14 +1887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="99" selection-start-line="61" selection-start-column="99" selection-end-line="61" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2015,17 +1925,34 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1757#1758#0" expanded="false" />
+            <element signature="e#1787#1788#0" expanded="false" />
+            <element signature="e#3451#3452#0" expanded="false" />
+            <element signature="e#3489#3490#0" expanded="false" />
+            <element signature="e#3529#3530#0" expanded="false" />
+            <element signature="e#3568#3569#0" expanded="false" />
+            <element signature="e#4376#4377#0" expanded="false" />
+            <element signature="e#4412#4413#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/urldata/FlickrURLBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="120" column="9" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
+          <caret line="10" column="104" selection-start-line="10" selection-start-column="104" selection-end-line="10" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/urlutil/URLConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
-            <element signature="method#onCreateView#0;class#FlickrPhotoSearchFragment#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2902#2903#0" expanded="false" />
+            <element signature="e#2931#2932#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2041,81 +1968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/urldata/FlickrURLBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="104" selection-start-line="10" selection-start-column="104" selection-end-line="10" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2898#3090#0" expanded="true" />
-            <element signature="e#3089#3090#0" expanded="true" />
-            <element signature="method#initFireBase#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#setUpAdapter#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#setUpTabs#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#setUpFragments#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#generateNavBar#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getViewPager#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#GenericTagAdapter#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getFragments#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#FlickrViewHolder#0;class#MainActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/urlutil/URLConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding>
-            <element signature="e#461#462#0" expanded="true" />
-            <element signature="e#489#490#0" expanded="true" />
-            <element signature="e#525#526#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#581#582#0" expanded="true" />
-            <element signature="e#606#607#0" expanded="true" />
-            <element signature="e#638#639#0" expanded="true" />
-            <element signature="e#666#667#0" expanded="true" />
-            <element signature="e#699#700#0" expanded="true" />
-            <element signature="e#727#728#0" expanded="true" />
-            <element signature="e#759#760#0" expanded="true" />
-            <element signature="e#787#788#0" expanded="true" />
-            <element signature="e#819#820#0" expanded="true" />
-            <element signature="e#847#848#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
-            <element signature="e#939#940#0" expanded="true" />
-            <element signature="e#967#968#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecentPhotosFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2127,15 +1979,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrPhotoSearchFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+          <folding>
+            <element signature="method#onCreateOptionsMenu#0;class#FlickrPhotoSearchFragment#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#FlickrPhotoSearchFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrDataPhotosSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7083333">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.625">
+          <caret line="182" column="54" selection-start-line="182" selection-start-column="54" selection-end-line="182" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#2786#2805#0" expanded="true" />
+            <element signature="e#2874#3098#0" expanded="true" />
+            <element signature="e#3097#3098#0" expanded="true" />
+            <element signature="method#initFireBase#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#setUpAdapter#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#setUpTabs#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#setUpFragments#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#generateNavBar#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#5369#5400#0" expanded="true" />
+            <element signature="e#5402#5434#0" expanded="true" />
+            <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getViewPager#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#FragmentAdapter#0;class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#addTab#0;class#FragmentAdapter#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#GenericTagAdapter#0;class#GenericTagAdapter#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#8885#9321#0" expanded="true" />
+            <element signature="e#9320#9321#0" expanded="true" />
+            <element signature="method#searchForFragment#0;class#GenericTagAdapter#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getFragments#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#FlickrViewHolder#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/photodata/FlickrPhotoItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1019#1020#0" expanded="true" />
+            <element signature="e#1047#1048#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+            <element signature="e#1107#1108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/flickrdata/FlickrRecycleImageAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79357797">
-          <caret line="123" column="80" selection-start-line="123" selection-start-column="80" selection-end-line="123" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
           <folding>
-            <element signature="e#2444#4049#0" expanded="true" />
-            <element signature="e#4048#4049#0" expanded="true" />
-            <element signature="e#5306#5307#0" expanded="true" />
-            <element signature="e#5347#5348#0" expanded="true" />
+            <element signature="e#2499#4621#0" expanded="true" />
+            <element signature="e#2894#2911#0" expanded="true" />
+            <element signature="e#4620#4621#0" expanded="true" />
+            <element signature="e#6296#6297#0" expanded="true" />
+            <element signature="e#6337#6338#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tanners/smartwallpaper/PhotoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40503433">
+          <caret line="169" column="32" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="32" />
+          <folding>
+            <element signature="e#2557#4227#0" expanded="true" />
+            <element signature="e#4226#4227#0" expanded="true" />
           </folding>
         </state>
       </provider>

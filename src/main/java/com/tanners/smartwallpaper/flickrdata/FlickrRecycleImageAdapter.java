@@ -3,6 +3,7 @@ package com.tanners.smartwallpaper.flickrdata;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tanners.smartwallpaper.PhotoActivity;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoItem;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import android.support.v7.widget.RecyclerView.*;
@@ -65,10 +68,23 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         holder.image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(context, PhotoActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              //  final Intent intent = new Intent(context, PhotoActivity.class);
+               // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 FlickrPhotoItem data = photos.get(position);
-                intent.putExtra("info", getInfo(position));
+
+                // TODO
+
+                ArrayList<FlickrPhotoItem> url_list = new ArrayList<FlickrPhotoItem>();
+                url_list.add(data);
+                Bundle urls = new Bundle();
+                urls.putSerializable("urls", url_list);
+
+                final Intent extra_intent = new Intent(context, PhotoActivity.class);
+                extra_intent.putExtra("extra", urls);
+                extra_intent.putExtra("info", getInfo(position));
+                extra_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                /*
 
                 if (data.getUrl_k() == null || (data.getUrl_k().length() <= 0)) {
                     if (data.getUrl_h() == null || (data.getUrl_h().length() <= 0)) {
@@ -92,13 +108,16 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
                 } else {
                     intent.putExtra("url", data.getUrl_k());
                 }
-                context.startActivity(intent);
+
+                */
+                context.startActivity(extra_intent);
             }
         });
 
         FlickrPhotoItem data = photos.get(position);
         String url = "";
 
+        /*
         if (data.getUrl_k() == null || (data.getUrl_k().length() <= 0)) {
             if (data.getUrl_h() == null || (data.getUrl_h().length() <= 0)) {
                 if (data.getUrl_b() == null || (data.getUrl_b().length() <= 0)) {
@@ -120,6 +139,24 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         } else {
             url = data.getUrl_k();
         }
+               */
+
+        if (data.getUrl_z() == null || (data.getUrl_z().length() <= 0))
+        {
+            if (data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
+            {
+                url = data.getUrl_o();
+            }
+            else
+            {
+                url = data.getUrl_n();
+            }
+        }
+        else
+        {
+            url = data.getUrl_z();
+        }
+
         //Glide.with(context).load(url).thumbnail(.9f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
         Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.image_button);
     }

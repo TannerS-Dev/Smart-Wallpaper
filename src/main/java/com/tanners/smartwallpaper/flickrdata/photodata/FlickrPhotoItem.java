@@ -2,8 +2,10 @@ package com.tanners.smartwallpaper.flickrdata.photodata;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FlickrPhotoItem
+public class FlickrPhotoItem implements Serializable
 {
     private float id;
     private String title;
@@ -13,6 +15,7 @@ public class FlickrPhotoItem
     private String url_h;
     private String url_k;
     private String url_o;
+    private String url_n;
     private String owner;
 
 
@@ -53,5 +56,9 @@ public class FlickrPhotoItem
 
     public String getUrl_o() {
         return url_k;
+    }
+
+    public String getUrl_n() {
+        return url_n;
     }
 }
