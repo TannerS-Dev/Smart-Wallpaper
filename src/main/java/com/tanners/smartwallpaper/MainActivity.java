@@ -1,13 +1,17 @@
 package com.tanners.smartwallpaper;
 
+import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup;
@@ -60,7 +64,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         generateNavBar();
         initFireBase();
         tag_selector = 0;
-        setUpTabs();
+        callDisclaimerAlert();
+    }
+
+    private void callDisclaimerAlert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage(R.string.disclaimer).setTitle("Disclaimer");
+        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                setUpTabs();
+            }
+        });
+
+        AlertDialog disclaimer = builder.create();
+        disclaimer.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(MainActivity.this, R.color.MainBGColor)));
+        disclaimer.show();
     }
 
     private void initFireBase()
