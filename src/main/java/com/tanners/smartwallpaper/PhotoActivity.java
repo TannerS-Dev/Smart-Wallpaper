@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class PhotoActivity extends AppCompatActivity
 {
@@ -32,28 +33,25 @@ public class PhotoActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Photo Information");
 
-
         Intent intent = getIntent();
+        // TODO may send in url_o (original value) for into
         String info = intent.getStringExtra("info");
         final String url = intent.getStringExtra("url");
         ImageView image = (ImageView) findViewById(R.id.image);
         TextView text = (TextView) findViewById(R.id.text_view);
         Button wallpaper_btn = (Button) findViewById(R.id.set_wallpaper);
 
-        wallpaper_btn.setOnClickListener(new View.OnClickListener()
-        {
+        wallpaper_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 new setWallpaper(getApplicationContext(), url).execute();
                 Toast.makeText(PhotoActivity.this, "Wallpaper Set", Toast.LENGTH_LONG).show();
             }
         });
 
-        Glide.with(this).load(url).centerCrop().fitCenter().into(image);
+        // Glide.with(this).load(url).centerCrop().fitCenter().into(image);
+        Glide.with(this).load(url).fitCenter().into(image);
         text.setText(info);
-
-
     }
 
     private class setWallpaper extends AsyncTask<Void, Void, Bitmap>
@@ -71,12 +69,25 @@ public class PhotoActivity extends AppCompatActivity
         protected Bitmap doInBackground(Void... position)
         {
             Bitmap bitmap = null;
+
+            try {
+                bitmap = Glide.with(PhotoActivity.this).load(url).asBitmap().into(-1,-1).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+           /*
             try {
 
                 bitmap = Picasso.with(context).load(url).get();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            */
+
             return bitmap;
         }
 
@@ -85,14 +96,14 @@ public class PhotoActivity extends AppCompatActivity
         {
             super.onPostExecute(bitmap);
             final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-            int height = metrics.heightPixels;
-            int width = metrics.widthPixels;
+           // int height = metrics.heightPixels;
+            //int width = metrics.widthPixels;
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
 
             try
             {
                 wallpaperManager.setBitmap(bitmap);
-                wallpaperManager.suggestDesiredDimensions(width, height);
+               // wallpaperManager.suggestDesiredDimensions(width, height);
             }
             catch (IOException e)
             {

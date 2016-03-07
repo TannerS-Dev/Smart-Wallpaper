@@ -8,7 +8,7 @@ public class FlickrURLBuilder
     private final String FORMAT = "&format=json&nojsoncallback=1";
     private final String PER_PAGE = "&per_page=";
     private final String PAGE = "&page=";
-    private final String EXTRAS = "&extras=url_n%2Curl_z%2Curl_m";
+    private final String EXTRAS = "&extras=url_n%2Curl_z%2Curl_m%2Curl_c%2Curl_b%2Curl_h%2Curl_k%2Curl_o";
     private final String FLICKR_GROUPS_METHOD = "flickr.groups.pools.getPhotos";
     private final String FLICKR_GROUPS_GROUP_ID = "&group_id=";
     private final String FLICKR_GROUPS_ID= "40961104@N00";

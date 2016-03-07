@@ -44,11 +44,6 @@ public class FlickrRecentPhotosFragment extends Fragment
         recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
         recycle_view.setHasFixedSize(true);
         recycle_view.setLayoutManager(grid);
-
-
-
-
-
     }
 
     @Nullable

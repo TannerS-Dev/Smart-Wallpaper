@@ -8,11 +8,13 @@ public class FlickrPhotoItem
     private float id;
     private String title;
     private String url_z;
-    private String url_n;
-    private String url_m;
-    private int height_z;
-    private int width_z;
+    private String url_c;
+    private String url_b;
+    private String url_h;
+    private String url_k;
+    private String url_o;
     private String owner;
+
 
     public String getUrl_z()
     {
@@ -32,19 +34,24 @@ public class FlickrPhotoItem
         return owner;
     }
 
-    public int getHeight_z() {
-        return height_z;
+
+    public String getUrl_c() {
+        return url_c;
     }
 
-    public int getWidth_z() {
-        return width_z;
+    public String getUrl_b() {
+        return url_b;
     }
 
-    public String getUrl_n() {
-        return url_n;
+    public String getUrl_h() {
+        return url_h;
     }
 
-    public String getUrl_m() {
-        return url_m;
+    public String getUrl_k() {
+        return url_k;
+    }
+
+    public String getUrl_o() {
+        return url_k;
     }
 }

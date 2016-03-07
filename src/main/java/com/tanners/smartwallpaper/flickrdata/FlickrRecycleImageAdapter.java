@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,62 +57,71 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         photo_info.append("ID: " + data.getId() + "\n");
         photo_info.append("Title: " + data.getTitle() + "\n");
         photo_info.append("Owner: " + data.getOwner() + "\n");
-        photo_info.append("Height: " + data.getHeight_z() + "\n");
-        photo_info.append("Width: " + data.getWidth_z() + "\n");
         return photo_info.toString();
     }
 
     @Override
-    public void onBindViewHolder(final ImageViewHolder holder, final int position)
-    {
-        holder.image_button.setOnClickListener(new View.OnClickListener()
-        {
+    public void onBindViewHolder(final ImageViewHolder holder, final int position) {
+        holder.image_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 final Intent intent = new Intent(context, PhotoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 FlickrPhotoItem data = photos.get(position);
                 intent.putExtra("info", getInfo(position));
 
-                if(data.getUrl_z() == null || (data.getUrl_z().length() <= 0))
-                {
-                    if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
-                    {
-                        if(data.getUrl_m() == null || (data.getUrl_m().length() <= 0))
-                        {
-                            intent.putExtra("url", data.getUrl_m());
-                        }
-                    }
-                    else
-                        intent.putExtra("url", data.getUrl_n());
-                }
-                else
-                    intent.putExtra("url", data.getUrl_z());
+                if (data.getUrl_k() == null || (data.getUrl_k().length() <= 0)) {
+                    if (data.getUrl_h() == null || (data.getUrl_h().length() <= 0)) {
+                        if (data.getUrl_b() == null || (data.getUrl_b().length() <= 0)) {
+                            if (data.getUrl_c() == null || (data.getUrl_c().length() <= 0)) {
+                                if (data.getUrl_z() == null || (data.getUrl_z().length() <= 0)) {
+                                            intent.putExtra("url", data.getUrl_o());
 
+                                } else {
+                                    intent.putExtra("url", data.getUrl_z());
+                                }
+                            } else {
+                                intent.putExtra("url", data.getUrl_c());
+                            }
+                        } else {
+                            intent.putExtra("url", data.getUrl_b());
+                        }
+                    } else {
+                        intent.putExtra("url", data.getUrl_h());
+                    }
+                } else {
+                    intent.putExtra("url", data.getUrl_k());
+                }
                 context.startActivity(intent);
             }
         });
 
-        String temp = null;
         FlickrPhotoItem data = photos.get(position);
+        String url = "";
 
-        if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
-        {
-            if(data.getUrl_m() == null || (data.getUrl_m().length() <= 0))
-            {
-                if(data.getUrl_n() == null || (data.getUrl_n().length() <= 0))
-                {
-                    temp = data.getUrl_z();
+        if (data.getUrl_k() == null || (data.getUrl_k().length() <= 0)) {
+            if (data.getUrl_h() == null || (data.getUrl_h().length() <= 0)) {
+                if (data.getUrl_b() == null || (data.getUrl_b().length() <= 0)) {
+                    if (data.getUrl_c() == null || (data.getUrl_c().length() <= 0)) {
+                        if (data.getUrl_z() == null || (data.getUrl_z().length() <= 0)) {
+                            url = data.getUrl_o();
+                        } else {
+                            url = data.getUrl_z();
+                        }
+                    } else {
+                        url = data.getUrl_c();
+                    }
+                } else {
+                    url = data.getUrl_b();
                 }
+            } else {
+                url = data.getUrl_h();
             }
-            else
-                temp = (data.getUrl_m());
+        } else {
+            url = data.getUrl_k();
         }
-        else
-            temp = (data.getUrl_n());
-
-        Glide.with(context).load(temp).thumbnail(.7f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
+        //Glide.with(context).load(url).thumbnail(.9f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_button);
+        Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.image_button);
     }
 
     @Override
@@ -132,8 +142,8 @@ public class FlickrRecycleImageAdapter extends RecyclerView.Adapter<FlickrRecycl
         {
             super(view);
             image_button = (ImageButton) view.findViewById(R.id.image_button);
-            int screen_width = metrics.widthPixels;
-            image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width / 2, screen_width / 2));
+            int screen_width = (metrics.widthPixels / 2);
+            image_button.setLayoutParams(new RelativeLayout.LayoutParams(screen_width, screen_width));
         }
     }
 
