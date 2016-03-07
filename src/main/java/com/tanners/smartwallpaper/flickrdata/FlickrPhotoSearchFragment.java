@@ -3,10 +3,12 @@ package com.tanners.smartwallpaper.flickrdata;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -121,10 +123,13 @@ public class FlickrPhotoSearchFragment extends Fragment
         @Override
         protected void onPreExecute()
         {
-            dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
-                    "Please wait, this depends on your internet connection", true);
-
-
+            dialog = new ProgressDialog(getActivity());
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.MainBGColor)));
+            dialog.setTitle("Gathering photos");
+            dialog.setMessage("Please wait, this depends on your internet connection");
+            dialog.setCancelable(false);
+            dialog.show();
+            dialog.getWindow().setGravity(Gravity.CENTER_VERTICAL);
         }
 
         @Override

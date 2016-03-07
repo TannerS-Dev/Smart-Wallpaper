@@ -2,10 +2,15 @@ package com.tanners.smartwallpaper.flickrdata;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -13,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.tanners.smartwallpaper.R;
 import com.tanners.smartwallpaper.flickrdata.photodata.FlickrPhotoContainer;
@@ -38,6 +44,11 @@ public class FlickrRecentPhotosFragment extends Fragment
         recycle_view = (RecyclerView) view.findViewById(R.id.recycler_view);
         recycle_view.setHasFixedSize(true);
         recycle_view.setLayoutManager(grid);
+
+
+
+
+
     }
 
     @Nullable
@@ -66,9 +77,14 @@ public class FlickrRecentPhotosFragment extends Fragment
         @Override
         protected void onPreExecute()
         {
-            dialog = ProgressDialog.show(getActivity(),"Gathering photos...",
-                    "Please wait, this depends on your internet connection", true);
-        }
+            dialog = new ProgressDialog(getActivity());
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getActivity(),R.color.MainBGColor)));
+            dialog.setTitle("Gathering photos");
+            dialog.setMessage("Please wait, this depends on your internet connection");
+            dialog.setCancelable(false);
+            dialog.show();
+            dialog.getWindow().setGravity(Gravity.CENTER_VERTICAL);
+       }
 
         @Override
         protected void onPostExecute(FlickrPhotoContainer result)

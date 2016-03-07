@@ -3,7 +3,6 @@ package com.tanners.smartwallpaper.clarifaidata;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -128,15 +127,12 @@ public class ClarifaiData extends ClarifaiClient
         fire_base.child("blocked_words").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Log.i("tags", "called***************");
                 bad_tags = snapshot.getValue(HashMap.class);
-                Log.i("tags", "TEST: " + snapshot.getValue());
-                Log.i("tags", "called***************" + bad_tags.toString());
             }
 
             @Override
             public void onCancelled(FirebaseError error) {
-                Log.i("tags", "BADDD" + error);
+
             }
         });
     }

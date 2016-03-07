@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.tannersummers.com.MainActivity"
-    android:background="#054070">
+    tools:context="com.tanners.smartwallpaper.MainActivity"
+    android:background="#000000">
 
    <RelativeLayout
        android:layout_width="match_parent"
@@ -29,9 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="#020241"
-
                     android:singleLine="true"
-                    android:text="Toolbar Title"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />

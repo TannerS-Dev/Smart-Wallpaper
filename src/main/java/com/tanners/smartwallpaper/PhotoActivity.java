@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -19,11 +20,19 @@ import java.io.IOException;
 
 public class PhotoActivity extends AppCompatActivity
 {
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+
+        toolbar = (Toolbar) findViewById(R.id.photo_tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Photo Information");
+
+
         Intent intent = getIntent();
         String info = intent.getStringExtra("info");
         final String url = intent.getStringExtra("url");
@@ -37,12 +46,14 @@ public class PhotoActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 new setWallpaper(getApplicationContext(), url).execute();
-                Toast.makeText(context, "Wallpaper Set", Toast.LENGTH_LONG).show();
+                Toast.makeText(PhotoActivity.this, "Wallpaper Set", Toast.LENGTH_LONG).show();
             }
         });
 
         Glide.with(this).load(url).centerCrop().fitCenter().into(image);
         text.setText(info);
+
+
     }
 
     private class setWallpaper extends AsyncTask<Void, Void, Bitmap>

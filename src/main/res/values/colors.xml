@@ -7,4 +7,6 @@
 
 
     <color name="navTitle">#3399ff</color>
+
+    <color name="MainBGColor">#020241</color>
 </resources>

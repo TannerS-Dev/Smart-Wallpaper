@@ -20,11 +20,17 @@
         >
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/main_tool_bar"
+            android:id="@+id/photo_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#020241"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:singleLine="true"
+            android:text="Toolbar Title"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
