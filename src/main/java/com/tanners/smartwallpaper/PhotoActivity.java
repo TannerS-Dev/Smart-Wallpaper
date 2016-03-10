@@ -160,9 +160,6 @@ public class PhotoActivity extends AppCompatActivity
         protected void onPostExecute(Bitmap bitmap)
         {
             super.onPostExecute(bitmap);
-            //final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-           // int height = metrics.heightPixels;
-            //int width = metrics.widthPixels;
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
 
             try

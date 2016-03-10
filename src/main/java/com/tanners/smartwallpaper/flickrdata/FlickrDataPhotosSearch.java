@@ -57,10 +57,13 @@ public class FlickrDataPhotosSearch
                     connection = new URLConnection(url.getAllPhotos(tag, per_page, page));
                     break;
             }
-
-            String response = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
-            ObjectMapper objectMapper = new ObjectMapper();
-            flickr = objectMapper.readValue(response, FlickrPhotoContainer.class);
+            
+            if(connection.getHttpURLConnection() != null)
+            {
+                String response = IOUtils.toString(connection.getHttpURLConnection().getInputStream());
+                ObjectMapper objectMapper = new ObjectMapper();
+                flickr = objectMapper.readValue(response, FlickrPhotoContainer.class);
+            }
 
             if(flickr != null)
             {

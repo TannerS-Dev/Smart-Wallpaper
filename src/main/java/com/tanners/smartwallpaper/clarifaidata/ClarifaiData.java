@@ -137,8 +137,9 @@ public class ClarifaiData extends ClarifaiClient
         });
     }
 
-    private boolean filerTags(String tag)
+    synchronized private boolean filerTags(String tag)
     {
+        // TODO broadcaster?
         for(String bad_tag : bad_tags.values())
         {
             //TODO lowercase?

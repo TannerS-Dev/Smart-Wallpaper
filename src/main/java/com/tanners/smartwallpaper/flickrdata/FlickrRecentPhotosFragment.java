@@ -94,7 +94,7 @@ public class FlickrRecentPhotosFragment extends Fragment
 
                 if (flickr_objects == null || (flickr_objects.size() == 0))
                 {
-                    NoImagesToast("No Images For This Tag");
+                    NoImagesToast("Unable to get images");
                 }
                 else
                 {
@@ -104,7 +104,7 @@ public class FlickrRecentPhotosFragment extends Fragment
                 }
             }
             else
-                NoImagesToast("No Images For This Tag");
+                NoImagesToast("Unable to get images");
 
             dialog.dismiss();
         }

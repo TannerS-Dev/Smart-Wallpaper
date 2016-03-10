@@ -111,32 +111,31 @@ public class ClarifaiFragment extends Fragment
             {
                 selectButton.setEnabled(true);
                 selectButton.setText("Select a photo");
-            }
-            else
-                noTagsToast(cdata.getRecError());
-
-            ListView listview = (ListView) view.findViewById(R.id.clarifaitagview);
-
-            List<String> tags = null;
-
-            if(cdata != null)
-            {
-                if(cdata.getTags() != null)
+                ListView listview = (ListView) view.findViewById(R.id.clarifaitagview);
+                List<String> tags = null;
+                // TODO conditions may not be needed
+                if (cdata != null)
                 {
-                    tags = cdata.getTags();
-                }
-                else
+                    if (cdata.getTags() != null)
+                    {
+                        tags = cdata.getTags();
+                    } else
+                        noTagsToast(NO_TAGS);
+                } else
                     noTagsToast(NO_TAGS);
+
+                if (tags.size() == 0)
+                    noTagsToast(NO_TAGS);
+                else {
+                    ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(context, R.layout.clarifai_tags_layout, tags);
+                    listview.setAdapter(adapter);
+                }
             }
             else
-                noTagsToast(NO_TAGS);
-
-            if(tags.size() == 0)
-                noTagsToast(NO_TAGS);
-            else
             {
-                ClarifaiTagAdapter adapter = new ClarifaiTagAdapter(context, R.layout.clarifai_tags_layout, tags);
-                listview.setAdapter(adapter);
+                noTagsToast(cdata.getRecError());
+                selectButton.setEnabled(true);
+                selectButton.setText("Select a photo");
             }
         }
     }
