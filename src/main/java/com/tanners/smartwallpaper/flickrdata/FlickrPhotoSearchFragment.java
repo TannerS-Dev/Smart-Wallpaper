@@ -100,8 +100,6 @@ public class FlickrPhotoSearchFragment extends Fragment
 
     public void searchByTag(String tag, int selection)
     {
-        Log.i("error", "searching");
-
         if(adapter != null)
             adapter.clear();
         new CollectTaggedPhotos(recycle_view, context, selection).execute(tag);
@@ -149,7 +147,7 @@ public class FlickrPhotoSearchFragment extends Fragment
 
             if (result == null || (result.size() <= 0))
             {
-                NoImagesToast("No Images For This Tag");
+                NoImagesToast("Unable to get images");
             }
             else
             {
